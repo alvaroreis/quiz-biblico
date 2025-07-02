@@ -5,46 +5,46 @@
  * @returns {object} Um objeto contendo os dados do quiz e o progresso respondido.
  */
 function loadGameData(defaultQuizData) {
-    let quizData;
-    let answeredQuestions;
+    let quizDataLoaded;
+    let answeredQuestionsLoaded;
 
     // Tenta carregar o quizData do localStorage
     const savedQuizData = localStorage.getItem('quizData');
     if (savedQuizData) {
         try {
-            quizData = JSON.parse(savedQuizData);
+            quizDataLoaded = JSON.parse(savedQuizData);
         } catch (e) {
             console.error("Erro ao analisar quizData do localStorage, usando dados padrão.", e);
-            quizData = defaultQuizData;
-            localStorage.setItem('quizData', JSON.stringify(quizData)); // Salva o padrão
+            quizDataLoaded = defaultQuizData;
+            localStorage.setItem('quizData', JSON.stringify(quizDataLoaded)); // Salva o padrão
         }
     } else {
         // Se não houver quizData salvo, usa o padrão e salva
-        quizData = defaultQuizData;
-        localStorage.setItem('quizData', JSON.stringify(quizData));
+        quizDataLoaded = defaultQuizData;
+        localStorage.setItem('quizData', JSON.stringify(quizDataLoaded));
     }
 
     // Tenta carregar o answeredQuestions do localStorage
     const savedAnsweredQuestions = localStorage.getItem('answeredQuestions');
     if (savedAnsweredQuestions) {
         try {
-            answeredQuestions = JSON.parse(savedAnsweredQuestions);
+            answeredQuestionsLoaded = JSON.parse(savedAnsweredQuestions);
         } catch (e) {
             console.error("Erro ao analisar answeredQuestions do localStorage, inicializando vazio.", e);
-            answeredQuestions = {}; // Inicializa vazio em caso de erro
+            answeredQuestionsLoaded = {}; // Inicializa vazio em caso de erro
         }
     } else {
         // Se não houver progresso salvo, inicializa
-        answeredQuestions = {};
+        answeredQuestionsLoaded = {};
     }
 
-    return { quizData, answeredQuestions };
+    return { quizData: quizDataLoaded, answeredQuestions: answeredQuestionsLoaded };
 }
 
 /**
  * Salva o progresso das perguntas respondidas no localStorage.
- * @param {object} answeredQuestions O objeto que rastreia as perguntas respondidas.
+ * @param {object} answeredQuestionsToSave O objeto que rastreia as perguntas respondidas.
  */
-function saveGameProgress(answeredQuestions) {
-    localStorage.setItem('answeredQuestions', JSON.stringify(answeredQuestions));
+function saveGameProgress(answeredQuestionsToSave) {
+    localStorage.setItem('answeredQuestions', JSON.stringify(answeredQuestionsToSave));
 }
