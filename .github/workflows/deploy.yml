@@ -32,16 +32,13 @@ jobs:
       - name: Copy files to output directory (for static sites)
         run: |
           mkdir _site # Cria a pasta que será o seu site
-          cp -R ./* _site/ # Copia todos os seus arquivos para dentro de '_site'
-          # Se você tem arquivos na raiz do projeto (ex: index.html, style.css, script.js, imagens, etc.),
-          # esta linha copia tudo para a pasta '_site'.
-          # Se seus arquivos estiverem em uma subpasta (ex: 'src'), você precisaria ajustar:
-          # cp -R ./src/* _site/
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './_site' # Onde os arquivos do seu site estão localizados para upload
+          # Copia todos os arquivos e pastas, EXCETO a pasta _site, para dentro de _site
+          # Isso impede o erro de copiar a pasta para dentro de si mesma.
+          find . -maxdepth 1 -not -name "_site" -exec cp -R {} _site/ \;
+          - name: Upload artifact
+            uses: actions/upload-pages-artifact@v3
+            with:
+              path: './_site' # Onde os arquivos do seu site estão localizados para upload
 
   # Job para implantar seu projeto no GitHub Pages
   deploy:
