@@ -3,7 +3,7 @@ name: Deploy GitHub Pages
 on:
   push:
     branches:
-      - main # Altere para a sua branch principal se não for 'main' (ex: master, gh-pages)
+      - main # <--- ALtere para a sua branch principal se não for 'main' (ex: master, gh-pages)
 
   # Permite que você execute este workflow manualmente na aba 'Actions' do GitHub
   workflow_dispatch:
@@ -28,17 +28,18 @@ jobs:
 
       # Se o seu quiz for um projeto HTML, CSS e JavaScript puro (frontend),
       # você não precisa de um passo de "build" complexo.
-      # Apenas copie seus arquivos para a pasta de saída.
+      # Apenas copie seus arquivos para a pasta de saída '_site'.
       - name: Copy files to output directory (for static sites)
         run: |
           mkdir _site # Cria a pasta que será o seu site
-          # Copia todos os arquivos e pastas, EXCETO a pasta _site, para dentro de _site
+          # Copia todos os arquivos e pastas, EXCETO a pasta _site, para dentro de _site.
           # Isso impede o erro de copiar a pasta para dentro de si mesma.
           find . -maxdepth 1 -not -name "_site" -exec cp -R {} _site/ \;
-          - name: Upload artifact
-            uses: actions/upload-pages-artifact@v3
-            with:
-              path: './_site' # Onde os arquivos do seu site estão localizados para upload
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './_site' # Onde os arquivos do seu site estão localizados para upload
 
   # Job para implantar seu projeto no GitHub Pages
   deploy:
