@@ -1,0 +1,56 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Altere para a sua branch principal se não for 'main' (ex: master, gh-pages)
+
+  # Permite que você execute este workflow manualmente na aba 'Actions' do GitHub
+  workflow_dispatch:
+
+# Define as permissões para o GITHUB_TOKEN para este workflow.
+# Isso é crucial para que o GitHub Actions possa interagir com o GitHub Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # Job para construir seu projeto
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4 # Baixa o código do seu repositório
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5 # Configura o ambiente para o GitHub Pages
+
+      # Se o seu quiz for um projeto HTML, CSS e JavaScript puro (frontend),
+      # você não precisa de um passo de "build" complexo.
+      # Apenas copie seus arquivos para a pasta de saída.
+      - name: Copy files to output directory (for static sites)
+        run: |
+          mkdir _site # Cria a pasta que será o seu site
+          cp -R ./* _site/ # Copia todos os seus arquivos para dentro de '_site'
+          # Se você tem arquivos na raiz do projeto (ex: index.html, style.css, script.js, imagens, etc.),
+          # esta linha copia tudo para a pasta '_site'.
+          # Se seus arquivos estiverem em uma subpasta (ex: 'src'), você precisaria ajustar:
+          # cp -R ./src/* _site/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './_site' # Onde os arquivos do seu site estão localizados para upload
+
+  # Job para implantar seu projeto no GitHub Pages
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build # Garante que o job 'build' seja concluído antes de 'deploy'
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # Ação que efetivamente publica seu site
