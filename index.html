@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Bíblico: A Carta aos Filipenses!</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícone da página, uma estrela para o tema Mario -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%' y='90%' style='font-size:80px;text-anchor:middle;'%3E⭐%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+</head>
+<body>
+<!-- Tela escura de overlay para transições/carregamento -->
+<div id="dark-screen" class="hidden"></div>
+
+<!-- Camadas de nuvens para o fundo animado -->
+<div id="cloud-layer-1" class="cloud-layer"></div>
+<div id="cloud-layer-2" class="cloud-layer"></div>
+
+<div id="game-container">
+    <!-- Tela Inicial do Jogo -->
+    <div id="start-screen" class="screen active">
+        <h1></h1> <!-- Título será preenchido via JavaScript -->
+        <h2></h2> <!-- Subtítulo será preenchido via JavaScript -->
+        <button id="start-button" class="mario-button">Iniciar Aventura</button>
+    </div>
+
+    <!-- Tela de Seleção de Nível de Dificuldade -->
+    <div id="level-selection-screen" class="screen">
+        <h2>Escolha sua Fase!</h2>
+        <div id="level-options-container" class="level-options">
+            <!-- Os botões de nível serão gerados dinamicamente pelo JavaScript -->
+        </div>
+    </div>
+
+    <!-- Tela de Seleção de Perguntas dentro de um Nível -->
+    <div id="question-selection-screen" class="screen">
+        <h2 id="level-title"></h2>
+        <p id="question-count"></p>
+        <div id="question-blocks" class="question-blocks-container">
+            <!-- Blocos de pergunta serão gerados dinamicamente pelo JavaScript -->
+        </div>
+    </div>
+
+    <!-- Tela de Exibição da Pergunta Ativa -->
+    <div id="question-display-screen" class="screen">
+        <h3 id="current-question"></h3>
+        <div id="current-question-options" class="options-container">
+            <button class="option-button mario-button" data-option="a"></button>
+            <button class="option-button mario-button" data-option="b"></button>
+            <button class="option-button mario-button" data-option="c"></button>
+            <button class="option-button mario-button" data-option="d"></button>
+        </div>
+        <!-- O feedback e a dica serão exibidos em diálogos modais -->
+    </div>
+
+    <!-- Barra de ferramentas fixa no rodapé do game-container -->
+    <div id="game-toolbar" class="hidden">
+        <button id="global-back-button" class="mario-button toolbar-button">Voltar</button>
+        <button id="hint-button-toolbar" class="mario-button hint-block toolbar-button">Dica</button>
+        <button id="answer-button-toolbar" class="mario-button toolbar-button">Responder</button>
+        <button id="answer-check-button-toolbar" class="mario-button toolbar-button selected hidden">Marcar Correta</button>
+    </div>
+</div>
+
+<!-- Diálogo para exibir a dica da pergunta -->
+<dialog id="hint-dialog" class="mario-dialog">
+    <h3 id="dialog-title">Dica!</h3>
+    <p id="dialog-hint-text"></p>
+    <button id="close-hint-dialog-button" class="mario-button">Fechar</button>
+</dialog>
+
+<!-- Diálogo para exibir o feedback da resposta (Correto/Incorreto) -->
+<dialog id="feedback-dialog" class="mario-dialog">
+    <h3 id="feedback-dialog-title"></h3>
+    <p id="feedback-dialog-message"></p>
+    <button id="close-feedback-dialog-button" class="mario-button">Ok!</button>
+</dialog>
+
+<!-- Área de Animação do Mario no rodapé da página -->
+<div id="mario-animation-area">
+    <div id="ground-animation"></div> <!-- Chão verde animado -->
+    <div id="mario-bushes"></div> <!-- Arbustos animados (feitos com CSS) -->
+    <div id="brown-path-line"></div> <!-- Linha marrom no chão -->
+    <div id="mario-character"></div> <!-- Personagem Mario (GIF animado) -->
+    <div id="obstacle-animation-container"></div> <!-- Contêiner para obstáculos gerados dinamicamente -->
+</div>
+
+<!-- Importa os scripts na ordem correta de dependência -->
+<script src="storage.js"></script>
+<script src="mario-animations.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
