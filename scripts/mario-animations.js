@@ -5,6 +5,7 @@ let darkScreen;
 let isJumping = false;
 let jumpTimeout;
 let obstacleInterval;
+let animationsActive = true; // Variável para controlar se as animações estão ativas
 
 // Função de inicialização para obter referências DOM
 function initializeAnimationElements() {
@@ -17,15 +18,15 @@ function initializeAnimationElements() {
  * Faz o Mario pular.
  */
 export function marioJump() {
-    if (!marioCharacter) initializeAnimationElements(); // Garante que elementos sejam inicializados
+    if (!animationsActive) return; // Não pula se as animações estiverem desativadas
+    if (!marioCharacter) initializeAnimationElements();
     if (!isJumping) {
         isJumping = true;
-        marioCharacter.style.animation = 'marioJump 0.8s ease-out forwards'; // Aplica a animação de pulo
-        // Remove a animação de pulo após um tempo para que possa ser aplicada novamente
+        marioCharacter.style.animation = 'marioJump 0.8s ease-out forwards';
         jumpTimeout = setTimeout(() => {
-            marioCharacter.style.animation = 'marioRun 0.5s steps(2) infinite'; // Volta para a animação de corrida
+            marioCharacter.style.animation = 'marioRun 0.5s steps(2) infinite';
             isJumping = false;
-        }, 800); // Duração do pulo deve corresponder à duração da animação CSS
+        }, 800);
     }
 }
 
@@ -33,27 +34,22 @@ export function marioJump() {
  * Gera e move obstáculos aleatoriamente.
  */
 export function spawnObstacle() {
-    if (!obstacleContainer) initializeAnimationElements(); // Garante que elementos sejam inicializados
+    if (!animationsActive) return; // Não gera obstáculos se as animações estiverem desativadas
+    if (!obstacleContainer) initializeAnimationElements();
+
     const obstacle = document.createElement('div');
-    obstacle.classList.add('obstacle'); // Adiciona uma classe para estilização
+    obstacle.classList.add('obstacle');
     obstacleContainer.appendChild(obstacle);
 
-    // Define a posição inicial do obstáculo (fora da tela à direita)
     obstacle.style.left = '100%';
+    obstacle.style.animation = `moveObstacle 8s linear forwards`;
 
-    // Inicia a animação de movimento do obstáculo
-    obstacle.style.animation = `moveObstacle 8s linear forwards`; // 'forwards' para que ele pare no final
-
-    // Remove o obstáculo após ele sair da tela para otimização
     obstacle.addEventListener('animationend', () => {
         obstacle.remove();
     });
 
-    // Lógica simples para fazer o Mario pular quando um obstáculo se aproxima
-    // Isso é uma simulação, não uma detecção de colisão precisa
-    const obstacleAnimationDuration = 8000; // 8 segundos (deve corresponder à animação CSS)
-    // Ajustado para que o Mario pule antes do obstáculo chegar à sua posição
-    const marioJumpTriggerTime = obstacleAnimationDuration * 0.77; // Ajuste este valor para sincronizar o salto
+    const obstacleAnimationDuration = 8000;
+    const marioJumpTriggerTime = obstacleAnimationDuration * 0.74;
 
     setTimeout(() => {
         marioJump();
@@ -64,8 +60,13 @@ export function spawnObstacle() {
  * Inicia o ciclo de spawn de obstáculos em intervalos regulares.
  */
 export function startObstacleSpawning() {
-    // Spawna um obstáculo a cada X segundos (ajustável)
-    obstacleInterval = setInterval(spawnObstacle, 3000); // Spawna um obstáculo a cada 3 segundos
+    // Limpa qualquer intervalo existente antes de iniciar um novo
+    if (obstacleInterval) {
+        clearInterval(obstacleInterval);
+    }
+    if (animationsActive) { // Só inicia se as animações estiverem ativas
+        obstacleInterval = setInterval(spawnObstacle, 3000);
+    }
 }
 
 /**
@@ -73,13 +74,23 @@ export function startObstacleSpawning() {
  */
 export function stopObstacleSpawning() {
     clearInterval(obstacleInterval);
+    // Remove quaisquer obstáculos existentes para limpar a tela
+    if (obstacleContainer) {
+        obstacleContainer.innerHTML = '';
+    }
+    // Garante que o Mario volte ao estado de corrida se estava pulando
+    if (marioCharacter) {
+        clearTimeout(jumpTimeout);
+        marioCharacter.style.animation = 'marioRun 0.5s steps(2) infinite';
+        isJumping = false;
+    }
 }
 
 /**
  * Mostra a tela escura.
  */
 export function showDarkScreen() {
-    if (!darkScreen) initializeAnimationElements(); // Garante que elementos sejam inicializados
+    if (!darkScreen) initializeAnimationElements();
     if (darkScreen) {
         darkScreen.classList.remove('hidden');
         darkScreen.classList.add('visible');
@@ -92,7 +103,7 @@ export function showDarkScreen() {
  * Oculta a tela escura.
  */
 export function hideDarkScreen() {
-    if (!darkScreen) initializeAnimationElements(); // Garante que elementos sejam inicializados
+    if (!darkScreen) initializeAnimationElements();
     if (darkScreen) {
         darkScreen.classList.remove('visible');
         darkScreen.classList.add('hidden');
@@ -100,3 +111,32 @@ export function hideDarkScreen() {
         console.warn("hideDarkScreen called but darkScreen element not found.");
     }
 }
+
+// Lógica de responsividade para ativar/desativar animações
+function checkAnimationStatus() {
+    // Verifica se a largura da tela é menor que 768px
+    const isSmallScreen = window.innerWidth < 768;
+
+    if (isSmallScreen && animationsActive) {
+        // Se for tela pequena e animações estiverem ativas, desativa
+        animationsActive = false;
+        stopObstacleSpawning();
+        // Opcional: ajustar a animação do Mario para um estado parado ou de corrida simples
+        if (marioCharacter) {
+            marioCharacter.style.animation = 'marioRun 0.5s steps(2) infinite'; // Volta para corrida simples
+        }
+    } else if (!isSmallScreen && !animationsActive) {
+        // Se for tela grande e animações estiverem inativas, ativa
+        animationsActive = true;
+        startObstacleSpawning();
+    }
+}
+
+// Adiciona o listener para o redimensionamento da janela
+window.addEventListener('resize', checkAnimationStatus);
+
+// Chama a função uma vez ao carregar o script para definir o estado inicial
+document.addEventListener("DOMContentLoaded", () => {
+    initializeAnimationElements(); // Garante que os elementos DOM estejam disponíveis
+    checkAnimationStatus();
+});

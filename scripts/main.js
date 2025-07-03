@@ -21,6 +21,9 @@ let answeredQuestions; // Será preenchida por loadGameData
 // Variável para armazenar os dados de QUIZ_OPTIONS carregados do JSON
 let QUIZ_OPTIONS_DATA = [];
 
+// Caminho para o arquivo JSON do quiz
+const pathData = '../data/quiz-data.json'; // Variável atualizada aqui
+
 // Referências aos elementos HTML (agora obtidas no DOMContentLoaded)
 let quizSelectionScreen;
 let quizSelect;
@@ -63,8 +66,6 @@ let currentQuestionElement;
 let optionButtons;
 
 let selectedOption = null;
-
-const pathData = '../data/quiz-data.json';
 
 /**
  * Obtém todas as referências DOM. Chamado no DOMContentLoaded.
@@ -244,9 +245,10 @@ function renderQuestionBlocks(levelId) {
         block.classList.add("question-block");
         block.dataset.questionIndex = index;
         block.textContent = index + 1;
+        // Verifica se a pergunta foi respondida para o quiz e nível atuais
         if (answeredQuestions[currentLevel] && answeredQuestions[currentLevel][index]) {
             block.classList.add("answered");
-            block.textContent = "";
+            block.textContent = ""; // Remove o número se respondida
         }
         block.addEventListener("click", () => {
             if (!block.classList.contains("answered")) {
@@ -354,11 +356,12 @@ function checkAnswer() {
 
     if (selectedOption === qData.correct) {
         checkCorrect();
+        // O answeredQuestions já está correto para o quiz atual
         if (!answeredQuestions[currentLevel]) {
             answeredQuestions[currentLevel] = {};
         }
         answeredQuestions[currentLevel][currentQuestionIndex] = true;
-        saveGameProgress(answeredQuestions, quizData.id);
+        saveGameProgress(answeredQuestions, quizData.id); // quizData.id garante que é salvo para o quiz específico
     } else {
         feedbackDialogTitle.textContent = "Ops!";
         feedbackDialogMessage.textContent = "Tente novamente!";
@@ -400,11 +403,12 @@ function checkCorrectAnswer() {
     });
 
     checkCorrect();
+    // O answeredQuestions já está correto para o quiz atual
     if (!answeredQuestions[currentLevel]) {
         answeredQuestions[currentLevel] = {};
     }
     answeredQuestions[currentLevel][currentQuestionIndex] = true;
-    saveGameProgress(answeredQuestions, quizData.id);
+    saveGameProgress(answeredQuestions, quizData.id); // quizData.id garante que é salvo para o quiz específico
 
     answerButtonToolbar.disabled = true;
     answerCheckButtonToolbar.disabled = true;
@@ -422,17 +426,20 @@ function checkCorrect() {
             button.classList.add("correct-answer");
         }
     });
+    // A lógica de salvamento já está na checkAnswer e checkCorrectAnswer, não precisa duplicar aqui
+    // Apenas atualiza a UI do bloco de pergunta
     if (!answeredQuestions[currentLevel] || !answeredQuestions[currentLevel][currentQuestionIndex]) {
+        // Esta parte é importante para a UI, mesmo que o save já tenha ocorrido
         if (!answeredQuestions[currentLevel]) {
             answeredQuestions[currentLevel] = {};
         }
-        answeredQuestions[currentLevel][currentQuestionIndex] = true;
+        answeredQuestions[currentLevel][currentQuestionIndex] = true; // Marca como respondida na memória
         const questionBlock = document.querySelector(
             `.question-block[data-question-index="${currentQuestionIndex}"]`
         );
         if (questionBlock) {
             questionBlock.classList.add("answered");
-            questionBlock.textContent = "";
+            questionBlock.textContent = ""; // Remove o número
         }
     }
 
@@ -504,19 +511,27 @@ function setupQuizSelectionScreen() {
         const selectedQuizId = quizSelect.value;
         localStorage.setItem('currentSelectedQuizId', selectedQuizId);
 
+        // Limpa o progresso das perguntas respondidas em memória para o novo quiz
+        answeredQuestions = {}; // <--- Adicionado para garantir um estado limpo
+
         localStorage.removeItem('currentQuizConfig');
         localStorage.removeItem('appFontSize');
+        // REMOVIDO: localStorage.removeItem('appThemeMode'); <--- Esta linha foi removida
 
         const selectedQuizOption = QUIZ_OPTIONS_DATA.find(q => q.id === selectedQuizId); // Usar QUIZ_OPTIONS_DATA
         if (selectedQuizOption) {
-            localStorage.setItem('appThemeMode', selectedQuizOption.data.theme || 'light');
+            // Apenas define o tema se não houver um tema salvo no localStorage
+            if (!localStorage.getItem('appThemeMode')) {
+                localStorage.setItem('appThemeMode', selectedQuizOption.data.theme || 'light');
+            }
             const initialFontSize = selectedQuizOption.data.fontSize ? parseFloat(selectedQuizOption.data.fontSize) : 1.5;
             localStorage.setItem('appFontSize', initialFontSize);
-            localStorage.setItem('currentQuizConfig', JSON.stringify(selectedQuizOption.data));
+            // Ao salvar currentQuizConfig, inclua o ID do quiz para que loadGameData possa usá-lo
+            localStorage.setItem('currentQuizConfig', JSON.stringify({ ...selectedQuizOption.data, id: selectedQuizOption.id }));
 
-            const loadedData = loadGameData(selectedQuizOption.data);
-            quizData = loadedData.quizData;
-            answeredQuestions = loadedData.answeredQuestions;
+            const loadedData = loadGameData(selectedQuizOption.data, selectedQuizId); // Pass selectedQuizId aqui
+            quizData = loadedData.quizData; // quizData agora terá a propriedade 'id'
+            answeredQuestions = loadedData.answeredQuestions; // Isso irá carregar o progresso específico do quiz ou um objeto vazio
             initializeGame();
         } else {
             console.error("Quiz selecionado não encontrado nos QUIZ_OPTIONS.");
@@ -558,7 +573,7 @@ document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async
 
     // Carrega os dados do quiz do arquivo JSON
     try {
-        const response = await fetch(pathData);
+        const response = await fetch(pathData); // Usando a variável pathData
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -574,13 +589,13 @@ document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async
         const targetScreenId = globalBackButton.dataset.targetScreen;
         if (targetScreenId === "quiz-selection-screen") {
             localStorage.removeItem('currentSelectedQuizId');
-            localStorage.removeItem('appThemeMode');
+            // REMOVIDO: localStorage.removeItem('appThemeMode'); <--- Esta linha foi removida
             localStorage.removeItem('appFontSize');
             if (quizData && quizData.id) {
                 localStorage.removeItem(`answeredQuestions_${quizData.id}`);
             }
             quizData = undefined;
-            answeredQuestions = {};
+            answeredQuestions = {}; // <--- Adicionado para garantir um estado limpo ao voltar
             currentFontSize = undefined;
             setupQuizSelectionScreen();
         } else if (targetScreenId) {
@@ -643,7 +658,8 @@ document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async
     if (lastSelectedQuizId) {
         const selectedQuizOption = QUIZ_OPTIONS_DATA.find(q => q.id === lastSelectedQuizId); // Usar QUIZ_OPTIONS_DATA
         if (selectedQuizOption) {
-            const loadedData = loadGameData(selectedQuizOption.data);
+            // Ao carregar, passe o ID do quiz para loadGameData
+            const loadedData = loadGameData(selectedQuizOption.data, selectedQuizOption.id);
             quizData = loadedData.quizData;
             answeredQuestions = loadedData.answeredQuestions;
             initializeGame();
