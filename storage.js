@@ -9,23 +9,25 @@ function loadGameData(defaultQuizData) {
     let answeredQuestionsLoaded;
 
     // Tenta carregar o quizData do localStorage
-    const savedQuizData = localStorage.getItem('quizData');
+    // Nota: Agora o quizData salvo no localStorage é a configuração COMPLETA do quiz selecionado.
+    const savedQuizData = localStorage.getItem('currentQuizConfig'); // Chave mais específica
     if (savedQuizData) {
         try {
             quizDataLoaded = JSON.parse(savedQuizData);
         } catch (e) {
             console.error("Erro ao analisar quizData do localStorage, usando dados padrão.", e);
-            quizDataLoaded = defaultQuizData;
-            localStorage.setItem('quizData', JSON.stringify(quizDataLoaded)); // Salva o padrão
+            quizDataLoaded = defaultQuizData; // Usa o padrão passado como argumento
+            localStorage.setItem('currentQuizConfig', JSON.stringify(quizDataLoaded)); // Salva o padrão
         }
     } else {
-        // Se não houver quizData salvo, usa o padrão e salva
+        // Se não houver quizData salvo, usa o padrão passado e salva
         quizDataLoaded = defaultQuizData;
-        localStorage.setItem('quizData', JSON.stringify(quizDataLoaded));
+        localStorage.setItem('currentQuizConfig', JSON.stringify(quizDataLoaded));
     }
 
     // Tenta carregar o answeredQuestions do localStorage
-    const savedAnsweredQuestions = localStorage.getItem('answeredQuestions');
+    // A chave para answeredQuestions agora deve ser específica para o quiz atual
+    const savedAnsweredQuestions = localStorage.getItem(`answeredQuestions_${quizDataLoaded.id}`);
     if (savedAnsweredQuestions) {
         try {
             answeredQuestionsLoaded = JSON.parse(savedAnsweredQuestions);
@@ -44,7 +46,8 @@ function loadGameData(defaultQuizData) {
 /**
  * Salva o progresso das perguntas respondidas no localStorage.
  * @param {object} answeredQuestionsToSave O objeto que rastreia as perguntas respondidas.
+ * @param {string} quizId O ID do quiz atual para salvar o progresso.
  */
-function saveGameProgress(answeredQuestionsToSave) {
-    localStorage.setItem('answeredQuestions', JSON.stringify(answeredQuestionsToSave));
+function saveGameProgress(answeredQuestionsToSave, quizId) {
+    localStorage.setItem(`answeredQuestions_${quizId}`, JSON.stringify(answeredQuestionsToSave));
 }

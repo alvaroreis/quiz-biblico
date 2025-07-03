@@ -1,22 +1,12 @@
-let marioCharacter;
-let obstacleContainer;
-let darkScreen;
+// Referências aos elementos DOM, inicializadas diretamente ao carregar o script.
+// Isso garante que estejam disponíveis quando as funções que os utilizam forem chamadas.
+let marioCharacter = document.getElementById("mario-character");
+let obstacleContainer = document.getElementById("obstacle-animation-container");
+let darkScreen = document.getElementById("dark-screen");
+
 let isJumping = false;
 let jumpTimeout;
 let obstacleInterval;
-
-/**
- * Inicializa as referências dos elementos DOM para as animações.
- * Deve ser chamado uma vez no início do jogo.
- * @param {HTMLElement} marioCharElement O elemento DOM do personagem Mario.
- * @param {HTMLElement} obstacleContainerElement O elemento DOM do contêiner de obstáculos.
- * @param {HTMLElement} darkScreenElement O elemento DOM da tela escura.
- */
-function initAnimations(marioCharElement, obstacleContainerElement, darkScreenElement) {
-    marioCharacter = marioCharElement;
-    obstacleContainer = obstacleContainerElement;
-    darkScreen = darkScreenElement;
-}
 
 /**
  * Faz o Mario pular.
@@ -82,14 +72,24 @@ function stopObstacleSpawning() {
  * Mostra a tela escura.
  */
 function showDarkScreen() {
-    darkScreen.classList.remove('hidden');
-    darkScreen.classList.add('visible');
+    // Adicionado uma verificação defensiva caso o elemento ainda não esteja disponível (improvável com a nova inicialização)
+    if (darkScreen) {
+        darkScreen.classList.remove('hidden');
+        darkScreen.classList.add('visible');
+    } else {
+        console.warn("showDarkScreen called but darkScreen element not found.");
+    }
 }
 
 /**
  * Oculta a tela escura.
  */
 function hideDarkScreen() {
-    darkScreen.classList.remove('visible');
-    darkScreen.classList.add('hidden');
+    // Adicionado uma verificação defensiva caso o elemento ainda não esteja disponível (improvável com a nova inicialização)
+    if (darkScreen) {
+        darkScreen.classList.remove('visible');
+        darkScreen.classList.add('hidden');
+    } else {
+        console.warn("hideDarkScreen called but darkScreen element not found.");
+    }
 }
