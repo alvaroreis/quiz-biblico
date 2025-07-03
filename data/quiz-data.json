@@ -1697,7 +1697,7 @@
     "name": "Descubra o Emoji!",
     "data": {
       "title": "Descubra o Emoji!",
-      "subtitle": "O que os emojis querem dizer?",
+      "subtitle": "Historias da Biblia!",
       "font": "'Press Start 2P', cursive",
       "fontSize": "5.5em",
       "actions": {
@@ -1706,8 +1706,8 @@
       },
       "data": [
         {
-          "id": "old-testament-books",
-          "title": "Livros do Antigo Testamento",
+          "id": "histories-books",
+          "title": "Historias da Biblia",
           "questions": [
             {
               "question": "🌍👨‍👩‍👧‍👦🐍🍎🌊",
@@ -1716,14 +1716,6 @@
               },
               "correct": "a",
               "hint": "Deus cria o mundo, o homem e a mulher em sete dias"
-            },
-            {
-              "question": "🌳🐍🍎👨‍👩‍👧‍👦 expulsion 😭",
-              "options": {
-                "a": "Adão e Eva e a Queda"
-              },
-              "correct": "a",
-              "hint": "A primeira desobediência, expulsão do Jardim do Éden"
             },
             {
               "question": "👨‍🌾🐑🩸🔪",
@@ -1740,14 +1732,6 @@
               },
               "correct": "a",
               "hint": "O dilúvio, salvação da família de Noé e dos animais"
-            },
-            {
-              "question": "🏗️ Babel 🗣️🤔",
-              "options": {
-                "a": "A Torre de Babel"
-              },
-              "correct": "a",
-              "hint": "Tentativa de construir uma torre até o céu, confusão de línguas"
             },
             {
               "question": "👨‍👦🔪🐑🙏",
@@ -1774,7 +1758,7 @@
               "hint": "Deus chama Moisés para libertar o povo"
             },
             {
-              "question": "🐸🩸🦟蝇🐄🔥🧊🦗 darkness 💀",
+              "question": "🐸🩸🦟蝇🐄🔥🧊🦗 💀",
               "options": {
                 "a": "As Dez Pragas do Egito"
               },
@@ -1814,30 +1798,6 @@
               "hint": "Força de Sansão, fraqueza por Dalila, queda e redenção"
             },
             {
-              "question": "👦🐑🪨 slingshot ⚔️巨人",
-              "options": {
-                "a": "Davi e Golias"
-              },
-              "correct": "a",
-              "hint": "O jovem Davi derrota o gigante Golias com uma funda"
-            },
-            {
-              "question": "👑 Solomon 👶⚖️💡",
-              "options": {
-                "a": "A Sabedoria de Salomão"
-              },
-              "correct": "a",
-              "hint": "Salomão pede sabedoria a Deus, julgamento famoso"
-            },
-            {
-              "question": "🔥 altar 🙏🌧️",
-              "options": {
-                "a": "Elias e os Profetas de Baal"
-              },
-              "correct": "a",
-              "hint": "Confronto no Monte Carmelo, Deus envia fogo do céu"
-            },
-            {
               "question": "⛵️🌊🐳🙏🗣️",
               "options": {
                 "a": "Jonas e a Baleia"
@@ -1846,20 +1806,12 @@
               "hint": "Jonas foge de Deus, é engolido por um grande peixe, se arrepende e prega"
             },
             {
-              "question": "🦁 den 🙏😇",
+              "question": "🦁⛓️🙏😇",
               "options": {
                 "a": "Daniel na Cova dos Leões"
               },
               "correct": "a",
               "hint": "Daniel é salvo dos leões por sua fé"
-            },
-            {
-              "question": "🌟👶🐑 stable",
-              "options": {
-                "a": "Jesus Nasce"
-              },
-              "correct": "a",
-              "hint": "O nascimento de Jesus em Belém"
             },
             {
               "question": "🌊🚶‍♂️⛵️🙏",
@@ -1870,14 +1822,6 @@
               "hint": "Jesus caminha sobre o mar e Pedro tenta imitá-lo"
             },
             {
-              "question": "🍞🐟 Crowd 🖐️✨",
-              "options": {
-                "a": "A Multiplicação dos Pães e Peixes"
-              },
-              "correct": "a",
-              "hint": "Jesus alimenta milhares com poucos alimentos"
-            },
-            {
               "question": "🐖💰🏡😔➡️🎉🥳",
               "options": {
                 "a": "A Parábola do Filho Pródigo"
@@ -1886,28 +1830,12 @@
               "hint": "Filho que gasta tudo, se arrepende e é recebido com festa pelo pai"
             },
             {
-              "question": "🤕 Samaritan ❤️🩹🙏",
-              "options": {
-                "a": "A Parábola do Bom Samaritano"
-              },
-              "correct": "a",
-              "hint": "Ajuda ao próximo, amor ao próximo sem preconceitos"
-            },
-            {
               "question": "👁️➡️✨🙏",
               "options": {
                 "a": "Jesus Cura o Cego de Nascença"
               },
               "correct": "a",
               "hint": "Jesus restaura a visão de um homem cego de nascença"
-            },
-            {
-              "question": "🪦 Lazarus 🗣️✨🙏",
-              "options": {
-                "a": "A Ressurreição de Lázaro"
-              },
-              "correct": "a",
-              "hint": "Jesus ressuscita Lázaro dos mortos"
             },
             {
               "question": "🍷🍞 discípulos 🙏",
