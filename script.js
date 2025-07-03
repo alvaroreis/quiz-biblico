@@ -98,6 +98,10 @@ function showScreen(screenId) {
   // Esconde o slider de fonte por padrão em todas as telas
   fontSizeSliderContainer.classList.add('hidden'); // Esconde o slider por padrão
 
+  // Garante que as opções de resposta estejam visíveis por padrão,
+  // e serão ocultadas ou não dependendo da lógica abaixo.
+  currentQuestionOptions.classList.remove("hidden");
+
   // Lógica de visibilidade da toolbar e botões específicos por tela
   if (screenId === "question-display-screen") {
     gameToolbar.classList.remove("hidden");
@@ -117,15 +121,14 @@ function showScreen(screenId) {
       } else {
         answerButtonToolbar.classList.remove("hidden");
         answerCheckButtonToolbar.classList.add("hidden");
-        currentQuestionOptions.classList.remove("hidden"); // Mostra as opções de resposta
-        // Remove classe se as opções forem mostradas
+        // currentQuestionOptions.classList.remove("hidden"); // Já removido no início da função
         questionDisplayScreen.classList.remove('no-answer-options');
       }
     } else {
       // Fallback if quizData.actions is not yet available (shouldn't happen on this screen generally)
       answerButtonToolbar.classList.remove("hidden");
       answerCheckButtonToolbar.classList.add("hidden");
-      currentQuestionOptions.classList.remove("hidden");
+      // currentQuestionOptions.classList.remove("hidden"); // Já removido no início da função
       questionDisplayScreen.classList.remove('no-answer-options'); // Garante que a classe seja removida
     }
   } else if (screenId === "level-selection-screen") {
@@ -135,7 +138,7 @@ function showScreen(screenId) {
     answerButtonToolbar.classList.add("hidden");
     answerCheckButtonToolbar.classList.add("hidden");
     hintButtonToolbar.classList.add("hidden");
-    currentQuestionOptions.classList.remove("hidden"); // Garante que esteja visível em outras telas
+    // currentQuestionOptions.classList.remove("hidden"); // Já removido no início da função
     questionDisplayScreen.classList.remove('no-answer-options'); // Garante que a classe seja removida
   } else if (screenId === "question-selection-screen") {
     gameToolbar.classList.remove("hidden");
@@ -144,7 +147,7 @@ function showScreen(screenId) {
     answerButtonToolbar.classList.add("hidden");
     answerCheckButtonToolbar.classList.add("hidden");
     hintButtonToolbar.classList.add("hidden");
-    currentQuestionOptions.classList.remove("hidden"); // Garante que esteja visível em outras telas
+    // currentQuestionOptions.classList.remove("hidden"); // Já removido no início da função
     questionDisplayScreen.classList.remove('no-answer-options'); // Garante que a classe seja removida
   } else if (screenId === "quiz-selection-screen") {
     gameToolbar.classList.add("hidden");
@@ -152,7 +155,7 @@ function showScreen(screenId) {
     answerButtonToolbar.classList.add("hidden");
     answerCheckButtonToolbar.classList.add("hidden");
     hintButtonToolbar.classList.add("hidden");
-    currentQuestionOptions.classList.remove("hidden"); // Garante que esteja visível em outras telas
+    // currentQuestionOptions.classList.remove("hidden"); // Já removido no início da função
     questionDisplayScreen.classList.remove('no-answer-options'); // Garante que a classe seja removida
   } else { // start-screen
     gameToolbar.classList.remove('hidden'); // Toolbar oculta na tela inicial
@@ -161,7 +164,7 @@ function showScreen(screenId) {
     answerButtonToolbar.classList.add('hidden');
     answerCheckButtonToolbar.classList.add('hidden');
     hintButtonToolbar.classList.add('hidden');
-    currentQuestionOptions.classList.remove("hidden"); // Garante que esteja visível em outras telas
+    // currentQuestionOptions.classList.remove("hidden"); // Já removido no início da função
     questionDisplayScreen.classList.remove('no-answer-options'); // Garante que a classe seja removida
   }
 
@@ -484,15 +487,15 @@ function setupQuizSelectionScreen() {
     const selectedQuizId = quizSelect.value;
     localStorage.setItem('currentSelectedQuizId', selectedQuizId);
 
-    // NOVO: Limpa quizData e appFontSize do localStorage ao carregar um novo quiz
+    // Limpa quizData e appFontSize do localStorage ao carregar um novo quiz
     localStorage.removeItem('currentQuizConfig');
     localStorage.removeItem('appFontSize');
 
     const selectedQuizOption = QUIZ_OPTIONS.find(q => q.id === selectedQuizId);
     if (selectedQuizOption) {
       localStorage.setItem('appThemeMode', selectedQuizOption.data.theme || 'light');
-      // Define o valor inicial do slider com base em quizData.fontSize ou 2.0 (novo mínimo)
-      const initialFontSize = selectedQuizOption.data.fontSize ? parseFloat(selectedQuizOption.data.fontSize) : 2.0;
+      // Define o valor inicial do slider com base em quizData.fontSize ou 1.5 (novo mínimo)
+      const initialFontSize = selectedQuizOption.data.fontSize ? parseFloat(selectedQuizOption.data.fontSize) : 1.5;
       localStorage.setItem('appFontSize', initialFontSize);
       localStorage.setItem('currentQuizConfig', JSON.stringify(selectedQuizOption.data));
 
@@ -512,8 +515,8 @@ function setupQuizSelectionScreen() {
  */
 function initializeGame() {
   themeMode = localStorage.getItem('appThemeMode') || 'light';
-  // Carrega o tamanho da fonte do localStorage, ou usa o valor padrão do quiz, ou 2.0 (novo mínimo)
-  currentFontSize = localStorage.getItem('appFontSize') || (quizData.fontSize ? parseFloat(quizData.fontSize) : 2.0);
+  // Carrega o tamanho da fonte do localStorage, ou usa o valor padrão do quiz, ou 1.5 (novo mínimo)
+  currentFontSize = localStorage.getItem('appFontSize') || (quizData.fontSize ? parseFloat(quizData.fontSize) : 1.5);
 
   document.body.classList.remove('light-theme', 'dark-theme');
   document.body.classList.add(themeMode + "-theme");
@@ -562,7 +565,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setupQuizSelectionScreen();
     } else if (targetScreenId) { // Para outros destinos de "Voltar"
       showScreen(targetScreenId);
-      if (targetId === "question-selection-screen") { // Corrigido: targetId para targetScreenId
+      if (targetScreenId === "question-selection-screen") {
         renderQuestionBlocks(currentLevel);
       }
     } else { // Fallback, caso não haja targetScreenId
