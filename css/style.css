@@ -654,7 +654,7 @@ p {
 #cloud-layer-1 {
     top: var(--cloud-row1-y-pos);
     height: var(--cloud-row1-height);
-    background-image: url('../images/nuvem.png');
+    background-image: url('../assets/images/nuvem.png');
     background-size: auto var(--cloud-row1-height);
     animation: moveCloudsLayer1 60s linear infinite;
 }
@@ -662,7 +662,7 @@ p {
 #cloud-layer-2 {
     top: var(--cloud-row2-y-pos);
     height: var(--cloud-row2-height);
-    background-image: url('../images/nuvem2.png');
+    background-image: url('../assets/images/nuvem2.png');
     background-size: auto var(--cloud-row2-height);
     animation: moveCloudsLayer2 90s linear infinite;
     z-index: 0;

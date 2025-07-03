@@ -22,7 +22,7 @@ let answeredQuestions; // Será preenchida por loadGameData
 let QUIZ_OPTIONS_DATA = [];
 
 // Caminho para o arquivo JSON do quiz
-const pathData = '../data/quiz-data.json'; // Variável atualizada aqui
+const pathData = '../assets/data/quiz-data.json'; // Variável atualizada aqui
 
 // Referências aos elementos HTML (agora obtidas no DOMContentLoaded)
 let quizSelectionScreen;
