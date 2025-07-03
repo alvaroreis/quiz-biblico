@@ -2,9 +2,10 @@
  * Carrega os dados do quiz e o progresso do localStorage.
  * Se não houver dados salvos, usa os dados padrão e os salva.
  * @param {object} defaultQuizData O objeto de dados padrão do quiz.
+ * @param {string} quizIdForLoading O ID do quiz atual para carregar o progresso.
  * @returns {object} Um objeto contendo os dados do quiz e o progresso respondido.
  */
-function loadGameData(defaultQuizData) {
+export function loadGameData(defaultQuizData, quizIdForLoading) { // Adicionado quizIdForLoading
     let quizDataLoaded;
     let answeredQuestionsLoaded;
 
@@ -14,14 +15,19 @@ function loadGameData(defaultQuizData) {
     if (savedQuizData) {
         try {
             quizDataLoaded = JSON.parse(savedQuizData);
+            // Garante que o quizData carregado tenha o ID correto, especialmente se foi salvo sem ele.
+            // Isso é uma verificação defensiva.
+            if (!quizDataLoaded.id && quizIdForLoading) {
+                quizDataLoaded.id = quizIdForLoading;
+            }
         } catch (e) {
             console.error("Erro ao analisar quizData do localStorage, usando dados padrão.", e);
-            quizDataLoaded = defaultQuizData; // Usa o padrão passado como argumento
+            quizDataLoaded = { ...defaultQuizData, id: quizIdForLoading }; // Usa o padrão e adiciona o ID
             localStorage.setItem('currentQuizConfig', JSON.stringify(quizDataLoaded)); // Salva o padrão
         }
     } else {
         // Se não houver quizData salvo, usa o padrão passado e salva
-        quizDataLoaded = defaultQuizData;
+        quizDataLoaded = { ...defaultQuizData, id: quizIdForLoading }; // Adiciona o ID aqui
         localStorage.setItem('currentQuizConfig', JSON.stringify(quizDataLoaded));
     }
 
@@ -46,8 +52,8 @@ function loadGameData(defaultQuizData) {
 /**
  * Salva o progresso das perguntas respondidas no localStorage.
  * @param {object} answeredQuestionsToSave O objeto que rastreia as perguntas respondidas.
- * @param {string} quizId O ID do quiz atual para salvar o progresso.
+ * @param {string} quizId O ID do quiz atual para salvar o proguraço.
  */
-function saveGameProgress(answeredQuestionsToSave, quizId) {
+export function saveGameProgress(answeredQuestionsToSave, quizId) {
     localStorage.setItem(`answeredQuestions_${quizId}`, JSON.stringify(answeredQuestionsToSave));
 }
