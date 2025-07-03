@@ -43,6 +43,7 @@ let globalBackButton;
 let answerButtonToolbar;
 let answerCheckButtonToolbar;
 let hintButtonToolbar;
+let clearProgressButton; // Adicionada referência ao novo botão
 let themeToggleCheckbox;
 
 let fontSizeSlider;
@@ -89,6 +90,7 @@ function getDOMElements() {
     answerButtonToolbar = document.getElementById("answer-button-toolbar");
     answerCheckButtonToolbar = document.getElementById("answer-check-button-toolbar");
     hintButtonToolbar = document.getElementById("hint-button-toolbar");
+    clearProgressButton = document.getElementById("clear-progress-button"); // Obtendo a referência do novo botão
     themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
 
     fontSizeSlider = document.getElementById("font-size-slider");
@@ -131,8 +133,9 @@ function showScreen(screenId) {
     feedbackDialog.close();
     hideDarkScreen();
 
-    // Esconde o slider de fonte por padrão em todas as telas
+    // Esconde o slider de fonte e o botão de limpar progresso por padrão em todas as telas
     fontSizeSliderContainer.classList.add('hidden');
+    clearProgressButton.classList.add("hidden"); // Esconde o botão de limpar progresso por padrão
 
     // Garante que as opções de resposta estejam visíveis por padrão,
     // e serão ocultadas ou não dependendo da lógica abaixo.
@@ -171,6 +174,7 @@ function showScreen(screenId) {
         answerCheckButtonToolbar.classList.add("hidden");
         hintButtonToolbar.classList.add("hidden");
         questionDisplayScreen.classList.remove('no-answer-options');
+        // clearProgressButton.classList.remove("hidden"); // Removido daqui
     } else if (screenId === "question-selection-screen") {
         gameToolbar.classList.remove("hidden");
         globalBackButton.dataset.targetScreen = "level-selection-screen";
@@ -179,6 +183,7 @@ function showScreen(screenId) {
         answerCheckButtonToolbar.classList.add("hidden");
         hintButtonToolbar.classList.add("hidden");
         questionDisplayScreen.classList.remove('no-answer-options');
+        // clearProgressButton.classList.remove("hidden"); // Removido daqui
     } else if (screenId === "quiz-selection-screen") {
         gameToolbar.classList.add("hidden");
         globalBackButton.classList.add("hidden");
@@ -194,6 +199,7 @@ function showScreen(screenId) {
         answerCheckButtonToolbar.classList.add('hidden');
         hintButtonToolbar.classList.add('hidden');
         questionDisplayScreen.classList.remove('no-answer-options');
+        clearProgressButton.classList.remove("hidden"); // Mostrar apenas na start-screen
     }
 
     if (quizData && quizData.actions && !quizData.actions.showToolbar) {
@@ -516,7 +522,7 @@ function setupQuizSelectionScreen() {
 
         localStorage.removeItem('currentQuizConfig');
         localStorage.removeItem('appFontSize');
-        // REMOVIDO: localStorage.removeItem('appThemeMode'); <--- Esta linha foi removida
+        // REMOVIDO: localStorage.removeItem('appThemeMode');
 
         const selectedQuizOption = QUIZ_OPTIONS_DATA.find(q => q.id === selectedQuizId); // Usar QUIZ_OPTIONS_DATA
         if (selectedQuizOption) {
@@ -589,7 +595,7 @@ document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async
         const targetScreenId = globalBackButton.dataset.targetScreen;
         if (targetScreenId === "quiz-selection-screen") {
             localStorage.removeItem('currentSelectedQuizId');
-            // REMOVIDO: localStorage.removeItem('appThemeMode'); <--- Esta linha foi removida
+            // REMOVIDO: localStorage.removeItem('appThemeMode');
             localStorage.removeItem('appFontSize');
             if (quizData && quizData.id) {
                 localStorage.removeItem(`answeredQuestions_${quizData.id}`);
@@ -611,6 +617,17 @@ document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async
     answerButtonToolbar.addEventListener("click", checkAnswer);
     answerCheckButtonToolbar.addEventListener("click", checkCorrectAnswer);
     hintButtonToolbar.addEventListener("click", showHint);
+
+    clearProgressButton.addEventListener("click", () => { // Adicionado event listener para o botão de limpar progresso
+        if (confirm("Tem certeza que deseja limpar todo o progresso deste quiz?")) {
+            localStorage.removeItem(`answeredQuestions_${quizData.id}`); // Limpa o progresso no localStorage
+            answeredQuestions = {}; // Reinicializa o objeto de progresso em memória
+            if (document.getElementById("question-selection-screen").classList.contains("active")) {
+                renderQuestionBlocks(currentLevel); // Recarrega a tela para refletir as mudanças
+            }
+            alert("Progresso limpo com sucesso!");
+        }
+    });
 
     themeToggleCheckbox.addEventListener("change", () => {
         themeMode = themeToggleCheckbox.checked ? 'dark' : 'light';

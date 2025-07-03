@@ -569,6 +569,17 @@ p {
     font-size: 0.9em;
 }
 
+/* Estilo para o botão Limpar Progresso */
+#clear-progress-button { /* Adicionado estilo para o botão Limpar Progresso */
+    background-color: var(--mario-red);
+    border-color: #A00000;
+}
+
+#clear-progress-button:hover { /* Adicionado estilo de hover para o botão Limpar Progresso */
+    background-color: #CC0000;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
+}
+
 /* Estilos para o Diálogo (Modal) */
 .mario-dialog {
     border: 5px solid var(--mario-brown);
