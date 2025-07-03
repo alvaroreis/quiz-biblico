@@ -1,17 +1,23 @@
-// Referências aos elementos DOM, inicializadas diretamente ao carregar o script.
-// Isso garante que estejam disponíveis quando as funções que os utilizam forem chamadas.
-let marioCharacter = document.getElementById("mario-character");
-let obstacleContainer = document.getElementById("obstacle-animation-container");
-let darkScreen = document.getElementById("dark-screen");
+let marioCharacter;
+let obstacleContainer;
+let darkScreen;
 
 let isJumping = false;
 let jumpTimeout;
 let obstacleInterval;
 
+// Função de inicialização para obter referências DOM
+function initializeAnimationElements() {
+    marioCharacter = document.getElementById("mario-character");
+    obstacleContainer = document.getElementById("obstacle-animation-container");
+    darkScreen = document.getElementById("dark-screen");
+}
+
 /**
  * Faz o Mario pular.
  */
-function marioJump() {
+export function marioJump() {
+    if (!marioCharacter) initializeAnimationElements(); // Garante que elementos sejam inicializados
     if (!isJumping) {
         isJumping = true;
         marioCharacter.style.animation = 'marioJump 0.8s ease-out forwards'; // Aplica a animação de pulo
@@ -26,7 +32,8 @@ function marioJump() {
 /**
  * Gera e move obstáculos aleatoriamente.
  */
-function spawnObstacle() {
+export function spawnObstacle() {
+    if (!obstacleContainer) initializeAnimationElements(); // Garante que elementos sejam inicializados
     const obstacle = document.createElement('div');
     obstacle.classList.add('obstacle'); // Adiciona uma classe para estilização
     obstacleContainer.appendChild(obstacle);
@@ -56,7 +63,7 @@ function spawnObstacle() {
 /**
  * Inicia o ciclo de spawn de obstáculos em intervalos regulares.
  */
-function startObstacleSpawning() {
+export function startObstacleSpawning() {
     // Spawna um obstáculo a cada X segundos (ajustável)
     obstacleInterval = setInterval(spawnObstacle, 3000); // Spawna um obstáculo a cada 3 segundos
 }
@@ -64,15 +71,15 @@ function startObstacleSpawning() {
 /**
  * Para o ciclo de spawn de obstáculos.
  */
-function stopObstacleSpawning() {
+export function stopObstacleSpawning() {
     clearInterval(obstacleInterval);
 }
 
 /**
  * Mostra a tela escura.
  */
-function showDarkScreen() {
-    // Adicionado uma verificação defensiva caso o elemento ainda não esteja disponível (improvável com a nova inicialização)
+export function showDarkScreen() {
+    if (!darkScreen) initializeAnimationElements(); // Garante que elementos sejam inicializados
     if (darkScreen) {
         darkScreen.classList.remove('hidden');
         darkScreen.classList.add('visible');
@@ -84,8 +91,8 @@ function showDarkScreen() {
 /**
  * Oculta a tela escura.
  */
-function hideDarkScreen() {
-    // Adicionado uma verificação defensiva caso o elemento ainda não esteja disponível (improvável com a nova inicialização)
+export function hideDarkScreen() {
+    if (!darkScreen) initializeAnimationElements(); // Garante que elementos sejam inicializados
     if (darkScreen) {
         darkScreen.classList.remove('visible');
         darkScreen.classList.add('hidden');

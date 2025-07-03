@@ -4,7 +4,7 @@
  * @param {object} defaultQuizData O objeto de dados padrão do quiz.
  * @returns {object} Um objeto contendo os dados do quiz e o progresso respondido.
  */
-function loadGameData(defaultQuizData) {
+export function loadGameData(defaultQuizData) {
     let quizDataLoaded;
     let answeredQuestionsLoaded;
 
@@ -48,6 +48,6 @@ function loadGameData(defaultQuizData) {
  * @param {object} answeredQuestionsToSave O objeto que rastreia as perguntas respondidas.
  * @param {string} quizId O ID do quiz atual para salvar o progresso.
  */
-function saveGameProgress(answeredQuestionsToSave, quizId) {
+export function saveGameProgress(answeredQuestionsToSave, quizId) {
     localStorage.setItem(`answeredQuestions_${quizId}`, JSON.stringify(answeredQuestionsToSave));
 }
