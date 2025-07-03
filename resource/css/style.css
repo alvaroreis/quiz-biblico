@@ -302,7 +302,7 @@ body::after { /* Montanhas distantes (feitas com SVG inline) */
     width: 100%; /* Ajuste para ser mais responsivo */
     position: relative; /* Essencial para o posicionamento absoluto da toolbar */
     z-index: 10; /* Acima dos elementos de fundo */
-    min-height: 400px; /* Altura mínima para o container */
+    min-height: 300px; /* Altura mínima para o container */
     max-height: 90vh; /* Limita a altura a 90% da altura da viewport */
     /* REMOVIDO: overflow-y: auto; do game-container */
     display: flex; /* Para centralizar o conteúdo verticalmente */
@@ -654,7 +654,7 @@ p {
 #cloud-layer-1 {
     top: var(--cloud-row1-y-pos);
     height: var(--cloud-row1-height);
-    background-image: url('./images/nuvem.png');
+    background-image: url('../images/nuvem.png');
     background-size: auto var(--cloud-row1-height);
     animation: moveCloudsLayer1 60s linear infinite;
 }
@@ -662,7 +662,7 @@ p {
 #cloud-layer-2 {
     top: var(--cloud-row2-y-pos);
     height: var(--cloud-row2-height);
-    background-image: url('./images/nuvem2.png');
+    background-image: url('../images/nuvem2.png');
     background-size: auto var(--cloud-row2-height);
     animation: moveCloudsLayer2 90s linear infinite;
     z-index: 0;
@@ -925,7 +925,7 @@ p {
         padding: 10px;
         padding-bottom: 70px;
         max-width: 85%; /* Ajustado para 85% */
-        min-height: 300px; /* Definido min-height para mobile */
+        min-height: 250px; /* Definido min-height para mobile */
     }
     h1 {
         font-size: 1.5em;
