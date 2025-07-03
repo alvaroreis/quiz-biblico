@@ -1,8 +1,8 @@
 // Objeto contendo todas as perguntas, divididas por nível de dificuldade.
 // A estrutura foi alterada para um objeto único com 'title', 'subtitle' e um array 'data' para os níveis.
 const quizData = {
-  title: "Descubra o Emoji!",
-  subtitle: "O que os emojis querem dizer?",
+  title: "Descubra os Livros!",
+  subtitle: "Livros Embaralhados! ",
   fontSize: "5em", // NOVO: Campo de tamanho de fonte para a pergunta atual
   actions: {
     showToolbar: true,
@@ -14,7 +14,7 @@ const quizData = {
       title: "Antigo Testamento",
       questions: [
         {
-          question: "SRENMUO",
+          question: "ESNUORM",
           options: {
             a: "Números",
           },
@@ -22,7 +22,7 @@ const quizData = {
           hint: "Descreve a contagem e as peregrinações do povo de Israel no deserto.",
         },
         {
-          question: "OONEDRETMUIO",
+          question: "NEEIDORTOMOU",
           options: {
             a: "Deuteronômio",
           },
@@ -30,7 +30,7 @@ const quizData = {
           hint: 'É o livro da "segunda lei", que reitera as instruções de Deus antes da entrada em Canaã.',
         },
         {
-          question: "SCANOCIT",
+          question: "TSIACCON",
           options: {
             a: "Cânticos",
           },
@@ -38,7 +38,7 @@ const quizData = {
           hint: "Um poema de amor que celebra o relacionamento entre um homem e uma mulher.",
         },
         {
-          question: "SAABDIA",
+          question: "ABSAODI",
           options: {
             a: "Obadias",
           },
@@ -46,15 +46,7 @@ const quizData = {
           hint: "O profeta mais curto do Antigo Testamento, que fala sobre a queda de Edom.",
         },
         {
-          question: "OJ",
-          options: {
-            a: "Jó",
-          },
-          correct: "a",
-          hint: "Um livro que explora o sofrimento humano e a soberania de Deus através da história de um homem justo.",
-        },
-        {
-          question: "GAUDE",
+          question: "EUGA",
           options: {
             a: "Ageu",
           },
@@ -62,7 +54,7 @@ const quizData = {
           hint: "Profeta que incentivou o povo a reconstruir o Templo após o exílio.",
         },
         {
-          question: "ERUT",
+          question: "TURE",
           options: {
             a: "Rute",
           },
@@ -70,7 +62,7 @@ const quizData = {
           hint: "A história de uma nora fiel que encontra amor e redenção em Belém.",
         },
         {
-          question: "SAAMLIC",
+          question: "AIASULMQA",
           options: {
             a: "Malaquias",
           },
@@ -78,7 +70,7 @@ const quizData = {
           hint: "É o último profeta antes do silêncio de 400 anos, e fala sobre dízimos e ofertas.",
         },
         {
-          question: "SACECOSLTIEA",
+          question: "SIAEETLESCS",
           options: {
             a: "Eclesiastes",
           },
@@ -86,15 +78,15 @@ const quizData = {
           hint: "Reflete sobre o sentido da vida e a vaidade das coisas sob o sol.",
         },
         {
-          question: "SARCINOC1",
+          question: "SNRCCIAO",
           options: {
-            a: "1 Crônicas",
+            a: "1 e 2 Crônicas",
           },
           correct: "a",
           hint: "Começa com longas genealogias e fala sobre o reinado de Davi.",
         },
         {
-          question: "XOOED",
+          question: "OEOXD",
           options: {
             a: "Êxodo",
           },
@@ -102,7 +94,7 @@ const quizData = {
           hint: "A libertação de Israel do Egito e a entrega dos Dez Mandamentos.",
         },
         {
-          question: "PRORSVEBOI",
+          question: "BVIRSEOROP",
           options: {
             a: "Provérbios",
           },
@@ -110,7 +102,7 @@ const quizData = {
           hint: "Um livro cheio de sabedoria prática e conselhos para a vida diária.",
         },
         {
-          question: "SANJO",
+          question: "OSNJA",
           options: {
             a: "Jonas",
           },
@@ -118,7 +110,7 @@ const quizData = {
           hint: "O profeta que tentou fugir da missão de pregar em Nínive e acabou na barriga de um peixe.",
         },
         {
-          question: "ASIAIS",
+          question: "AIIASS",
           options: {
             a: "Isaías",
           },
@@ -126,15 +118,15 @@ const quizData = {
           hint: 'Conhecido como o "príncipe dos profetas", fala muito sobre a vinda do Messias.',
         },
         {
-          question: "EL1UMAS",
+          question: "AUSEML",
           options: {
-            a: "1 Samuel",
+            a: "1 e 2 Samuel",
           },
           correct: "a",
           hint: "Conta a história do último juiz de Israel e a ascensão do primeiro rei, Saul.",
         },
         {
-          question: "SASJEMRIE",
+          question: "MSJEEIAR",
           options: {
             a: "Jeremias",
           },
@@ -142,7 +134,7 @@ const quizData = {
           hint: 'Conhecido como o "profeta chorão", ele alertou sobre o juízo iminente de Jerusalém.',
         },
         {
-          question: "SOMA",
+          question: "MASO",
           options: {
             a: "Amós",
           },
@@ -150,7 +142,7 @@ const quizData = {
           hint: "Um pastor e agricultor que profetizou contra a injustiça social.",
         },
         {
-          question: "SOONAFIS",
+          question: "SINAFSOO",
           options: {
             a: "Sofonias",
           },
@@ -158,7 +150,7 @@ const quizData = {
           hint: 'Anuncia o "Dia do Senhor" e a restauração de Israel.',
         },
         {
-          question: "NIELDAN",
+          question: "ADLNEI",
           options: {
             a: "Daniel",
           },
@@ -166,7 +158,7 @@ const quizData = {
           hint: "Um jovem judeu no exílio que interpretou sonhos e sobreviveu à cova dos leões.",
         },
         {
-          question: "CAZARISA",
+          question: "AARZSAIC",
           options: {
             a: "Zacarias",
           },
@@ -174,7 +166,7 @@ const quizData = {
           hint: "Profeta que teve visões sobre a reconstrução de Jerusalém e a vinda do Messias.",
         },
         {
-          question: "SRDAES",
+          question: "SRDEAS",
           options: {
             a: "Esdras",
           },
@@ -182,7 +174,7 @@ const quizData = {
           hint: "Narra o retorno dos judeus do exílio babilônico e a reconstrução do Templo.",
         },
         {
-          question: "ABCUHAQB",
+          question: "HUABUEAQC",
           options: {
             a: "Habacuque",
           },
@@ -190,7 +182,7 @@ const quizData = {
           hint: "O profeta que questiona a Deus sobre a injustiça e a maldade, e encontra resposta na fé.",
         },
         {
-          question: "IVLTCEOI",
+          question: "IOTIELCV",
           options: {
             a: "Levítico",
           },
@@ -198,7 +190,7 @@ const quizData = {
           hint: "Contém muitas leis sobre sacrifícios, pureza e santidade para o povo de Deus.",
         },
         {
-          question: "NEIAMEAS",
+          question: "SENIAEM",
           options: {
             a: "Neemias",
           },
@@ -222,7 +214,7 @@ const quizData = {
           hint: "Um profeta que descreve uma praga de gafanhotos e fala sobre o derramamento do Espírito.",
         },
         {
-          question: "OEJSU",
+          question: "UEJSO",
           options: {
             a: "Josué",
           },
@@ -230,7 +222,7 @@ const quizData = {
           hint: "A história da conquista da Terra Prometida sob a liderança de um grande capitão.",
         },
         {
-          question: "QUIAEMIS",
+          question: "IUAMISQE",
           options: {
             a: "Miquéias",
           },
@@ -238,7 +230,7 @@ const quizData = {
           hint: "Predisse que o Messias nasceria em Belém.",
         },
         {
-          question: "SAIEOS",
+          question: "ASIEOS",
           options: {
             a: "Oséias",
           },
@@ -254,15 +246,15 @@ const quizData = {
           hint: 'O livro do "início", que narra a criação, a queda e os primeiros patriarcas.',
         },
         {
-          question: "SEIR1",
+          question: "SEIR",
           options: {
-            a: "1 Reis",
+            a: "1 e 2 Reis",
           },
           correct: "a",
           hint: "Conta a ascensão de Salomão e a divisão do reino de Israel.",
         },
         {
-          question: "SLAMOS",
+          question: "ALOSMS",
           options: {
             a: "Salmos",
           },
@@ -278,7 +270,7 @@ const quizData = {
           hint: "Anuncia a destruição da grande cidade de Nínive.",
         },
         {
-          question: "ZEUEQIL",
+          question: "QELUZIEE",
           options: {
             a: "Ezequiel",
           },
@@ -286,7 +278,7 @@ const quizData = {
           hint: "O profeta que teve visões complexas, como o vale de ossos secos.",
         },
         {
-          question: "ZIUEJS",
+          question: "UEIZJS",
           options: {
             a: "Juízes",
           },
@@ -300,7 +292,7 @@ const quizData = {
       title: "Novo Testamento",
       questions: [
         {
-          question: "SCAMOR",
+          question: "OARMSC",
           options: {
             a: "Marcos",
           },
@@ -308,15 +300,15 @@ const quizData = {
           hint: "O Evangelho mais curto e dinâmico, que mostra Jesus como o Servo sofredor.",
         },
         {
-          question: "OAOJ1",
+          question: "OOJA",
           options: {
-            a: "1 João",
+            a: "1,2 e 3 João",
           },
           correct: "a",
           hint: "Fala sobre o amor de Deus, a comunhão e a certeza da salvação.",
         },
         {
-          question: "STOA",
+          question: "TSAO",
           options: {
             a: "Atos",
           },
@@ -324,7 +316,7 @@ const quizData = {
           hint: "Narra o início da Igreja após a ascensão de Jesus e a expansão do Evangelho.",
         },
         {
-          question: "USBHRE",
+          question: "USRBEEH",
           options: {
             a: "Hebreus",
           },
@@ -332,7 +324,7 @@ const quizData = {
           hint: "Exalta a superioridade de Jesus sobre anjos, Moisés e sacerdotes, e fala sobre a fé.",
         },
         {
-          question: "SEFIOSE",
+          question: "SFISEOE",
           options: {
             a: "Efésios",
           },
@@ -340,7 +332,7 @@ const quizData = {
           hint: "Fala sobre a unidade da igreja como o corpo de Cristo e a armadura de Deus.",
         },
         {
-          question: "COSECOLNSSES",
+          question: "ESOSSLCONES",
           options: {
             a: "Colossenses",
           },
@@ -348,7 +340,7 @@ const quizData = {
           hint: "Paulo combate falsas doutrinas e exalta a supremacia de Cristo.",
         },
         {
-          question: "SDJAU",
+          question: "AUJDS",
           options: {
             a: "Judas",
           },
@@ -356,15 +348,15 @@ const quizData = {
           hint: "Uma pequena carta que exorta os crentes a lutar pela fé contra falsos mestres.",
         },
         {
-          question: "TIO1OTEM",
+          question: "IÓTEMTO",
           options: {
-            a: "1 Timóteo",
+            a: "Timóteo",
           },
           correct: "a",
           hint: "Paulo escreve a seu jovem discípulo dando instruções sobre como pastorear a igreja.",
         },
         {
-          question: "OTAGI",
+          question: "IOAGT",
           options: {
             a: "Tiago",
           },
@@ -372,15 +364,15 @@ const quizData = {
           hint: "Uma carta prática que enfatiza que a fé sem obras é morta.",
         },
         {
-          question: "DREPE1",
+          question: "REPDO",
           options: {
-            a: "1 Pedro",
+            a: "Pedro",
           },
           correct: "a",
           hint: "Encoraja os cristãos a perseverarem em meio ao sofrimento e perseguição.",
         },
         {
-          question: "LIPENSESFI",
+          question: "LEISEISNPF",
           options: {
             a: "Filipenses",
           },
@@ -388,7 +380,7 @@ const quizData = {
           hint: "Uma carta de alegria escrita da prisão, incentivando à unidade e à humildade de Cristo.",
         },
         {
-          question: "OAOJ",
+          question: "OJAO",
           options: {
             a: "João",
           },
@@ -396,7 +388,7 @@ const quizData = {
           hint: "O Evangelho que apresenta Jesus como o Verbo encarnado e enfatiza sua divindade.",
         },
         {
-          question: "OSNORAM",
+          question: "ORAMOSN",
           options: {
             a: "Romanos",
           },
@@ -412,7 +404,7 @@ const quizData = {
           hint: "Paulo instrui seu jovem colaborador sobre a organização e conduta na igreja.",
         },
         {
-          question: "POCAALISPE",
+          question: "IOSAPEPALC",
           options: {
             a: "Apocalipse",
           },
@@ -420,23 +412,23 @@ const quizData = {
           hint: "O último livro da Bíblia, com visões proféticas sobre o fim dos tempos e a volta de Jesus.",
         },
         {
-          question: "S1CENAOSLOTENSI",
+          question: "CEIOSTNSNSSAELE",
           options: {
-            a: "1 Tessalonicenses",
+            a: "1 e 2 Tessalonicenses",
           },
           correct: "a",
           hint: "Escrita por Paulo, fala sobre a segunda vinda de Cristo e a vida cristã.",
         },
         {
-          question: "SIN1COTROI",
+          question: "ISTROCNOI",
           options: {
-            a: "1 Coríntios",
+            a: "1 e 2 Coríntios",
           },
           correct: "a",
           hint: "Paulo corrige problemas na igreja de Corinto, como divisões e imoralidade, e fala sobre o amor.",
         },
         {
-          question: "SLUCA",
+          question: "AULSC",
           options: {
             a: "Lucas",
           },
@@ -444,7 +436,7 @@ const quizData = {
           hint: "O Evangelho mais detalhado, escrito por um médico, que enfatiza a humanidade de Jesus e sua atenção aos marginalizados.",
         },
         {
-          question: "STAGALAA",
+          question: "SATLAAG",
           options: {
             a: "Gálatas",
           },
@@ -452,7 +444,7 @@ const quizData = {
           hint: "Paulo defende a justificação pela fé, não pelas obras da lei.",
         },
         {
-          question: "SUTEAM",
+          question: "UEAMTS",
           options: {
             a: "Mateus",
           },
@@ -460,7 +452,7 @@ const quizData = {
           hint: "O Evangelho que apresenta Jesus como o Messias prometido, com foco em seus ensinamentos (Sermão da Montanha).",
         },
         {
-          question: "OMELNFILE",
+          question: "LMFMIEO",
           options: {
             a: "Filemom",
           },

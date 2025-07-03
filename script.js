@@ -1,7 +1,14 @@
-// A variável DEFAULT_QUIZ_DATA é carregada globalmente de default-quiz-data.js
+// As variáveis e funções de outros arquivos (default-quiz-data.js, storage.js, mario-animations.js)
+// são assumidas como globais e carregadas antes deste script no HTML.
 
 // Variável que irá armazenar os dados do quiz (carregados do localStorage ou padrão)
 let quizData; // Será preenchida por loadGameData
+
+// Variável para armazenar o tema atual (carregado do localStorage ou padrão)
+let themeMode; // Será preenchida por loadGameData
+
+// Variável para armazenar o tamanho da fonte da pergunta atual
+let currentFontSize; // Será preenchida por loadGameData
 
 // Variáveis de estado do jogo
 let currentLevel = ""; // ID do nível de dificuldade atual (e.g., 'easy', 'medium', 'difficult')
@@ -11,6 +18,10 @@ let currentQuestionIndex = -1; // Índice da pergunta atual dentro do nível
 let answeredQuestions; // Será preenchida por loadGameData
 
 // Referências aos elementos HTML
+const quizSelectionScreen = document.getElementById("quiz-selection-screen");
+const quizSelect = document.getElementById("quiz-select");
+const loadQuizButton = document.getElementById("load-quiz-button");
+
 const startScreen = document.getElementById("start-screen");
 const levelSelectionScreen = document.getElementById("level-selection-screen");
 const questionSelectionScreen = document.getElementById(
@@ -24,7 +35,7 @@ const startButton = document.getElementById("start-button");
 const levelOptionsContainer = document.getElementById(
     "level-options-container"
 );
-const currentQuestionOptions = document.getElementById("current-question-options"); // Selecionado pela classe
+const currentQuestionOptions = document.getElementById("current-question-options");
 
 const gameToolbar = document.getElementById("game-toolbar");
 const globalBackButton = document.getElementById("global-back-button");
@@ -33,6 +44,13 @@ const answerCheckButtonToolbar = document.getElementById(
     "answer-check-button-toolbar"
 );
 const hintButtonToolbar = document.getElementById("hint-button-toolbar");
+const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox"); // Referência ao checkbox
+
+// Referências aos elementos do slider de fonte
+const fontSizeSlider = document.getElementById("font-size-slider");
+const fontSizeValueSpan = document.getElementById("font-size-value");
+const fontSizeSliderContainer = document.querySelector(".font-size-slider-container"); // Container do slider de fonte
+
 
 const hintDialog = document.getElementById("hint-dialog");
 const dialogHintText = document.getElementById("dialog-hint-text");
@@ -56,7 +74,7 @@ const questionBlocksContainer = document.getElementById("question-blocks");
 const currentQuestionElement = document.getElementById("current-question");
 const optionButtons = document.querySelectorAll(".option-button");
 
-let selectedOption = null; // Armazena a opção selecionada pelo jogador
+let selectedOption = null;
 
 
 // --- Funções de Navegação e Lógica do Jogo ---
@@ -73,56 +91,85 @@ function showScreen(screenId) {
 
   // Esconde a toolbar por padrão em todas as telas
   gameToolbar.classList.add("hidden");
-  hintDialog.close(); // Garante que o diálogo da dica esteja fechado ao mudar de tela
-  feedbackDialog.close(); // Garante que o diálogo de feedback esteja fechado ao mudar de tela
-  hideDarkScreen(); // Garante que a tela escura esteja oculta ao mudar de tela principal
+  hintDialog.close();
+  feedbackDialog.close();
+  hideDarkScreen();
 
-  // Mostra a toolbar e seus botões relevantes apenas na tela de perguntas
+  // Esconde o slider de fonte por padrão em todas as telas
+  fontSizeSliderContainer.classList.add('hidden'); // Esconde o slider por padrão
+
+  // Lógica de visibilidade da toolbar e botões específicos por tela
   if (screenId === "question-display-screen") {
     gameToolbar.classList.remove("hidden");
-    globalBackButton.dataset.targetScreen = "question-selection-screen"; // Volta para a seleção de perguntas
+    globalBackButton.dataset.targetScreen = "question-selection-screen";
     globalBackButton.classList.remove("hidden");
     hintButtonToolbar.classList.remove("hidden");
-    answerButtonToolbar.classList.remove("hidden");
-    answerCheckButtonToolbar.classList.add("hidden");
+    fontSizeSliderContainer.classList.remove('hidden'); // Mostra o slider apenas na tela de pergunta
 
-    if (!quizData.actions.showAwnserButtons) {
-      answerButtonToolbar.classList.add("hidden");
-      answerCheckButtonToolbar.classList.remove("hidden");
+    // Lógica para showAwnserButtons e currentQuestionOptions
+    if (quizData && quizData.actions) { // Ensure quizData.actions is defined
+      if (!quizData.actions.showAwnserButtons) {
+        answerButtonToolbar.classList.add("hidden");
+        answerCheckButtonToolbar.classList.remove("hidden");
+        currentQuestionOptions.classList.add("hidden"); // Oculta as opções de resposta
+        // Adiciona classe para centralizar e remover cursor quando opções não são mostradas
+        questionDisplayScreen.classList.add('no-answer-options');
+      } else {
+        answerButtonToolbar.classList.remove("hidden");
+        answerCheckButtonToolbar.classList.add("hidden");
+        currentQuestionOptions.classList.remove("hidden"); // Mostra as opções de resposta
+        // Remove classe se as opções forem mostradas
+        questionDisplayScreen.classList.remove('no-answer-options');
+      }
+    } else {
+      // Fallback if quizData.actions is not yet available (shouldn't happen on this screen generally)
+      answerButtonToolbar.classList.remove("hidden");
+      answerCheckButtonToolbar.classList.add("hidden");
+      currentQuestionOptions.classList.remove("hidden");
+      questionDisplayScreen.classList.remove('no-answer-options'); // Garante que a classe seja removida
     }
   } else if (screenId === "level-selection-screen") {
-    // Na tela de seleção de nível, a toolbar deve estar oculta, mas o botão "Voltar" deve ser visível.
-    gameToolbar.classList.add("hidden"); // Toolbar oculta
-    globalBackButton.dataset.targetScreen = "start-screen";
-    globalBackButton.classList.remove("hidden"); // Botão Voltar visível
-    answerButtonToolbar.classList.add("hidden");
-    answerCheckButtonToolbar.classList.add("hidden");
-    hintButtonToolbar.classList.add("hidden");
-  } else if (screenId === "question-selection-screen") {
-    // Na tela de seleção de perguntas, a toolbar deve estar oculta, mas o botão "Voltar" deve ser visível.
-    gameToolbar.classList.add("hidden"); // Toolbar oculta
-    globalBackButton.dataset.targetScreen = "level-selection-screen";
-    globalBackButton.classList.remove("hidden"); // Botão Voltar visível
-    answerButtonToolbar.classList.add("hidden");
-    answerCheckButtonToolbar.classList.add("hidden");
-    hintButtonToolbar.classList.add("hidden");
-  }
-  // Se for a tela inicial ('start-screen'), a toolbar permanece oculta
-
-  // Controla a visibilidade da toolbar e dos botões de resposta com base em quizData.actions
-  if (!quizData.actions.showToolbar) {
-    gameToolbar.classList.add("hidden");
-  } else {
     gameToolbar.classList.remove("hidden");
+    globalBackButton.dataset.targetScreen = "start-screen"; // Voltar da seleção de nível para a tela inicial
+    globalBackButton.classList.remove("hidden"); // Mostrar botão voltar
+    answerButtonToolbar.classList.add("hidden");
+    answerCheckButtonToolbar.classList.add("hidden");
+    hintButtonToolbar.classList.add("hidden");
+    currentQuestionOptions.classList.remove("hidden"); // Garante que esteja visível em outras telas
+    questionDisplayScreen.classList.remove('no-answer-options'); // Garante que a classe seja removida
+  } else if (screenId === "question-selection-screen") {
+    gameToolbar.classList.remove("hidden");
+    globalBackButton.dataset.targetScreen = "level-selection-screen";
+    globalBackButton.classList.remove("hidden");
+    answerButtonToolbar.classList.add("hidden");
+    answerCheckButtonToolbar.classList.add("hidden");
+    hintButtonToolbar.classList.add("hidden");
+    currentQuestionOptions.classList.remove("hidden"); // Garante que esteja visível em outras telas
+    questionDisplayScreen.classList.remove('no-answer-options'); // Garante que a classe seja removida
+  } else if (screenId === "quiz-selection-screen") {
+    gameToolbar.classList.add("hidden");
+    globalBackButton.classList.add("hidden"); // Sem botão voltar na seleção de quiz
+    answerButtonToolbar.classList.add("hidden");
+    answerCheckButtonToolbar.classList.add("hidden");
+    hintButtonToolbar.classList.add("hidden");
+    currentQuestionOptions.classList.remove("hidden"); // Garante que esteja visível em outras telas
+    questionDisplayScreen.classList.remove('no-answer-options'); // Garante que a classe seja removida
+  } else { // start-screen
+    gameToolbar.classList.remove('hidden'); // Toolbar oculta na tela inicial
+    globalBackButton.dataset.targetScreen = "quiz-selection-screen"; // Voltar da tela inicial para a seleção de quiz
+    globalBackButton.classList.remove("hidden"); // Mostrar botão voltar
+    answerButtonToolbar.classList.add('hidden');
+    answerCheckButtonToolbar.classList.add('hidden');
+    hintButtonToolbar.classList.add('hidden');
+    currentQuestionOptions.classList.remove("hidden"); // Garante que esteja visível em outras telas
+    questionDisplayScreen.classList.remove('no-answer-options'); // Garante que a classe seja removida
   }
 
-  if (!quizData.actions.showAwnserButtons) {
-    currentQuestionOptions.classList.add("hidden");
-    answerButtonToolbar.classList.add("hidden");
-  } else {
-    currentQuestionOptions.classList.remove("hidden");
-    answerButtonToolbar.classList.remove("hidden");
+  // Certificar-se de que a toolbar está oculta se quizData.actions.showToolbar for false
+  if (quizData && quizData.actions && !quizData.actions.showToolbar) {
+    gameToolbar.classList.add("hidden");
   }
+  // O botão de tema e o slider de fonte agora são elementos independentes e sempre visíveis (controlados por esta função).
 }
 
 /**
@@ -137,7 +184,6 @@ function startGame() {
  * @param {string} levelId O ID do nível selecionado ('easy', 'medium', 'difficult').
  */
 function selectLevel(levelId) {
-  // Encontra o objeto de nível correspondente ao ID dentro de quizData.data
   const selectedLevelObject = quizData.data.find(
       (level) => level.id === levelId
   );
@@ -147,18 +193,17 @@ function selectLevel(levelId) {
   }
 
   currentLevel = levelId;
-  // Inicializa o array de perguntas respondidas para o nível, se ainda não existir
-  answeredQuestions[currentLevel] = answeredQuestions[currentLevel] || [];
-  levelTitle.textContent = selectedLevelObject.title; // Usa o título do objeto de nível
+  answeredQuestions[currentLevel] = answeredQuestions[currentLevel] || {};
+  levelTitle.textContent = selectedLevelObject.title;
   questionCount.textContent = `${selectedLevelObject.questions.length} Perguntas`;
-  renderQuestionBlocks(levelId); // Renderiza os blocos de perguntas para o nível
+  renderQuestionBlocks(levelId);
   showScreen("question-selection-screen");
 }
 
 /**
  * Renderiza os blocos de perguntas clicáveis para o nível atual.
- * Cada bloco representa uma pergunta e mostra se já foi respondida.
- * @param {string} levelId O ID do nível de dificuldade atual.
+ * @param {string} levelId
+ * O ID do nível de dificuldade atual.
  */
 function renderQuestionBlocks(levelId) {
   const selectedLevelObject = quizData.data.find(
@@ -166,20 +211,17 @@ function renderQuestionBlocks(levelId) {
   );
   if (!selectedLevelObject) return;
 
-  questionBlocksContainer.innerHTML = ""; // Limpa os blocos existentes
+  questionBlocksContainer.innerHTML = "";
   selectedLevelObject.questions.forEach((q, index) => {
     const block = document.createElement("div");
     block.classList.add("question-block");
-    block.dataset.questionIndex = index; // Armazena o índice da pergunta no dataset
-    block.textContent = index + 1; // Define o número da pergunta (começando de 1)
-    // Adiciona a classe 'answered' se a pergunta já foi respondida neste nível
-    if (answeredQuestions[currentLevel].includes(index)) {
+    block.dataset.questionIndex = index;
+    block.textContent = index + 1;
+    if (answeredQuestions[currentLevel] && answeredQuestions[currentLevel][index]) {
       block.classList.add("answered");
-      block.textContent = ""; // Oculta o número se a pergunta já foi respondida
+      block.textContent = "";
     }
-    // Adiciona um evento de clique para carregar a pergunta
     block.addEventListener("click", () => {
-      // Só carrega a pergunta se ela ainda não foi respondida
       if (!block.classList.contains("answered")) {
         loadQuestion(levelId, index);
       }
@@ -194,51 +236,69 @@ function renderQuestionBlocks(levelId) {
  * @param {number} index O índice da pergunta dentro do nível.
  */
 function loadQuestion(levelId, index) {
-  showDarkScreen(); // Mostra a tela escura ao iniciar o carregamento da pergunta
+  showDarkScreen();
   const selectedLevelObject = quizData.data.find(
       (level) => level.id === levelId
   );
   if (!selectedLevelObject) return;
 
   currentQuestionIndex = index;
-  const qData = selectedLevelObject.questions[index]; // Dados da pergunta
+  const qData = selectedLevelObject.questions[index];
 
-  currentQuestionElement.textContent = qData.question; // Define o texto da pergunta
+  currentQuestionElement.textContent = qData.question;
 
-  // Aplica a fonte e o tamanho de fonte definidos em quizData
-  if(quizData.font) { // Verifica se a propriedade font existe
+  // Aplica a fonte e o tamanho da fonte do quiz
+  if(quizData.font) {
     currentQuestionElement.style.fontFamily = quizData.font;
+  } else {
+    currentQuestionElement.style.fontFamily = ''; // Remove se não houver fonte definida no quiz
   }
-  if(quizData.fontSize) { // Verifica se a propriedade fontSize existe
-    currentQuestionElement.style.fontSize = quizData.fontSize;
+  // Aplica o tamanho da fonte do slider, se houver, senão volta ao padrão do CSS ou quizData.fontSize
+  if (currentFontSize) {
+    currentQuestionElement.style.setProperty('font-size', `${currentFontSize}em`, 'important');
+  } else if (quizData.fontSize) {
+    currentQuestionElement.style.setProperty('font-size', quizData.fontSize, 'important');
+  } else {
+    currentQuestionElement.style.removeProperty('font-size'); // Remove a propriedade para o CSS padrão ser aplicado
   }
 
-  // Preenche e reinicia os botões de opção
+
   optionButtons.forEach((button) => {
     const optionKey = button.dataset.option;
-    // Verifica se a opção existe antes de tentar acessá-la
     if (qData.options[optionKey] !== undefined) {
       button.textContent = `${optionKey.toUpperCase()}) ${
           qData.options[optionKey]
       }`;
-      button.classList.remove("selected", "correct-answer", "incorrect-answer"); // Limpa estilos anteriores
-      button.disabled = false; // Habilita o botão
+      button.classList.remove("selected", "correct-answer", "incorrect-answer");
+      button.disabled = false;
       button.onclick = () => selectOption(button);
-      button.style.display = ''; // Garante que o botão esteja visível
+      button.style.display = '';
     } else {
-      button.style.display = 'none'; // Oculta o botão se não houver opção correspondente
+      button.style.display = 'none';
     }
   });
 
-  answerButtonToolbar.disabled = true; // Desabilita o botão de responder até uma opção ser selecionada
-  hintButtonToolbar.classList.remove("hidden"); // Garante que o botão de dica apareça
-  hintButtonToolbar.disabled = false; // Habilita o botão de dica
+  // Ajuste aqui: Define o estado inicial dos botões da toolbar
+  if (!quizData.actions.showAwnserButtons) {
+    answerButtonToolbar.disabled = true;
+    answerCheckButtonToolbar.disabled = false;
+    optionButtons.forEach(button => button.disabled = true);
+  } else {
+    answerButtonToolbar.disabled = true;
+    answerCheckButtonToolbar.disabled = true;
+    optionButtons.forEach(button => button.disabled = false);
+  }
 
-  // Pequeno atraso para o efeito de transição da tela escura
+  hintButtonToolbar.classList.remove("hidden");
+  hintButtonToolbar.disabled = false;
+
   setTimeout(() => {
-    showScreen("question-display-screen"); // Exibe a tela da pergunta
-    hideDarkScreen(); // Oculta a tela escura após o carregamento e a exibição da tela
-  }, 300); // Ajuste este tempo conforme a duração da transição CSS da tela escura
+    showScreen("question-display-screen");
+    hideDarkScreen();
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
+  }, 300);
 }
 
 /**
@@ -246,55 +306,53 @@ function loadQuestion(levelId, index) {
  * @param {HTMLElement} selectedButton O botão de opção que foi clicado.
  */
 function selectOption(selectedButton) {
-  // Remove a classe 'selected' de todos os botões de opção
   optionButtons.forEach((button) => button.classList.remove("selected"));
-  // Adiciona a classe 'selected' ao botão clicado
   selectedButton.classList.add("selected");
-  selectedOption = selectedButton.dataset.option; // Armazena a opção selecionada
-  answerButtonToolbar.disabled = false; // Habilita o botão "Responder"
-  answerCheckButtonToolbar.disabled = false; // Habilita o botão "Marcar Correta"
-  // Limpa feedback anterior e estilos de resposta
-  optionButtons.forEach((button) => {
-    button.classList.remove("correct-answer", "incorrect-answer");
-  });
+  selectedOption = selectedButton.dataset.option;
+
+  if (quizData.actions.showAwnserButtons) {
+    answerButtonToolbar.disabled = false;
+  } else {
+    answerCheckButtonToolbar.disabled = false;
+  }
 }
 
 /**
  * Verifica a resposta do jogador e fornece feedback em um diálogo.
  */
 function checkAnswer() {
-  if (!selectedOption) return; // Não faz nada se nenhuma opção foi selecionada
+  if (!selectedOption) return;
 
-  // Acessar quizData.data para encontrar o nível
   const selectedLevelObject = quizData.data.find(
       (level) => level.id === currentLevel
   );
   if (!selectedLevelObject) return;
 
   const qData = selectedLevelObject.questions[currentQuestionIndex];
-  // Desabilita todos os botões de opção após a resposta
   optionButtons.forEach((button) => (button.disabled = true));
 
   if (selectedOption === qData.correct) {
-    checkCorrect(); // Reseta a seleção
-    saveGameProgress(answeredQuestions); // Salva o progresso após uma resposta correta
+    checkCorrect();
+    if (!answeredQuestions[currentLevel]) {
+      answeredQuestions[currentLevel] = {};
+    }
+    answeredQuestions[currentLevel][currentQuestionIndex] = true;
+    saveGameProgress(answeredQuestions, quizData.id);
   } else {
     feedbackDialogTitle.textContent = "Ops!";
     feedbackDialogMessage.textContent = "Tente novamente!";
     feedbackDialogMessage.style.color = "var(--mario-red)";
-    // Adiciona estilo para a resposta incorreta selecionada
     optionButtons.forEach((button) => {
       if (button.dataset.option === selectedOption) {
         button.classList.add("incorrect-answer");
       }
     });
   }
-  feedbackDialog.showModal(); // Abre o diálogo de feedback
-  answerButtonToolbar.disabled = true; // Impede múltiplas respostas
-  answerCheckButtonToolbar.disabled = true; // Impede múltiplas respostas
-  hintButtonToolbar.classList.add("hidden"); // Esconde a dica após responder
-  // selectedOption = null; // Reseta a seleção
-  hintDialog.close(); // Fecha o diálogo da dica se estiver aberto
+  feedbackDialog.showModal();
+  answerButtonToolbar.disabled = true;
+  answerCheckButtonToolbar.disabled = true;
+  hintButtonToolbar.classList.add("hidden");
+  hintDialog.close();
 }
 
 /**
@@ -302,7 +360,6 @@ function checkAnswer() {
  * Usado quando quizData.actions.showAwnserButtons é false.
  */
 function checkCorrectAnswer() {
-  // Encontra a opção correta diretamente
   const selectedLevelObject = quizData.data.find(
       (level) => level.id === currentLevel
   );
@@ -311,54 +368,51 @@ function checkCorrectAnswer() {
   const qData = selectedLevelObject.questions[currentQuestionIndex];
   const correctOptionKey = qData.correct;
 
-  const correctButton = Array.from(optionButtons).find(
-      (button) => button.dataset.option === correctOptionKey
-  );
-
-  if (!correctButton) {
-    console.error("Botão da resposta correta não encontrado.");
-    return;
-  }
-
-  // Simula a seleção da opção correta
   selectedOption = correctOptionKey;
-  optionButtons.forEach((button) => button.classList.remove("selected"));
-  correctButton.classList.add("selected");
 
-  // Chama a função de verificação de resposta, que agora vai tratar como correta
+  optionButtons.forEach((button) => {
+    button.classList.remove("selected", "incorrect-answer");
+    if (button.dataset.option === correctOptionKey) {
+      button.classList.add("correct-answer");
+    }
+    button.disabled = true;
+  });
+
+
   checkCorrect();
-  saveGameProgress(answeredQuestions); // Salva o progresso após marcar a resposta correta
+  if (!answeredQuestions[currentLevel]) {
+    answeredQuestions[currentLevel] = {};
+  }
+  answeredQuestions[currentLevel][currentQuestionIndex] = true;
+  saveGameProgress(answeredQuestions, quizData.id);
 
-  // Desabilita os botões após a marcação
-  optionButtons.forEach((button) => (button.disabled = true));
   answerButtonToolbar.disabled = true;
   answerCheckButtonToolbar.disabled = true;
   hintButtonToolbar.classList.add("hidden");
   hintDialog.close();
-  feedbackDialog.showModal(); // Abre o diálogo de feedback
+  feedbackDialog.showModal();
 }
-
 
 function checkCorrect() {
   feedbackDialogTitle.textContent = "Certo!";
   feedbackDialogMessage.textContent = "Você ganhou uma moeda!";
   feedbackDialogMessage.style.color = "var(--mario-green)";
-  // Adiciona estilo para a resposta correta
   optionButtons.forEach((button) => {
     if (button.dataset.option === selectedOption) {
       button.classList.add("correct-answer");
     }
   });
-  // Marca a pergunta como respondida no array e atualiza o bloco visualmente
-  if (!answeredQuestions[currentLevel].includes(currentQuestionIndex)) {
-    answeredQuestions[currentLevel].push(currentQuestionIndex);
-    // Encontra o bloco de pergunta correspondente e adiciona a classe 'answered'
+  if (!answeredQuestions[currentLevel] || !answeredQuestions[currentLevel][currentQuestionIndex]) {
+    if (!answeredQuestions[currentLevel]) {
+      answeredQuestions[currentLevel] = {};
+    }
+    answeredQuestions[currentLevel][currentQuestionIndex] = true;
     const questionBlock = document.querySelector(
         `.question-block[data-question-index="${currentQuestionIndex}"]`
     );
     if (questionBlock) {
       questionBlock.classList.add("answered");
-      questionBlock.textContent = ""; // Oculta o número do bloco
+      questionBlock.textContent = "";
     }
   }
 
@@ -376,119 +430,205 @@ function showHint() {
 
   const qData = selectedLevelObject.questions[currentQuestionIndex];
   dialogHintText.textContent = qData.hint;
-  hintDialog.showModal(); // Abre o diálogo
-  hintButtonToolbar.disabled = true; // Desabilita a dica após ser usada
+  hintDialog.showModal();
+  hintButtonToolbar.disabled = true;
 }
 
 /**
  * Renderiza os botões de seleção de nível dinamicamente.
  */
 function renderLevelSelectionButtons() {
-  levelOptionsContainer.innerHTML = ""; // Limpa os botões existentes
-  quizData.data.forEach((level) => {
-    // Itera sobre quizData.data
-    const button = document.createElement("button");
-    button.classList.add("level-button", "mario-button");
-    button.dataset.level = level.id;
-    button.textContent = level.title;
-    button.addEventListener("click", () => {
-      selectLevel(level.id);
+  levelOptionsContainer.innerHTML = "";
+  if (quizData.data && Array.isArray(quizData.data)) {
+    quizData.data.forEach((level) => {
+      const button = document.createElement("button");
+      button.classList.add("level-button", "mario-button");
+      button.dataset.level = level.id;
+      button.textContent = level.title;
+      button.addEventListener("click", () => {
+        selectLevel(level.id);
+      });
+      levelOptionsContainer.appendChild(button);
     });
-    levelOptionsContainer.appendChild(button);
+  } else {
+    console.error("quizData.data não é um array ou está indefinido:", quizData.data);
+  }
+}
+
+/**
+ * Configura a tela de seleção de quiz.
+ * Popula o combobox e gerencia o carregamento do quiz.
+ */
+function setupQuizSelectionScreen() {
+  quizSelect.innerHTML = '';
+
+  QUIZ_OPTIONS.forEach(quizOption => {
+    const option = document.createElement('option');
+    option.value = quizOption.id;
+    option.textContent = quizOption.name;
+    quizSelect.appendChild(option);
+  });
+
+  const lastSelectedQuizId = localStorage.getItem('currentSelectedQuizId');
+  if (lastSelectedQuizId && QUIZ_OPTIONS.some(q => q.id === lastSelectedQuizId)) {
+    quizSelect.value = lastSelectedQuizId;
+  }
+
+  showScreen("quiz-selection-screen");
+  startScreen.classList.remove('active');
+  levelSelectionScreen.classList.remove('active');
+  questionSelectionScreen.classList.remove('active');
+  questionDisplayScreen.classList.remove('active');
+
+  loadQuizButton.addEventListener('click', () => {
+    const selectedQuizId = quizSelect.value;
+    localStorage.setItem('currentSelectedQuizId', selectedQuizId);
+
+    // NOVO: Limpa quizData e appFontSize do localStorage ao carregar um novo quiz
+    localStorage.removeItem('currentQuizConfig');
+    localStorage.removeItem('appFontSize');
+
+    const selectedQuizOption = QUIZ_OPTIONS.find(q => q.id === selectedQuizId);
+    if (selectedQuizOption) {
+      localStorage.setItem('appThemeMode', selectedQuizOption.data.theme || 'light');
+      // Define o valor inicial do slider com base em quizData.fontSize ou 2.0 (novo mínimo)
+      const initialFontSize = selectedQuizOption.data.fontSize ? parseFloat(selectedQuizOption.data.fontSize) : 2.0;
+      localStorage.setItem('appFontSize', initialFontSize);
+      localStorage.setItem('currentQuizConfig', JSON.stringify(selectedQuizOption.data));
+
+      const loadedData = loadGameData(selectedQuizOption.data);
+      quizData = loadedData.quizData;
+      answeredQuestions = loadedData.answeredQuestions;
+      initializeGame();
+    } else {
+      console.error("Quiz selecionado não encontrado nos QUIZ_OPTIONS.");
+    }
   });
 }
 
-// --- Event Listeners ---
 
-// Evento para o botão "Iniciar Aventura"
-startButton.addEventListener("click", startGame);
-
-// Evento para o botão "Voltar" na toolbar
-globalBackButton.addEventListener("click", () => {
-  const targetScreenId = globalBackButton.dataset.targetScreen;
-  if (targetScreenId) {
-    showScreen(targetScreenId);
-    // Se estiver voltando para a tela de seleção de perguntas, renderize os blocos novamente
-    if (targetScreenId === "question-selection-screen") {
-      renderQuestionBlocks(currentLevel);
-    }
-  } else {
-    // Caso padrão para voltar ao início se não houver targetScreen definido
-    showScreen("start-screen");
-  }
-});
-
-// Evento para o botão "Responder" na toolbar
-answerButtonToolbar.addEventListener("click", checkAnswer);
-
-// Evento para o botão "Marcar Correta" na toolbar
-answerCheckButtonToolbar.addEventListener("click", checkCorrectAnswer);
-
-// Evento para o botão "Dica" na toolbar
-hintButtonToolbar.addEventListener("click", showHint);
-
-// Evento para fechar o diálogo da dica
-closeHintDialogButton.addEventListener("click", () => {
-  hintDialog.close();
-});
-
-// Evento para fechar o diálogo de feedback
-closeFeedbackDialogButton.addEventListener("click", () => {
-  feedbackDialog.close();
-
-  // Se a opção selecionada for nula, significa que a resposta foi correta e já foi tratada.
-  // Se não for nula, significa que a resposta foi incorreta e precisamos reabilitar os botões.
-  if (selectedOption !== null) {
-    // Acessar quizData.data para encontrar o nível
-    const selectedLevelObject = quizData.data.find(
-        (level) => level.id === currentLevel
-    );
-    if (!selectedLevelObject) return;
-
-    const qData = selectedLevelObject.questions[currentQuestionIndex];
-
-    // Remove o estilo de incorreto e reabilita os botões para tentar novamente
-    optionButtons.forEach((button) => {
-      if (button.dataset.option === selectedOption) {
-        button.classList.remove("incorrect-answer");
-      }
-      button.disabled = false;
-      button.classList.remove("selected"); // Remove a seleção visual
-    });
-    answerButtonToolbar.disabled = false; // Reabilita o botão Responder
-    answerCheckButtonToolbar.disabled = false; // Reabilita o botão Marcar Correta
-    hintButtonToolbar.classList.remove("hidden"); // Mostra a dica novamente
-    selectedOption = null; // Reseta a seleção após fechar o feedback de erro
-  }
-});
-
-// Função para inicializar o jogo (dados do quiz e progresso)
+/**
+ * Função para inicializar o jogo (dados do quiz e progresso)
+ */
 function initializeGame() {
-  // Carrega os dados do jogo do localStorage ou usa o padrão
-  const loadedData = loadGameData(DEFAULT_QUIZ_DATA);
-  quizData = loadedData.quizData;
-  answeredQuestions = loadedData.answeredQuestions;
+  themeMode = localStorage.getItem('appThemeMode') || 'light';
+  // Carrega o tamanho da fonte do localStorage, ou usa o valor padrão do quiz, ou 2.0 (novo mínimo)
+  currentFontSize = localStorage.getItem('appFontSize') || (quizData.fontSize ? parseFloat(quizData.fontSize) : 2.0);
 
-  // Aplica o tema ao body
-  document.body.classList.add(quizData.theme + "-theme"); // Adiciona a classe do tema ao body
+  document.body.classList.remove('light-theme', 'dark-theme');
+  document.body.classList.add(themeMode + "-theme");
 
-  // Preenche os títulos da tela inicial dinamicamente
   document.getElementById("start-screen").querySelector("h1").innerHTML =
       quizData.title;
   document.getElementById("start-screen").querySelector("h2").textContent =
       quizData.subtitle;
 
-  // Inicializa as animações do Mario passando os elementos DOM
-  const marioCharacterElement = document.getElementById("mario-character");
-  const obstacleContainerElement = document.getElementById("obstacle-animation-container");
-  const darkScreenElement = document.getElementById("dark-screen");
-  initAnimations(marioCharacterElement, obstacleContainerElement, darkScreenElement);
-
   showScreen("start-screen");
-  renderLevelSelectionButtons(); // Renderiza os botões de nível ao carregar a página
-  startObstacleSpawning(); // Inicia a animação de obstáculos
-  gameToolbar.classList.add("hidden"); // Garante que a toolbar esteja oculta inicialmente
+  renderLevelSelectionButtons();
+  startObstacleSpawning();
+  gameToolbar.classList.add("hidden");
+
+  // O event listener para o botão "Iniciar Aventura" AQUI.
+  // Isso garante que ele seja anexado depois que o quizData é carregado e a start-screen é exibida.
+  startButton.addEventListener("click", startGame);
+
+  // Define o estado inicial do checkbox de tema
+  themeToggleCheckbox.checked = (themeMode === 'dark');
+
+  // Define o estado inicial do slider de fonte e do span de valor
+  fontSizeSlider.value = currentFontSize;
+  // Formata para ter sempre uma casa decimal
+  fontSizeValueSpan.textContent = `${parseFloat(currentFontSize).toFixed(1)}`;
 }
 
-// Carrega os dados do jogo quando o DOM estiver completamente carregado
-document.addEventListener("DOMContentLoaded", initializeGame);
+document.addEventListener("DOMContentLoaded", () => {
+  // Anexar event listeners para os botões da toolbar uma única vez.
+  globalBackButton.addEventListener("click", () => {
+    const targetScreenId = globalBackButton.dataset.targetScreen;
+    if (targetScreenId === "quiz-selection-screen") { // Se o destino é a tela de seleção de quiz
+      // Limpa os dados do quiz atual e o progresso do localStorage
+      localStorage.removeItem('currentSelectedQuizId');
+      localStorage.removeItem('appThemeMode');
+      localStorage.removeItem('appFontSize'); // Limpa a preferência de tamanho de fonte
+      // A chave do answeredQuestions é dinâmica, então precisamos do quizData.id atual
+      if (quizData && quizData.id) {
+        localStorage.removeItem(`answeredQuestions_${quizData.id}`);
+      }
+      // Redefine as variáveis globais
+      quizData = undefined;
+      answeredQuestions = {};
+      currentFontSize = undefined; // Reseta o tamanho da fonte
+      // Volta para a tela de seleção de quiz
+      setupQuizSelectionScreen();
+    } else if (targetScreenId) { // Para outros destinos de "Voltar"
+      showScreen(targetScreenId);
+      if (targetId === "question-selection-screen") { // Corrigido: targetId para targetScreenId
+        renderQuestionBlocks(currentLevel);
+      }
+    } else { // Fallback, caso não haja targetScreenId
+      showScreen("start-screen");
+    }
+  });
+
+  answerButtonToolbar.addEventListener("click", checkAnswer);
+  answerCheckButtonToolbar.addEventListener("click", checkCorrectAnswer);
+  hintButtonToolbar.addEventListener("click", showHint);
+
+  themeToggleCheckbox.addEventListener("change", () => { // Listener para o checkbox de tema
+    themeMode = themeToggleCheckbox.checked ? 'dark' : 'light';
+    localStorage.setItem('appThemeMode', themeMode);
+    document.body.classList.remove('light-theme', 'dark-theme');
+    document.body.classList.add(themeMode + "-theme");
+  });
+
+  // Listener para o slider de tamanho da fonte
+  fontSizeSlider.addEventListener("input", (event) => {
+    currentFontSize = event.target.value;
+    // Formata para ter sempre uma casa decimal
+    fontSizeValueSpan.textContent = `${parseFloat(currentFontSize).toFixed(1)}`;
+    localStorage.setItem('appFontSize', currentFontSize); // Salva a preferência do usuário
+    // Aplica o novo tamanho da fonte imediatamente se estiver na tela de pergunta
+    if (document.getElementById("question-display-screen").classList.contains("active")) {
+      currentQuestionElement.style.setProperty('font-size', `${currentFontSize}em`, 'important');
+    }
+  });
+
+  closeHintDialogButton.addEventListener("click", () => {
+    hintDialog.close();
+  });
+
+  closeFeedbackDialogButton.addEventListener("click", () => {
+    feedbackDialog.close();
+    if (selectedOption !== null) {
+      const selectedLevelObject = quizData.data.find(
+          (level) => level.id === currentLevel
+      );
+      if (!selectedLevelObject) return;
+
+      optionButtons.forEach((button) => {
+        if (button.dataset.option === selectedOption) {
+          button.classList.remove("incorrect-answer");
+        }
+        button.disabled = false;
+        button.classList.remove("selected");
+      });
+      answerButtonToolbar.disabled = false;
+      answerCheckButtonToolbar.disabled = false;
+      hintButtonToolbar.classList.remove("hidden");
+      selectedOption = null;
+    }
+  });
+
+  const lastSelectedQuizId = localStorage.getItem('currentSelectedQuizId');
+  if (lastSelectedQuizId) {
+    const selectedQuizOption = QUIZ_OPTIONS.find(q => q.id === lastSelectedQuizId);
+    if (selectedQuizOption) {
+      const loadedData = loadGameData(selectedQuizOption.data);
+      quizData = loadedData.quizData;
+      answeredQuestions = loadedData.answeredQuestions;
+      initializeGame();
+      return;
+    }
+  }
+  setupQuizSelectionScreen();
+});

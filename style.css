@@ -66,6 +66,21 @@ body.dark-theme {
         color: var(--mario-yellow); /* Cor amarela para o título principal */
         text-shadow: 3px 3px 0px var(--mario-brown); /* Sombra para destaque */
     }
+    /* Cor do texto e fundo do slider de fonte no tema escuro */
+    .font-size-slider-container {
+        color: var(--mario-text-color); /* Usa a cor de texto definida para o tema escuro */
+        background-color: var(--toolbar-bg); /* Usa a cor de fundo da toolbar para o tema escuro */
+    }
+    /* NOVO: Cor do trilho e polegar do slider de fonte no tema escuro */
+    .font-size-slider-container input[type="range"] {
+        background: var(--mario-dark-green); /* Cor do trilho (ligado) */
+    }
+    .font-size-slider-container input[type="range"]::-webkit-slider-thumb {
+        background: white; /* Cor do polegar (ligado) */
+    }
+    .font-size-slider-container input[type="range"]::-moz-range-thumb {
+        background: white; /* Cor do polegar (ligado) */
+    }
 }
 
 
@@ -83,6 +98,147 @@ body {
     box-sizing: border-box; /* Garante que padding não adicione largura extra */
     padding-bottom: 100px; /* Espaço para a área de animação fixa no rodapé */
 }
+
+/* NOVO: Estilos para o slider de tamanho da fonte */
+.font-size-slider-container {
+    position: fixed;
+    top: 20px; /* Posição superior */
+    left: 20px; /* Alinhado à esquerda */
+    z-index: 100;
+    display: flex;
+    flex-direction: column; /* Quebra o texto para ficar abaixo do slider */
+    align-items: center; /* Centraliza os itens na coluna */
+    gap: 5px; /* Espaçamento menor entre os itens */
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    font-family: 'Press Start 2P', cursive;
+    color: var(--mario-text-color); /* Cor do texto padrão para o slider */
+    width: 150px; /* Largura aumentada para o container */
+}
+
+.font-size-slider-container label {
+    white-space: nowrap; /* Evita quebra de linha no texto da label */
+    font-size: 0.6em; /* Tamanho da fonte diminuído */
+    text-align: center; /* Centraliza o texto da label */
+}
+
+.font-size-slider-container input[type="range"] {
+    -webkit-appearance: none; /* Remove estilos padrão do navegador */
+    appearance: none;
+    width: 100%; /* Slider deve ter 100% da largura do container */
+    height: 8px; /* Altura do trilho */
+    background: var(--mario-brown); /* Cor do trilho (desligado) */
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.font-size-slider-container input[type="range"]:hover {
+    opacity: 1;
+}
+
+.font-size-slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px; /* Largura do polegar */
+    height: 20px; /* Altura do polegar */
+    border-radius: 50%;
+    background: var(--mario-yellow); /* Cor do polegar (desligado) */
+    cursor: pointer;
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+}
+
+.font-size-slider-container input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--mario-yellow); /* Cor do polegar (desligado) */
+    cursor: pointer;
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+}
+
+#font-size-value {
+    min-width: 50px; /* Garante que o valor tenha um espaço mínimo */
+    text-align: center; /* Centraliza o valor */
+    font-size: 0.7em; /* Ajusta o tamanho da fonte do valor exibido */
+}
+
+
+/* Estilos para o switch de tema */
+.theme-switch {
+    position: fixed; /* Fixa na tela */
+    top: 20px; /* Retorna à posição original superior */
+    right: 20px; /* Distância da direita */
+    z-index: 100; /* Acima da maioria dos elementos, mas abaixo dos diálogos */
+    display: inline-block;
+    width: 60px; /* Largura do switch */
+    height: 34px; /* Altura do switch */
+}
+
+/* Oculta o input checkbox padrão */
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* O slider (o "trilho" do switch) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--mario-brown); /* Cor do trilho (desligado) */
+    -webkit-transition: .4s;
+    transition: .4s;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--mario-yellow); /* Cor do "polegar" (desligado) */
+    -webkit-transition: .4s;
+    transition: .4s;
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Quando o checkbox está marcado (ligado) */
+input:checked + .slider {
+    background-color: var(--mario-dark-green); /* Cor do trilho (ligado) */
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--mario-dark-green);
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    background-color: white; /* Cor do "polegar" (ligado) */
+}
+
+/* Cantos arredondados para o slider e o polegar */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
 
 /* Efeitos de fundo do Mario */
 body::before { /* Céu (para garantir a cor base) */
@@ -231,6 +387,37 @@ p {
     color: #666;
 }
 
+/* Estilos para o combobox de seleção de quiz */
+.quiz-selection-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+#quiz-select {
+    /* Herda a maioria dos estilos de .mario-button */
+    -webkit-appearance: none; /* Remove estilos padrão do navegador */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M7 10l5 5 5-5z"/></svg>'); /* Seta para baixo */
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 45px; /* Espaço para a seta */
+    cursor: pointer;
+    text-align: center;
+    text-align-last: center; /* Centraliza o texto no Firefox */
+}
+
+#quiz-select option {
+    background-color: var(--mario-button-color);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    padding: 10px;
+}
+
+
 /* Nível de seleção */
 .level-options {
     display: flex;
@@ -263,7 +450,8 @@ p {
     align-items: center;
     font-size: 2em; /* Ajustado para o número */
     color: var(--mario-brown);
-    cursor: pointer;
+    cursor: default; /* NOVO: Cursor padrão */
+    user-select: none; /* NOVO: Impede a seleção de texto */
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
     transition: transform 0.1s, background-color 0.2s;
     position: relative;
@@ -306,7 +494,7 @@ p {
     flex-direction: column;
     gap: 15px;
     margin-bottom: 20px;
-    width: 100%; /* Ocupa toda a largura disponível */
+    width: 100%;
     max-width: 900px; /* Ajustado para acompanhar o game-container */
 }
 
@@ -633,10 +821,6 @@ p {
         max-width: 600px; /* Ajustado para telas menores */
     }
 
-    #game-toolbar {
-        padding: 10px 15px; /* Ajuste o padding da toolbar em telas menores */
-    }
-
     #game-toolbar .toolbar-button {
         margin: 0 3px;
         padding: 8px 12px;
@@ -675,6 +859,19 @@ p {
         bottom: 20px; /* Ajustado para o chão responsivo */
         width: 40px;
         height: 40px;
+    }
+
+    /* NOVO: Ajuste do slider de fonte para telas menores */
+    .font-size-slider-container {
+        left: 20px; /* Alinhado à esquerda */
+        top: 20px; /* Mantém no topo */
+        width: 120px; /* Ajusta a largura para telas menores */
+    }
+
+    /* Ajuste do switch de tema para telas menores */
+    .theme-switch {
+        top: 20px; /* Retorna à posição original superior */
+        right: 20px; /* Mantém alinhado à direita */
     }
 }
 
@@ -724,10 +921,6 @@ p {
         max-width: 400px; /* Ajustado para telas muito pequenas */
     }
 
-    #game-toolbar {
-        padding: 8px 10px; /* Ajuste o padding da toolbar em telas muito pequenas */
-    }
-
     #game-toolbar .toolbar-button {
         margin: 0 2px;
         padding: 6px 10px;
@@ -764,4 +957,30 @@ p {
         width: 30px;
         height: 30px;
     }
+
+    /* NOVO: Ajuste do slider de fonte para telas muito pequenas */
+    .font-size-slider-container {
+        left: 20px; /* Alinhado à esquerda */
+        top: 20px; /* Mantém no topo */
+        width: 100px; /* Diminui a largura para telas muito pequenas */
+    }
+
+    /* Ajuste do switch de tema para telas muito pequenas */
+    .theme-switch {
+        top: 20px; /* Retorna à posição original superior */
+        right: 20px; /* Mantém alinhado à direita */
+    }
+}
+
+/* NOVO: Estilos para a tela de exibição de pergunta quando as opções não são mostradas */
+#question-display-screen.no-answer-options {
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+}
+
+#question-display-screen.no-answer-options h3 {
+    margin: 0 !important; /* Remove margens padrão do h3 para centralização */
+    text-align: center; /* Garante que o texto dentro do h3 esteja centralizado */
+    cursor: default; /* Remove o cursor de texto */
+    user-select: none; /* Impede a seleção de texto */
 }

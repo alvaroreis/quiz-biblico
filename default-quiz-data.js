@@ -1,602 +1,1804 @@
-// Este arquivo contém a variável DEFAULT_QUIZ_DATA, que será globalmente acessível.
-const DEFAULT_QUIZ_DATA = {
-    title: "Descubra o Emoji!",
-    subtitle: "O que os emojis querem dizer?",
-    font: "'Press Start 2P', cursive", // Campo de fonte para a pergunta atual
-    fontSize: "2.5em", // Campo de tamanho de fonte para a pergunta atual
-    theme: "dark", // Variável para definir o tema ('light' ou 'dark')
-    actions: {
-        showToolbar: true,
-        showAwnserButtons: false,
-    },
-    data: [
-        {
-            "id": "old-testament-books",
-            "title": "Livros do Antigo Testamento",
-            "questions": [
-                {
-                    "question": "🌍👨‍👩‍👧‍👦🐍🍎🌊",
-                    "options": { "a": "Gênesis" },
-                    "correct": "a",
-                    "hint": "Criação, família, pecado, dilúvio"
-                },
-                {
-                    "question": "🌊🚶‍♂️🚶‍♀️🔥⛰️📜",
-                    "options": { "a": "Êxodo" },
-                    "correct": "a",
-                    "hint": "Mar Vermelho, êxodo, sarça ardente, Monte Sinai, tábuas da lei"
-                },
-                {
-                    "question": "📖🩸🙏🕊️",
-                    "options": { "a": "Levítico" },
-                    "correct": "a",
-                    "hint": "Lei, sacrifícios, pureza"
-                },
-                {
-                    "question": "🏕️🚶‍♂️🚶‍♀️🗺️🔢",
-                    "options": { "a": "Números" },
-                    "correct": "a",
-                    "hint": "Caminhada no deserto, censo, jornada"
-                },
-                {
-                    "question": "🗣️📜✨",
-                    "options": { "a": "Deuteronômio" },
-                    "correct": "a",
-                    "hint": "Discurso de Moisés, segunda lei, renovação da aliança"
-                },
-                {
-                    "question": "⚔️ Jericho 🎺🔥",
-                    "options": { "a": "Josué" },
-                    "correct": "a",
-                    "hint": "Batalha de Jericó, trombetas, conquista"
-                },
-                {
-                    "question": "💪🦁🍯✂️",
-                    "options": { "a": "Juízes" },
-                    "correct": "a",
-                    "hint": "Sansão, juízes, ciclo de desobediência"
-                },
-                {
-                    "question": "🌾❤️👩‍❤️‍👨",
-                    "options": { "a": "Rute" },
-                    "correct": "a",
-                    "hint": "Campos de cevada, amor, casamento"
-                },
-                {
-                    "question": "👑🐑👂",
-                    "options": { "a": "1 Samuel" },
-                    "correct": "a",
-                    "hint": "Rei, ovelhas, ouvir a Deus"
-                },
-                {
-                    "question": "👑⚔️🎵",
-                    "options": { "a": "2 Samuel" },
-                    "correct": "a",
-                    "hint": "Rei Davi, batalhas, salmos"
-                },
-                {
-                    "question": "👑 Solomon 🏛️🔥",
-                    "options": { "a": "1 Reis" },
-                    "correct": "a",
-                    "hint": "Rei Salomão, templo, divisão do reino"
-                },
-                {
-                    "question": "👑 Elijah 🔥 chariot 🌬️",
-                    "options": { "a": "2 Reis" },
-                    "correct": "a",
-                    "hint": "Reis, Elias, Eliseu, carro de fogo"
-                },
-                {
-                    "question": "👑 genealogia 📜",
-                    "options": { "a": "1 Crônicas" },
-                    "correct": "a",
-                    "hint": "Reis, genealogias, história"
-                },
-                {
-                    "question": "👑 temple 🙏",
-                    "options": { "a": "2 Crônicas" },
-                    "correct": "a",
-                    "hint": "Reis, templo, adoração"
-                },
-                {
-                    "question": "📜 rebuild 🏛️",
-                    "options": { "a": "Esdras" },
-                    "correct": "a",
-                    "hint": "Esdras, reconstrução do templo"
-                },
-                {
-                    "question": "🧱 rebuild 🛡️",
-                    "options": { "a": "Neemias" },
-                    "correct": "a",
-                    "hint": "Neemias, reconstrução dos muros"
-                },
-                {
-                    "question": "👑👸📜",
-                    "options": { "a": "Ester" },
-                    "correct": "a",
-                    "hint": "Rainha Ester, plano de salvação"
-                },
-                {
-                    "question": "😥🌪️🙏✨",
-                    "options": { "a": "Jó" },
-                    "correct": "a",
-                    "hint": "Sofrimento, provação, fé"
-                },
-                {
-                    "question": "🎵🙏💖🙌",
-                    "options": { "a": "Salmos" },
-                    "correct": "a",
-                    "hint": "Cânticos, louvor, oração"
-                },
-                {
-                    "question": "💡🦉🗣️",
-                    "options": { "a": "Provérbios" },
-                    "correct": "a",
-                    "hint": "Sabedoria, conselhos, ensinamentos"
-                },
-                {
-                    "question": "🕰️💨🤔",
-                    "options": { "a": "Eclesiastes" },
-                    "correct": "a",
-                    "hint": "Tempo, vaidade, reflexão"
-                },
-                {
-                    "question": "❤️🌹👰🤵",
-                    "options": { "a": "Cânticos" },
-                    "correct": "a",
-                    "hint": "Amor, casamento, poema"
-                },
-                {
-                    "question": "🦁 Lamb 👑 prophecy 📜",
-                    "options": { "a": "Isaías" },
-                    "correct": "a",
-                    "hint": "Profecia, Messias, leão e cordeiro"
-                },
-                {
-                    "question": "😭💔📜",
-                    "options": { "a": "Jeremias" },
-                    "correct": "a",
-                    "hint": "Profeta chorão, destruição, lamento"
-                },
-                {
-                    "question": "😭💔🌃",
-                    "options": { "a": "Lamentações" },
-                    "correct": "a",
-                    "hint": "Tristeza, destruição de Jerusalêm"
-                },
-                {
-                    "question": "👁️🔥🌪️👤",
-                    "options": { "a": "Ezequiel" },
-                    "correct": "a",
-                    "hint": "Visões, profecias, restauração"
-                },
-                {
-                    "question": "🦁🔥👑",
-                    "options": { "a": "Daniel" },
-                    "correct": "a",
-                    "hint": "Cova dos leões, fornalha ardente, reinos"
-                },
-                {
-                    "question": "❤️💔👰",
-                    "options": { "a": "Oséias" },
-                    "correct": "a",
-                    "hint": "Amor de Deus, infidelidade"
-                },
-                {
-                    "question": "🦗🌍🔥",
-                    "options": { "a": "Joel" },
-                    "correct": "a",
-                    "hint": "Pragas, dia do Senhor"
-                },
-                {
-                    "question": "🐑⚖️🗣️",
-                    "options": { "a": "Amós" },
-                    "correct": "a",
-                    "hint": "Pastor, justiça social"
-                },
-                {
-                    "question": "⛰️⚔️",
-                    "options": { "a": "Obadias" },
-                    "correct": "a",
-                    "hint": "Juízo sobre Edom"
-                },
-                {
-                    "question": "🐳🌊🙏",
-                    "options": { "a": "Jonas" },
-                    "correct": "a",
-                    "hint": "Baleia, arrependimento"
-                },
-                {
-                    "question": "⚖️👣🙏",
-                    "options": { "a": "Miquéias" },
-                    "correct": "a",
-                    "hint": "Justiça, andar com Deus"
-                },
-                {
-                    "question": "🌊🔥⚔️",
-                    "options": { "a": "Naum" },
-                    "correct": "a",
-                    "hint": "Juízo sobre Nínive"
-                },
-                {
-                    "question": "🤔🙏❓",
-                    "options": { "a": "Habacuque" },
-                    "correct": "a",
-                    "hint": "Perguntas a Deus, fé"
-                },
-                {
-                    "question": "🌍🔥🙏",
-                    "options": { "a": "Sofonias" },
-                    "correct": "a",
-                    "hint": "Dia do Senhor, juízo"
-                },
-                {
-                    "question": "🏛️ rebuild 🙏",
-                    "options": { "a": "Ageu" },
-                    "correct": "a",
-                    "hint": "Reconstrução do templo"
-                },
-                {
-                    "question": "🐎👑🙏",
-                    "options": { "a": "Zacarias" },
-                    "correct": "a",
-                    "hint": "Visões, Messias"
-                },
-                {
-                    "question": "🙏🔥🎁",
-                    "options": { "a": "Malaquias" },
-                    "correct": "a",
-                    "hint": "Sacrifícios, dízimos, dia do Senhor"
-                }
-            ]
-        },
-        {
-            "id": "new-testament-books",
-            "title": "Livros do Novo Testamento",
-            "questions": [
-                {
-                    "question": "👶👑🗣️📖",
-                    "options": { "a": "Mateus" },
-                    "correct": "a",
-                    "hint": "Nascimento de Jesus, Rei, sermão da montanha"
-                },
-                {
-                    "question": "🦁👑🏃‍♂️",
-                    "options": { "a": "Marcos" },
-                    "correct": "a",
-                    "hint": "Jesus servo, ação, milagres"
-                },
-                {
-                    "question": "👨‍⚕️🌍🙏📖",
-                    "options": { "a": "Lucas" },
-                    "correct": "a",
-                    "hint": "Jesus homem, graça, parábolas"
-                },
-                {
-                    "question": "❤️🌟📖🔥",
-                    "options": { "a": "João" },
-                    "correct": "a",
-                    "hint": "Jesus Deus, luz, amor"
-                },
-                {
-                    "question": "🔥🌬️ spreading the word 🌎",
-                    "options": { "a": "Atos" },
-                    "correct": "a",
-                    "hint": "Espírito Santo, Igreja, missões"
-                },
-                {
-                    "question": "⚖️✝️🙏",
-                    "options": { "a": "Romanos" },
-                    "correct": "a",
-                    "hint": "Justificação pela fé, salvação"
-                },
-                {
-                    "question": "❤️⛪🗣️",
-                    "options": { "a": "1 Coríntios" },
-                    "correct": "a",
-                    "hint": "Amor, dons espirituais, divisões"
-                },
-                {
-                    "question": "💪💔🙏",
-                    "options": { "a": "2 Coríntios" },
-                    "correct": "a",
-                    "hint": "Fraqueza, sofrimento, consolo"
-                },
-                {
-                    "question": "⛓️✝️ libertad",
-                    "options": { "a": "Gálatas" },
-                    "correct": "a",
-                    "hint": "Liberdade em Cristo, lei e graça"
-                },
-                {
-                    "question": "💒👑🛡️",
-                    "options": { "a": "Efésios" },
-                    "correct": "a",
-                    "hint": "Igreja, armadura de Deus, unidade"
-                },
-                {
-                    "question": "😁🙏💖",
-                    "options": { "a": "Filipenses" },
-                    "correct": "a",
-                    "hint": "Alegria, contentamento, unidade"
-                },
-                {
-                    "question": "👑🌟✝️",
-                    "options": { "a": "Colossenses" },
-                    "correct": "a",
-                    "hint": "Supremacia de Cristo, nova vida"
-                },
-                {
-                    "question": "✝️💨🙏",
-                    "options": { "a": "1 Tessalonicenses" },
-                    "correct": "a",
-                    "hint": "Volta de Jesus, esperança"
-                },
-                {
-                    "question": "✝️💨🕰️",
-                    "options": { "a": "2 Tessalonicenses" },
-                    "correct": "a",
-                    "hint": "Volta de Jesus, sinais, paciência"
-                },
-                {
-                    "question": "젊은 목사 📚👨‍🏫",
-                    "options": { "a": "1 Timóteo" },
-                    "correct": "a",
-                    "hint": "Jovem pastor, liderança, doutrina"
-                },
-                {
-                    "question": "📜⚔️🏃‍♂️",
-                    "options": { "a": "2 Timóteo" },
-                    "correct": "a",
-                    "hint": "Combate da fé, perseverança"
-                },
-                {
-                    "question": "👨‍🏫⛪✨",
-                    "options": { "a": "Tito" },
-                    "correct": "a",
-                    "hint": "Liderança, boas obras"
-                },
-                {
-                    "question": "⛓️🤝❤️",
-                    "options": { "a": "Filemom" },
-                    "correct": "a",
-                    "hint": "Escravo, perdão, reconciliação"
-                },
-                {
-                    "question": "👑✝️🙏",
-                    "options": { "a": "Hebreus" },
-                    "correct": "a",
-                    "hint": "Jesus sumo sacerdote, superioridade de Cristo"
-                },
-                {
-                    "question": "🚶‍♂️🗣️🙏",
-                    "options": { "a": "Tiago" },
-                    "correct": "a",
-                    "hint": "Fé e obras, sabedoria prática"
-                },
-                {
-                    "question": "✝️🔥🌍",
-                    "options": { "a": "1 Pedro" },
-                    "correct": "a",
-                    "hint": "Sofrimento, esperança, fé"
-                },
-                {
-                    "question": "🚨📖🌟",
-                    "options": { "a": "2 Pedro" },
-                    "correct": "a",
-                    "hint": "Falsos mestres, profecia, segunda vinda"
-                },
-                {
-                    "question": "❤️💡✝️",
-                    "options": { "a": "1 João" },
-                    "correct": "a",
-                    "hint": "Amor, luz, verdade"
-                },
-                {
-                    "question": "🏡✝️",
-                    "options": { "a": "2 João" },
-                    "correct": "a",
-                    "hint": "Caminhar na verdade e amor"
-                },
-                {
-                    "question": "🤝❤️",
-                    "options": { "a": "3 João" },
-                    "correct": "a",
-                    "hint": "Hospitalidade, cooperadores"
-                },
-                {
-                    "question": "🛡️✝️",
-                    "options": { "a": "Judas" },
-                    "correct": "a",
-                    "hint": "Defender a fé, alertar contra falsos mestres"
-                },
-                {
-                    "question": "🌍🔥😇👑",
-                    "options": { "a": "Apocalipse" },
-                    "correct": "a",
-                    "hint": "Fim dos tempos, visões, vitória de Cristo"
-                }
-            ]
-        },
-        {
-            "id": "bible-stories",
-            "title": "Histórias da Bíblia",
-            "questions": [
-                {
-                    "question": "🌍☀️🌙⭐️🐠🦅🌳🐄👨‍👩‍👧‍👦",
-                    "options": { "a": "A Criação" },
-                    "correct": "a",
-                    "hint": "Deus cria o mundo, o homem e a mulher em sete dias"
-                },
-                {
-                    "question": "🌳🐍🍎👨‍👩‍👧‍👦 expulsion 😭",
-                    "options": { "a": "Adão e Eva e a Queda" },
-                    "correct": "a",
-                    "hint": "A primeira desobediência, expulsão do Jardim do Éden"
-                },
-                {
-                    "question": "👨‍🌾🐑🩸🔪",
-                    "options": { "a": "Caim e Abel" },
-                    "correct": "a",
-                    "hint": "O primeiro assassinato, inveja e sacrifício"
-                },
-                {
-                    "question": "🌧️🌊🛶🐘🦒🐅🕊️🌈",
-                    "options": { "a": "A Arca de Noé" },
-                    "correct": "a",
-                    "hint": "O dilúvio, salvação da família de Noé e dos animais"
-                },
-                {
-                    "question": "🏗️ Babel 🗣️🤔",
-                    "options": { "a": "A Torre de Babel" },
-                    "correct": "a",
-                    "hint": "Tentativa de construir uma torre até o céu, confusão de línguas"
-                },
-                {
-                    "question": "👨‍👦🔪🐑🙏",
-                    "options": { "a": "Abraão e o Sacrifício de Isaque" },
-                    "correct": "a",
-                    "hint": "Fé e obediência de Abraão, provisão de Deus"
-                },
-                {
-                    "question": "🌈🧥💭🌾👑🌽👨‍👩‍👦‍👦",
-                    "options": { "a": "José e os Sonhos do Egito" },
-                    "correct": "a",
-                    "hint": "José tem sonhos, interpreta os sonhos do Faraó sobre as vacas e o trigo, administra o Egito durante a fome, e reencontra sua família"
-                },
-                {
-                    "question": "🔥🌳🗣️🙏",
-                    "options": { "a": "Moisés e a Sarça Ardente" },
-                    "correct": "a",
-                    "hint": "Deus chama Moisés para libertar o povo"
-                },
-                {
-                    "question": "🐸🩸🦟蝇🐄🔥🧊🦗 darkness 💀",
-                    "options": { "a": "As Dez Pragas do Egito" },
-                    "correct": "a",
-                    "hint": "Juízos de Deus sobre o Egito para libertar Israel"
-                },
-                {
-                    "question": "🌊🚶‍♂️🚶‍♀️🌊 Pharaoh 🐎🌊",
-                    "options": { "a": "Abertura do Mar Vermelho" },
-                    "correct": "a",
-                    "hint": "Deus abre o mar para o povo passar e fecha sobre os egípcios"
-                },
-                {
-                    "question": "⛰️📜🙏",
-                    "options": { "a": "Os Dez Mandamentos" },
-                    "correct": "a",
-                    "hint": "Deus entrega suas leis a Moisés no Monte Sinai"
-                },
-                {
-                    "question": "🐑🍶🎺⚔️💪",
-                    "options": { "a": "Gideão e o Exército Pequeno" },
-                    "correct": "a",
-                    "hint": "Vitória de Israel com poucos homens, fé em Deus"
-                },
-                {
-                    "question": "💪🦁🍯✂️😩",
-                    "options": { "a": "Sansão e Dalila" },
-                    "correct": "a",
-                    "hint": "Força de Sansão, fraqueza por Dalila, queda e redenção"
-                },
-                {
-                    "question": "👦🐑🪨 slingshot ⚔️巨人",
-                    "options": { "a": "Davi e Golias" },
-                    "correct": "a",
-                    "hint": "O jovem Davi derrota o gigante Golias com uma funda"
-                },
-                {
-                    "question": "👑 Solomon 👶⚖️💡",
-                    "options": { "a": "A Sabedoria de Salomão" },
-                    "correct": "a",
-                    "hint": "Salomão pede sabedoria a Deus, julgamento famoso"
-                },
-                {
-                    "question": "🔥 altar 🙏🌧️",
-                    "options": { "a": "Elias e os Profetas de Baal" },
-                    "correct": "a",
-                    "hint": "Confronto no Monte Carmelo, Deus envia fogo do céu"
-                },
-                {
-                    "question": "⛵️🌊🐳🙏🗣️",
-                    "options": { "a": "Jonas e a Baleia" },
-                    "correct": "a",
-                    "hint": "Jonas foge de Deus, é engolido por um grande peixe, se arrepende e prega"
-                },
-                {
-                    "question": "🦁 den 🙏😇",
-                    "options": { "a": "Daniel na Cova dos Leões" },
-                    "correct": "a",
-                    "hint": "Daniel é salvo dos leões por sua fé"
-                },
-                {
-                    "question": "🌟👶🐑 stable",
-                    "options": { "a": "Jesus Nasce" },
-                    "correct": "a",
-                    "hint": "O nascimento de Jesus em Belém"
-                },
-                {
-                    "question": "🌊🚶‍♂️⛵️🙏",
-                    "options": { "a": "Jesus Anda sobre as Águas" },
-                    "correct": "a",
-                    "hint": "Jesus caminha sobre o mar e Pedro tenta imitá-lo"
-                },
-                {
-                    "question": "🍞🐟 Crowd 🖐️✨",
-                    "options": { "a": "A Multiplicação dos Pães e Peixes" },
-                    "correct": "a",
-                    "hint": "Jesus alimenta milhares com poucos alimentos"
-                },
-                {
-                    "question": "🐖💰🏡😔➡️🎉🥳",
-                    "options": { "a": "A Parábola do Filho Pródigo" },
-                    "correct": "a",
-                    "hint": "Filho que gasta tudo, se arrepende e é recebido com festa pelo pai"
-                },
-                {
-                    "question": "🤕 Samaritan ❤️🩹🙏",
-                    "options": { "a": "A Parábola do Bom Samaritano" },
-                    "correct": "a",
-                    "hint": "Ajuda ao próximo, amor ao próximo sem preconceitos"
-                },
-                {
-                    "question": "👁️➡️✨🙏",
-                    "options": { "a": "Jesus Cura o Cego de Nascença" },
-                    "correct": "a",
-                    "hint": "Jesus restaura a visão de um homem cego de nascença"
-                },
-                {
-                    "question": "🪦 Lazarus 🗣️✨🙏",
-                    "options": { "a": "A Ressurreição de Lázaro" },
-                    "correct": "a",
-                    "hint": "Jesus ressuscita Lázaro dos mortos"
-                },
-                {
-                    "question": "🍷🍞 discípulos 🙏",
-                    "options": { "a": "A Última Ceia" },
-                    "correct": "a",
-                    "hint": "Jesus partilha a última refeição com seus discípulos"
-                },
-                {
-                    "question": "✝️👑💔😭",
-                    "options": { "a": "A Crucificação de Jesus" },
-                    "correct": "a",
-                    "hint": "Jesus morre na cruz por nossos pecados"
-                },
-                {
-                    "question": "🪦🌅😇✨🙌",
-                    "options": { "a": "A Ressurreição de Jesus" },
-                    "correct": "a",
-                    "hint": "Jesus ressuscita dos mortos ao terceiro dia"
-                },
-                {
-                    "question": "🔥🌬️🗣️🌎🙏",
-                    "options": { "a": "Pentecostes" },
-                    "correct": "a",
-                    "hint": "O Espírito Santo desce sobre os apóstolos, início da Igreja"
+// Este arquivo contém a variável QUIZ_OPTIONS, que será globalmente acessível.
+// Cada objeto dentro do array representa uma configuração de quiz diferente.
+const QUIZ_OPTIONS = [
+    {
+        id: 'charadas-id',
+        name: 'Charadas Biblicas',
+        data: {
+            title: "Quiz Bíblico:<br> Charadas da Biblia!",
+            subtitle: "Cuidado com as pegadinhas!",
+            actions: {
+                showToolbar: true,
+                showAwnserButtons: false,
+            },
+            data: [{
+                id: "easy",
+                title: "Nível Fácil",
+                questions: [{
+                    question: "Fui salvo das águas em um cesto e me tornei líder do meu povo. Quem sou eu?",
+                    options: {
+                        a: "Moisés"
+                    },
+                    correct: "a",
+                    hint: "Êxodo 2:3-10",
+                },
+                    {
+                        question: "Construí uma arca grande e salvei minha família e os animais do dilúvio. Quem sou eu?",
+                        options: {
+                            a: "Noé"
+                        },
+                        correct: "a",
+                        hint: "Gênesis 6:13-22",
+                    },
+                    {
+                        question: "Venci um gigante com uma pedra e uma funda e me tornei rei de Israel. Quem sou eu?",
+                        options: {
+                            a: "Davi"
+                        },
+                        correct: "a",
+                        hint: "1 Samuel 17",
+                    },
+                    {
+                        question: "Nasci em Belém e sou o Salvador do mundo. Quem sou eu?",
+                        options: {
+                            a: "Jesus"
+                        },
+                        correct: "a",
+                        hint: "Lucas 2:1-20",
+                    },
+                    {
+                        question: "Minha esposa, Eva, foi a primeira mulher. Quem sou eu?",
+                        options: {
+                            a: "Adão"
+                        },
+                        correct: "a",
+                        hint: "Gênesis 2:20-25",
+                    },
+                    {
+                        question: "Traí Jesus por trinta moedas de prata. Quem sou eu?",
+                        options: {
+                            a: "Judas Iscariotes"
+                        },
+                        correct: "a",
+                        hint: "Mateus 26:14-16",
+                    },
+                    {
+                        question: "Fui jogado na cova dos leões, mas Deus me salvou. Quem sou eu?",
+                        options: {
+                            a: "Daniel"
+                        },
+                        correct: "a",
+                        hint: "Daniel 6",
+                    },
+                    {
+                        question: "Fui o homem mais forte, mas perdi minha força quando meu cabelo foi cortado. Quem sou eu?",
+                        options: {
+                            a: "Sansão"
+                        },
+                        correct: "a",
+                        hint: "Juízes 16",
+                    },
+                    {
+                        question: "Fui um profeta que foi engolido por um grande peixe. Quem sou eu?",
+                        options: {
+                            a: "Jonas"
+                        },
+                        correct: "a",
+                        hint: "Jonas 1:17",
+                    },
+                    {
+                        question: "Fui a mãe de Jesus. Quem sou eu?",
+                        options: {
+                            a: "Maria"
+                        },
+                        correct: "a",
+                        hint: "Lucas 1:26-38",
+                    },
+                    {
+                        question: "Sou um livro da Bíblia que começa com 'No princípio, criou Deus os céus e a terra.' Qual livro sou eu?",
+                        options: {
+                            a: "Gênesis"
+                        },
+                        correct: "a",
+                        hint: "Gênesis 1:1",
+                    },
+                    {
+                        question: "Eu sou o décimo mandamento. Não cobiçarás a casa do teu próximo, não cobiçarás a mulher do teu próximo, nem o seu servo, nem a sua serva, nem o seu boi, nem o seu jumento, nem coisa alguma do teu próximo. O que sou eu?",
+                        options: {
+                            a: "Não cobiçar"
+                        },
+                        correct: "a",
+                        hint: "Êxodo 20:17",
+                    },
+                    {
+                        question: "O que a Bíblia diz que devemos fazer em tudo?",
+                        options: {
+                            a: "Dar graças"
+                        },
+                        correct: "a",
+                        hint: "1 Tessalonicenses 5:18",
+                    },
+                    {
+                        question: "Quem é conhecido por sua sabedoria e pediu a Deus um coração que soubesse discernir?",
+                        options: {
+                            a: "Salomão"
+                        },
+                        correct: "a",
+                        hint: "1 Reis 3:5-12",
+                    },
+                    {
+                        question: "Qual é o último livro da Bíblia?",
+                        options: {
+                            a: "Apocalipse"
+                        },
+                        correct: "a",
+                        hint: "Apocalipse 1:1",
+                    },
+                ],
+            },
+                {
+                    id: "medium",
+                    title: "Nível Médio",
+                    questions: [{
+                        question: "Fui um homem justo, salvo de Sodoma e Gomorra, mas minha esposa se tornou uma estátua de sal. Quem sou eu?",
+                        options: {
+                            a: "Ló"
+                        },
+                        correct: "a",
+                        hint: "Gênesis 19:15-26",
+                    },
+                        {
+                            question: "Tive um sonho com uma escada que ia até o céu e Deus renovou Sua aliança comigo ali. Quem sou eu?",
+                            options: {
+                                a: "Jacó"
+                            },
+                            correct: "a",
+                            hint: "Gênesis 28:10-22",
+                        },
+                        {
+                            question: "Fui o primeiro rei de Israel, mas desobedeci a Deus. Quem sou eu?",
+                            options: {
+                                a: "Saul"
+                            },
+                            correct: "a",
+                            hint: "1 Samuel 10, 15",
+                        },
+                        {
+                            question: "Fui uma rainha corajosa que salvou seu povo de um plano maligno, arriscando sua própria vida. Quem sou eu?",
+                            options: {
+                                a: "Ester"
+                            },
+                            correct: "a",
+                            hint: "Ester 4:13-16",
+                        },
+                        {
+                            question: "Fui o irmão de Moisés e me tornei o primeiro sumo sacerdote. Quem sou eu?",
+                            options: {
+                                a: "Arão"
+                            },
+                            correct: "a",
+                            hint: "Êxodo 7:1-7",
+                        },
+                        {
+                            question: "Fui um profeta que subiu ao céu em um carro de fogo. Quem sou eu?",
+                            options: {
+                                a: "Elias"
+                            },
+                            correct: "a",
+                            hint: "2 Reis 2:11",
+                        },
+                        {
+                            question: "Fui cego, mas Jesus me curou. Comecei a segui-Lo e glorificá-Lo. Quem sou eu?",
+                            options: {
+                                a: "Bartimeu"
+                            },
+                            correct: "a",
+                            hint: "Marcos 10:46-52",
+                        },
+                        {
+                            question: "Fui uma das duas esposas de Jacó e mãe de José e Benjamim. Morri no caminho para Efrata. Quem sou eu?",
+                            options: {
+                                a: "Raquel"
+                            },
+                            correct: "a",
+                            hint: "Gênesis 29:1-30, 35:16-19",
+                        },
+                        {
+                            question: "Fui um apóstolo que negou Jesus três vezes antes do galo cantar. Quem sou eu?",
+                            options: {
+                                a: "Pedro"
+                            },
+                            correct: "a",
+                            hint: "Mateus 26:69-75",
+                        },
+                        {
+                            question: "Minha cidade foi destruída porque o povo adorou um bezerro de ouro. Qual cidade sou eu?",
+                            options: {
+                                a: "Sodoma"
+                            },
+                            correct: "a",
+                            hint: "Gênesis 19",
+                        },
+                        {
+                            question: "Qual o nome do jardim onde Jesus orou intensamente antes de ser preso?",
+                            options: {
+                                a: "Getsêmani"
+                            },
+                            correct: "a",
+                            hint: "Mateus 26:36-46",
+                        },
+                        {
+                            question: "Qual era o nome do discípulo que Jesus amava?",
+                            options: {
+                                a: "João"
+                            },
+                            correct: "a",
+                            hint: "João 13:23",
+                        },
+                        {
+                            question: "Qual profeta desafiou os profetas de Baal no Monte Carmelo?",
+                            options: {
+                                a: "Elias"
+                            },
+                            correct: "a",
+                            hint: "1 Reis 18:16-40",
+                        },
+                        {
+                            question: "Em qual cidade nasceu o apóstolo Paulo?",
+                            options: {
+                                a: "Tarso"
+                            },
+                            correct: "a",
+                            hint: "Atos 21:39",
+                        },
+                        {
+                            question: "Qual era o nome do homem rico que pediu o corpo de Jesus para o sepultamento?",
+                            options: {
+                                a: "José de Arimateia"
+                            },
+                            correct: "a",
+                            hint: "Mateus 27:57-60",
+                        },
+                        {
+                            question: "Qual animal falou com Balaão?",
+                            options: {
+                                a: "Jumenta"
+                            },
+                            correct: "a",
+                            hint: "Números 22:21-35",
+                        },
+                        {
+                            question: "Qual a cidade conhecida por suas muralhas que caíram após os israelitas marcharem ao redor dela?",
+                            options: {
+                                a: "Jericó"
+                            },
+                            correct: "a",
+                            hint: "Josué 6",
+                        },
+                        {
+                            question: "Qual o nome do pai de João Batista?",
+                            options: {
+                                a: "Zacarias"
+                            },
+                            correct: "a",
+                            hint: "Lucas 1:5-25",
+                        },
+                        {
+                            question: "Fui o discípulo que duvidou da ressurreição de Jesus até que pudesse tocar em Suas feridas. Quem sou eu?",
+                            options: {
+                                a: "Tomé"
+                            },
+                            correct: "a",
+                            hint: "João 20:24-29",
+                        },
+                        {
+                            question: "Qual o nome do livro que contém a história de Davi e Golias?",
+                            options: {
+                                a: "1 Samuel"
+                            },
+                            correct: "a",
+                            hint: "1 Samuel 17",
+                        },
+                    ],
+                },
+                {
+                    id: "difficult",
+                    title: "Nível Difícil",
+                    questions: [{
+                        question: "Fui um profeta que teve uma visão de um vale de ossos secos que ganharam vida. Quem sou eu?",
+                        options: {
+                            a: "Ezequiel"
+                        },
+                        correct: "a",
+                        hint: "Ezequiel 37:1-14",
+                    },
+                        {
+                            question: "Fui um rei justo que orou por cura e teve mais quinze anos de vida adicionados. Quem sou eu?",
+                            options: {
+                                a: "Ezequias"
+                            },
+                            correct: "a",
+                            hint: "2 Reis 20:1-11",
+                        },
+                        {
+                            question: "Minha história é contada em um dos poucos livros da Bíblia que levam o nome de uma mulher e fala de fidelidade e lealdade. Qual livro e quem sou eu?",
+                            options: {
+                                a: "Rute"
+                            },
+                            correct: "a",
+                            hint: "Livro de Rute",
+                        },
+                        {
+                            question: "Fui um mestre da lei que foi visitar Jesus à noite para entender melhor o Reino de Deus. Quem sou eu?",
+                            options: {
+                                a: "Nicodemos"
+                            },
+                            correct: "a",
+                            hint: "João 3:1-21",
+                        },
+                        {
+                            question: "Quem foi o profeta que ungiu tanto Saul quanto Davi como reis?",
+                            options: {
+                                a: "Samuel"
+                            },
+                            correct: "a",
+                            hint: "1 Samuel 10:1, 16:13",
+                        },
+                        {
+                            question: "Em qual dos evangelhos encontramos a parábola do Filho Pródigo?",
+                            options: {
+                                a: "Lucas"
+                            },
+                            correct: "a",
+                            hint: "Lucas 15:11-32",
+                        },
+                        {
+                            question: "Qual era o nome do sumo sacerdote que presidiu o julgamento de Jesus?",
+                            options: {
+                                a: "Caifás"
+                            },
+                            correct: "a",
+                            hint: "Mateus 26:57-68",
+                        },
+                        {
+                            question: "Qual apóstolo foi apedrejado e deixado como morto em Listra, mas se levantou e continuou a pregar?",
+                            options: {
+                                a: "Paulo"
+                            },
+                            correct: "a",
+                            hint: "Atos 14:19-20",
+                        },
+                        {
+                            question: "Qual o nome da profetisa que ajudou o rei Josias a entender as palavras da Lei?",
+                            options: {
+                                a: "Hulda"
+                            },
+                            correct: "a",
+                            hint: "2 Reis 22:14-20",
+                        },
+                        {
+                            question: "Fui um homem rico que se tornou um seguidor de Jesus e era de Jericó. Eu era muito baixo. Quem sou eu?",
+                            options: {
+                                a: "Zaqueu"
+                            },
+                            correct: "a",
+                            hint: "Lucas 19:1-10",
+                        },
+                        {
+                            question: "Qual rio foi dividido para que os israelitas pudessem entrar na Terra Prometida?",
+                            options: {
+                                a: "Rio Jordão"
+                            },
+                            correct: "a",
+                            hint: "Josué 3",
+                        },
+                        {
+                            question: "Quem foi o governador romano que lavou as mãos, declarando-se inocente da morte de Jesus?",
+                            options: {
+                                a: "Pôncio Pilatos"
+                            },
+                            correct: "a",
+                            hint: "Mateus 27:24",
+                        },
+                        {
+                            question: "Qual o nome do homem que foi levado para o céu sem experimentar a morte?",
+                            options: {
+                                a: "Enoque"
+                            },
+                            correct: "a",
+                            hint: "Gênesis 5:24, Hebreus 11:5",
+                        },
+                        {
+                            question: "Qual o profeta que foi exilado na ilha de Patmos e recebeu visões do fim dos tempos?",
+                            options: {
+                                a: "João (o apóstolo)"
+                            },
+                            correct: "a",
+                            hint: "Apocalipse 1:9",
+                        },
+                        {
+                            question: "Qual o nome do servo do sumo sacerdote que teve a orelha cortada por Pedro e foi curada por Jesus?",
+                            options: {
+                                a: "Malco"
+                            },
+                            correct: "a",
+                            hint: "João 18:10-11, Lucas 22:50-51",
+                        },
+                    ],
+                },
+            ],
+        }
+    }, {
+        id: 'livro-filipenses-id',
+        name: 'Livro De Filipenses',
+        data: {
+            title: 'Quiz Bíblico:<br>A Carta aos Filipenses!',
+            subtitle: 'Uma aventura de conhecimento no mundo do Paulo!',
+            actions: {
+                showToolbar: true,
+                showAwnserButtons: false,
+            },
+            data: [{
+                id: 'easy',
+                title: 'Nível Fácil',
+                questions: [{
+                    question: "Qual apóstolo escreveu a carta aos Filipenses?",
+                    options: {
+                        a: "Pedro",
+                        b: "João",
+                        c: "Paulo",
+                        d: "Tiago"
+                    },
+                    correct: "c",
+                    hint: "Pense em quem escreveu a maioria das epístolas do Novo Testamento, muitas delas da prisão."
+                },
+                    {
+                        question: "Em qual cidade ficava a igreja para quem Paulo escreveu esta carta?",
+                        options: {
+                            a: "Éfeso",
+                            b: "Corinto",
+                            c: "Filipos",
+                            d: "Roma"
+                        },
+                        correct: "c",
+                        hint: "O nome da cidade está no título do livro."
+                    },
+                    {
+                        question: "Complete o versículo: 'Posso todas as coisas naquele que me _____________.' (Filipenses 4:13)",
+                        options: {
+                            a: "ama",
+                            b: "chama",
+                            c: "fortalece",
+                            d: "salva"
+                        },
+                        correct: "c",
+                        hint: "Este versículo fala sobre a capacidade de suportar e superar desafios com auxílio divino."
+                    },
+                    {
+                        question: "Qual a saudação inicial de Paulo aos Filipenses no capítulo 1?",
+                        options: {
+                            a: "Graça e paz a vós, da parte de Deus nosso Pai e do Senhor Jesus Cristo.",
+                            b: "Que o amor de Deus esteja convosco.",
+                            c: "Alegrai-vos sempre no Senhor.",
+                            d: "Saúdo-vos em nome do Senhor."
+                        },
+                        correct: "a",
+                        hint: "Pense na fórmula usual de saudação nas epístolas paulinas."
+                    },
+                    {
+                        question: "Qual a atitude principal que Paulo encoraja os Filipenses a ter uns para com os outros no capítulo 2?",
+                        options: {
+                            a: "Competição e rivalidade",
+                            b: "Individualismo e auto-suficiência",
+                            c: "Humildade e consideração mútua",
+                            d: "Busca por poder e autoridade"
+                        },
+                        correct: "c",
+                        hint: "Pense no exemplo que Paulo usa para ilustrar essa atitude."
+                    },
+                    {
+                        question: "Qual a expressão de gratidão de Paulo aos Filipenses por sua 'participação no evangelho' (Filipenses 1:5)?",
+                        options: {
+                            a: "Ele agradece a Deus por eles em cada oração.",
+                            b: "Ele promete visitá-los em breve para expressar sua gratidão.",
+                            c: "Ele envia-lhes presentes como sinal de agradecimento.",
+                            d: "Ele escreve uma canção de louvor em honra a eles."
+                        },
+                        correct: "a",
+                        hint: "Pense em como Paulo, como apóstolo, geralmente se relacionava com as igrejas que amava."
+                    }
+                ]
+            },
+                {
+                    id: 'medium',
+                    title: 'Nível Médio',
+                    questions: [{
+                        question: "O que Paulo menciona repetidamente na carta como motivo de sua alegria, mesmo estando preso?",
+                        options: {
+                            a: "A expectativa de ser solto em breve",
+                            b: "O apoio financeiro que recebeu de outras igrejas",
+                            c: "O avanço do Evangelho apesar de suas correntes",
+                            d: "A oportunidade de escrever mais cartas da prisão"
+                        },
+                        correct: "c",
+                        hint: "Sua alegria não dependia das circunstâncias externas, mas do propósito de sua vida."
+                    },
+                        {
+                            question: "Qual é o tema principal da carta aos Filipenses?",
+                            options: {
+                                a: "A salvação pela fé e não pelas obras da lei",
+                                b: "A segunda vinda de Cristo",
+                                c: "A alegria em Cristo, união e humildade",
+                                d: "A defesa contra falsos mestres"
+                            },
+                            correct: "c",
+                            hint: "Pense na emoção que Paulo expressa frequentemente e nos conselhos que ele dá sobre a convivência mútua."
+                        },
+                        {
+                            question: "Qual exemplo de humildade Paulo cita em Filipenses 2:5-8, para encorajar os crentes a terem a mesma atitude?",
+                            options: {
+                                a: "O exemplo de Moisés, que renunciou ao trono do Egito",
+                                b: "O exemplo de Jesus Cristo, que se esvaziou a si mesmo",
+                                c: "O exemplo de Davi, que esperou no Senhor para ser rei",
+                                d: "O exemplo de Paulo, que se tornou servo de todos"
+                            },
+                            correct: "b",
+                            hint: "Pense na figura central do cristianianismo e em sua encarnação e sacrifício."
+                        },
+                        {
+                            question: "Qual a razão principal pela qual Paulo envia Epafrodito de volta aos Filipenses?",
+                            options: {
+                                a: "Para que Epafrodito pudesse descansar, pois estava doente.",
+                                b: "Para que ele pudesse trazer mais ofertas para Paulo.",
+                                c: "Para que ele pudesse fundar uma nova igreja.",
+                                d: "Para que ele pudesse ser o novo pastor da igreja."
+                            },
+                            correct: "a",
+                            hint: "Pense na condição física e emocional de Epafrodito, e na preocupação de Paulo com o bem-estar dos Filipenses."
+                        },
+                        {
+                            question: "O que Paulo diz sobre seu 'viver' e seu 'morrer' em Filipenses 1:21?",
+                            options: {
+                                a: "Para mim o viver é Cristo e o morrer é o ganho.",
+                                b: "Para mim o viver é a liberdade e o morrer é a paz.",
+                                c: "Para mim o viver é pregar e o morrer é descansar.",
+                                d: "Para mim o viver é servir e o morrer é ser coroado."
+                            },
+                            correct: "a",
+                            hint: "Essa é uma das declarações mais conhecidas de Paulo sobre o propósito de sua vida."
+                        },
+                        {
+                            question: "Em Filipenses 1:6, Paulo expressa confiança de que 'Aquele que em vós começou a boa obra a aperfeiçoará até ao Dia de Cristo Jesus'. A que 'boa obra' ele se refere?",
+                            options: {
+                                a: "A obra de pregação do evangelho pelos Filipenses.",
+                                b: "A obra de construção do templo em Filipos.",
+                                c: "A obra de salvação e santificação na vida dos crentes.",
+                                d: "A obra de arrecadação de ofertas para os santos em Jerusalém."
+                            },
+                            correct: "c",
+                            hint: "Pense no que Deus faz na vida de cada pessoa que crê."
+                        },
+                        {
+                            question: "Qual é a 'carta de recomendação' que Paulo menciona para Timóteo em Filipenses 2:19-22?",
+                            options: {
+                                a: "Uma carta física de Paulo para a igreja de Filipos.",
+                                b: "Sua reputação como bom pregador e mestre.",
+                                c: "Seu caráter e serviço fiel a Cristo e ao Evangelho.",
+                                d: "Sua origem familiar e posição social."
+                            },
+                            correct: "c",
+                            hint: "Pense no que realmente importa para Paulo em um servo de Cristo."
+                        },
+                        {
+                            question: "Qual o significado da palavra 'koinoia' (comunhão/participação) em Filipenses, especialmente em 1:5 e 2:1?",
+                            options: {
+                                a: "Refere-se apenas à comunhão em refeições e celebrações sociais.",
+                                b: "Significa compartilhar bens materiais apenas com os necessitados.",
+                                c: "Envolve uma parceria profunda e compartilhamento em todos os aspectos da vida cristã, incluindo o evangelho e o sofrimento.",
+                                d: "Indica uma submissão hierárquica a líderes religiosos."
+                            },
+                            correct: "c",
+                            hint: "Pense na profundidade do relacionamento e do propósito que une os crentes em Cristo."
+                        }
+                    ]
+                },
+                {
+                    id: 'difficult',
+                    title: 'Nível Difícil',
+                    questions: [{
+                        question: "De acordo com Filipenses 3:7-8, o que Paulo considerou 'perda' e 'esterco' por amor a Cristo?",
+                        options: {
+                            a: "Seus bens materiais e sua família",
+                            b: "Sua cidadania romana e sua liberdade",
+                            c: "Seus privilégios religiosos e sua justiça própria",
+                            d: "Seus amigos e sua reputação"
+                        },
+                        correct: "c",
+                        hint: "Ele está se referindo a tudo aquilo em que ele antes confiava para sua justificação perante Deus."
+                    },
+                        {
+                            question: "Qual é o 'fruto dos lábios' que os Filipenses são encorajados a oferecer a Deus em 4:18?",
+                            options: {
+                                a: "Pregação do evangelho",
+                                b: "Louvor e ações de graças",
+                                c: "Orações intercessórias",
+                                d: "Testemunho pessoal"
+                            },
+                            correct: "b",
+                            hint: "Pense em uma forma de adoração que envolve a fala e expressa gratidão."
+                        },
+                        {
+                            question: "Qual a advertência de Paulo em Filipenses 3:2 sobre 'cães' e 'maus obreiros'?",
+                            options: {
+                                a: "Contra os gentios que não se convertem",
+                                b: "Contra os líderes religiosos que pervertiam o evangelho da graça pela circuncisão",
+                                c: "Contra os que se opunham ao seu ministério",
+                                d: "Contra os idólatras e pagãos"
+                            },
+                            correct: "b",
+                            hint: "Pense nos grupos religiosos da época que insistiam em práticas da Lei Mosaica para a salvação."
+                        },
+                        {
+                            question: "Em Filipenses 4:6-7, Paulo instrui os crentes a não andarem ansiosos, mas a apresentar suas petições a Deus. Qual é a promessa que segue essa instrução?",
+                            options: {
+                                a: "Deus suprirá todas as suas necessidades",
+                                b: "A paz de Deus, que excede todo o entendimento",
+                                c: "Terão vida abundante e eterna",
+                                d: "Serão libertos de todas as tribulações"
+                            },
+                            correct: "b",
+                            hint: "Pense no estado mental e espiritual que Deus oferece quando confiamos Nele e oramos."
+                        },
+                        {
+                            question: "Qual é o propósito da admoestação de Paulo sobre a 'circuncisão', conforme Filipenses 3:3?",
+                            options: {
+                                a: "Para encorajar todos os crentes a serem circuncidados fisicamente.",
+                                b: "Para distinguir entre judeus e gentios convertidos.",
+                                c: "Para enfatizar que a verdadeira circuncisão é a do coração, pelo Espírito.",
+                                d: "Para proibir a circuncisão de bebês cristãos."
+                            },
+                            correct: "c",
+                            hint: "Pense na diferença entre rituais externos e uma transformação espiritual interna."
+                        },
+                        {
+                            question: "Qual a exortação de Paulo em Filipenses 2:14-16 sobre a conduta dos crentes em meio a uma 'geração corrompida e perversa'?",
+                            options: {
+                                a: "Para que se isolem do mundo e evitem contato com pecadores.",
+                                b: "Para que reclamem e questionem a autoridade.",
+                                c: "Para que façam todas as coisas sem murmurações nem contendas, brilhando como luzeiros no mundo.",
+                                d: "Para que defendam o evangelho com argumentos filosóficos."
+                            },
+                            correct: "c",
+                            hint: "Pense no contraste que Paulo faz entre o comportamento dos crentes e o do mundo ao redor."
+                        },
+                        {
+                            question: "Em Filipenses 4:5, Paulo diz: 'Seja a vossa eqüidade notória a todos os homens. Perto está o Senhor.' O que significa 'equidade' nesse contexto?",
+                            options: {
+                                a: "Riqueza material e prosperidade financeira.",
+                                b: "Justiça rigorosa e observância estrita da lei.",
+                                c: "Moderação, bondade, razoabilidade e clemência.",
+                                d: "Inteligência superior e sabedoria humana."
+                            },
+                            correct: "c",
+                            hint: "Pense em como uma pessoa justa e paciente se comporta em suas interações."
+                        },
+                        {
+                            question: "Afinal, qual era a principal preocupação de Paulo ao escrever a carta aos Filipenses?",
+                            options: {
+                                a: "Pedir ajuda financeira para suas necessidades.",
+                                b: "Conclamá-los à alegria e à unidade em Cristo, e alertá-los contra falsos ensinadores.",
+                                c: "Organizar a estrutura eclesiástica da igreja de Filipos.",
+                                d: "Dar instruções detalhadas sobre a ceia do Senhor."
+                            },
+                            correct: "b",
+                            hint: "Pense nos sentimentos que ele expressa e nos perigos que ele aponta."
+                        },
+                        {
+                            question: "Paulo menciona a 'árvore' que dá frutos de justiça em Filipenses 1:11. A que 'frutos de justiça' ele se refere?",
+                            options: {
+                                a: "Resultados de boas obras e caridade realizadas pelos crentes.",
+                                b: "Consequências diretas da observância da lei mosaica.",
+                                c: "As virtudes e o caráter de Cristo manifestados na vida dos crentes, através de Jesus Cristo.",
+                                d: "Bênçãos materiais e prosperidade concedidas por Deus."
+                            },
+                            correct: "c",
+                            hint: "Pense na fonte desses frutos e no seu propósito final."
+                        },
+                        {
+                            question: "Em Filipenses 1:27, Paulo exorta os crentes a se comportarem 'dignamente do evangelho de Cristo'. O que isso implica, segundo o contexto?",
+                            options: {
+                                a: "Viver uma vida de luxo para mostrar a bênção de Deus.",
+                                b: "Lutar uns com os outros pela verdade da doutrina.",
+                                c: "Permanecer firmes em um só espírito, lutando juntos pela fé do evangelho.",
+                                d: "Ignorar as perseguições e viver em paz isolada."
+                            },
+                            correct: "c",
+                            hint: "Pense na forma como a comunidade cristã deve agir em união diante dos desafios."
+                        },
+                        {
+                            question: "Em Filipenses 3:12-14, Paulo fala sobre 'prosseguir para o alvo'. Qual é esse alvo?",
+                            options: {
+                                a: "Alcançar a perfeição moral e ética por seus próprios esforços.",
+                                b: "Ser reconhecido e aclamado pelos outros crentes.",
+                                c: "O prêmio da soberana vocação de Deus em Cristo Jesus, que é a ressurreição e a semelhança com Cristo.",
+                                d: "Acumular conhecimento teológico e doutrinário."
+                            },
+                            correct: "c",
+                            hint: "Pense no propósito final da vida cristã, que está além desta vida terrena."
+                        },
+                        {
+                            question: "Qual o conselho de Paulo sobre os pensamentos em Filipenses 4:8? Ele diz para pensarmos em tudo que é...",
+                            options: {
+                                a: "Rentável, popular e conveniente.",
+                                b: "Verdadeiro, respeitável, justo, puro, amável, de boa fama, e se há alguma virtude e louvor.",
+                                c: "Ambicioso, competitivo e focado em si mesmo.",
+                                d: "Fácil, divertido e relaxante."
+                            },
+                            correct: "b",
+                            hint: "Pense nas qualidades que elevam o caráter e agradam a Deus."
+                        },
+                        {
+                            question: "Em Filipenses 2:3, Paulo adverte contra o 'partidarismo' e a 'vanglória'. O que ele sugere em seu lugar?",
+                            options: {
+                                a: "Buscar reconhecimento e elogios dos outros.",
+                                b: "Considerar os outros superiores a si mesmos.",
+                                c: "Defender a própria opinião a todo custo.",
+                                d: "Focar apenas em seus próprios interesses e necessidades."
+                            },
+                            correct: "b",
+                            hint: "Pense na atitude que Jesus demonstrou ao se esvaziar."
+                        },
+                        {
+                            question: "O que Paulo diz sobre a sua 'esperança' e a 'salvação' em Filipenses 1:20?",
+                            options: {
+                                a: "Que Cristo será engrandecido em seu corpo, seja pela vida, seja pela morte.",
+                                b: "Que ele será libertado da prisão e continuará a pregar.",
+                                c: "Que sua salvação depende de seus próprios esforços para pregar o evangelho.",
+                                d: "Que a salvação dos Filipenses está garantida se eles seguirem suas instruções à risca."
+                            },
+                            correct: "a",
+                            hint: "Pense na dedicação total de Paulo a Cristo e ao evangelho, mesmo diante da morte."
+                        },
+                        {
+                            question: "Paulo se refere a si mesmo como 'cidadão do céu' em Filipenses 3:20. O que isso significa para ele e para os crentes?",
+                            options: {
+                                a: "Que ele tinha dupla cidadania, romana e celestial.",
+                                b: "Que a verdadeira pátria dos crentes é o céu, de onde esperam o Salvador.",
+                                c: "Que eles deveriam se desinteressar pelos assuntos terrenos.",
+                                d: "Que eles iriam literalmente se mudar para o céu antes da morte."
+                            },
+                            correct: "b",
+                            hint: "Pense na sua identidade e no seu verdadeiro lar, que não é deste mundo."
+                        },
+                        {
+                            question: "Em Filipenses 4:11-12, Paulo fala sobre estar contente 'em toda e qualquer situação'. Qual é o segredo dele para essa satisfação?",
+                            options: {
+                                a: "Ele tinha aprendido a arte de viver com o que tinha, sem depender de ninguém.",
+                                b: "Ele havia encontrado a verdadeira felicidade na filosofia estoica.",
+                                c: "Ele havia aprendido o segredo de todas as coisas em Cristo, que o fortalecia.",
+                                d: "Ele recebia grandes quantidades de ajuda financeira das igrejas."
+                            },
+                            correct: "c",
+                            hint: "Pense na fonte de sua força interior para lidar com as adversidades e a abundância."
+                        }
+                    ]
                 }
             ]
         }
-    ],
-};
+    }, {
+        id: 'embaralhados-id',
+        name: 'Livros Embaralhados',
+        data: {
+            title: "Descubra os Livros!",
+            subtitle: "Livros Embaralhados! ",
+            fontSize: "5em", // NOVO: Campo de tamanho de fonte para a pergunta atual
+            actions: {
+                showToolbar: true,
+                showAwnserButtons: false,
+            },
+            data: [{
+                id: "old-testament",
+                title: "Antigo Testamento",
+                questions: [{
+                    question: "ESNUORM",
+                    options: {
+                        a: "Números",
+                    },
+                    correct: "a",
+                    hint: "Descreve a contagem e as peregrinações do povo de Israel no deserto.",
+                },
+                    {
+                        question: "NEEIDORTOMOU",
+                        options: {
+                            a: "Deuteronômio",
+                        },
+                        correct: "a",
+                        hint: 'É o livro da "segunda lei", que reitera as instruções de Deus antes da entrada em Canaã.',
+                    },
+                    {
+                        question: "TSIACCON",
+                        options: {
+                            a: "Cânticos",
+                        },
+                        correct: "a",
+                        hint: "Um poema de amor que celebra o relacionamento entre um homem e uma mulher.",
+                    },
+                    {
+                        question: "ABSAODI",
+                        options: {
+                            a: "Obadias",
+                        },
+                        correct: "a",
+                        hint: "O profeta mais curto do Antigo Testamento, que fala sobre a queda de Edom.",
+                    },
+                    {
+                        question: "EUGA",
+                        options: {
+                            a: "Ageu",
+                        },
+                        correct: "a",
+                        hint: "Profeta que incentivou o povo a reconstruir o Templo após o exílio.",
+                    },
+                    {
+                        question: "TURE",
+                        options: {
+                            a: "Rute",
+                        },
+                        correct: "a",
+                        hint: "A história de uma nora fiel que encontra amor e redenção em Belém.",
+                    },
+                    {
+                        question: "AIASULMQA",
+                        options: {
+                            a: "Malaquias",
+                        },
+                        correct: "a",
+                        hint: "É o último profeta antes do silêncio de 400 anos, e fala sobre dízimos e ofertas.",
+                    },
+                    {
+                        question: "SIAEETLESCS",
+                        options: {
+                            a: "Eclesiastes",
+                        },
+                        correct: "a",
+                        hint: "Reflete sobre o sentido da vida e a vaidade das coisas sob o sol.",
+                    },
+                    {
+                        question: "SNRCCIAO",
+                        options: {
+                            a: "1 e 2 Crônicas",
+                        },
+                        correct: "a",
+                        hint: "Começa com longas genealogias e fala sobre o reinado de Davi.",
+                    },
+                    {
+                        question: "OEOXD",
+                        options: {
+                            a: "Êxodo",
+                        },
+                        correct: "a",
+                        hint: "A libertação de Israel do Egito e a entrega dos Dez Mandamentos.",
+                    },
+                    {
+                        question: "BVIRSEOROP",
+                        options: {
+                            a: "Provérbios",
+                        },
+                        correct: "a",
+                        hint: "Um livro cheio de sabedoria prática e conselhos para a vida diária.",
+                    },
+                    {
+                        question: "OSNJA",
+                        options: {
+                            a: "Jonas",
+                        },
+                        correct: "a",
+                        hint: "O profeta que tentou fugir da missão de pregar em Nínive e acabou na barriga de um peixe.",
+                    },
+                    {
+                        question: "AIIASS",
+                        options: {
+                            a: "Isaías",
+                        },
+                        correct: "a",
+                        hint: 'Conhecido como o "príncipe dos profetas", fala muito sobre a vinda do Messias.',
+                    },
+                    {
+                        question: "AUSEML",
+                        options: {
+                            a: "1 e 2 Samuel",
+                        },
+                        correct: "a",
+                        hint: "Conta a história do último juiz de Israel e a ascensão do primeiro rei, Saul.",
+                    },
+                    {
+                        question: "MSJEEIAR",
+                        options: {
+                            a: "Jeremias",
+                        },
+                        correct: "a",
+                        hint: 'Conhecido como o "profeta chorão", ele alertou sobre o juízo iminente de Jerusalém.',
+                    },
+                    {
+                        question: "MASO",
+                        options: {
+                            a: "Amós",
+                        },
+                        correct: "a",
+                        hint: "Um pastor e agricultor que profetizou contra a injustiça social.",
+                    },
+                    {
+                        question: "SINAFSOO",
+                        options: {
+                            a: "Sofonias",
+                        },
+                        correct: "a",
+                        hint: 'Anuncia o "Dia do Senhor" e a restauração de Israel.',
+                    },
+                    {
+                        question: "ADLNEI",
+                        options: {
+                            a: "Daniel",
+                        },
+                        correct: "a",
+                        hint: "Um jovem judeu no exílio que interpretou sonhos e sobreviveu à cova dos leões.",
+                    },
+                    {
+                        question: "AARZSAIC",
+                        options: {
+                            a: "Zacarias",
+                        },
+                        correct: "a",
+                        hint: "Profeta que teve visões sobre a reconstrução de Jerusalém e a vinda do Messias.",
+                    },
+                    {
+                        question: "SRDEAS",
+                        options: {
+                            a: "Esdras",
+                        },
+                        correct: "a",
+                        hint: "Narra o retorno dos judeus do exílio babilônico e a reconstrução do Templo.",
+                    },
+                    {
+                        question: "HUABUEAQC",
+                        options: {
+                            a: "Habacuque",
+                        },
+                        correct: "a",
+                        hint: "O profeta que questiona a Deus sobre a injustiça e a maldade, e encontra resposta na fé.",
+                    },
+                    {
+                        question: "IOTIELCV",
+                        options: {
+                            a: "Levítico",
+                        },
+                        correct: "a",
+                        hint: "Contém muitas leis sobre sacrifícios, pureza e santidade para o povo de Deus.",
+                    },
+                    {
+                        question: "SENIAEM",
+                        options: {
+                            a: "Neemias",
+                        },
+                        correct: "a",
+                        hint: "O copeiro do rei que liderou a reconstrução dos muros de Jerusalém.",
+                    },
+                    {
+                        question: "OJ",
+                        options: {
+                            a: "Jó",
+                        },
+                        correct: "a",
+                        hint: "Um livro que explora o sofrimento humano e a soberania de Deus através da história de um homem justo.",
+                    },
+                    {
+                        question: "OEJL",
+                        options: {
+                            a: "Joel",
+                        },
+                        correct: "a",
+                        hint: "Um profeta que descreve uma praga de gafanhotos e fala sobre o derramamento do Espírito.",
+                    },
+                    {
+                        question: "UEJSO",
+                        options: {
+                            a: "Josué",
+                        },
+                        correct: "a",
+                        hint: "A história da conquista da Terra Prometida sob a liderança de um grande capitão.",
+                    },
+                    {
+                        question: "IUAMISQE",
+                        options: {
+                            a: "Miquéias",
+                        },
+                        correct: "a",
+                        hint: "Predisse que o Messias nasceria em Belém.",
+                    },
+                    {
+                        question: "ASIEOS",
+                        options: {
+                            a: "Oséias",
+                        },
+                        correct: "a",
+                        hint: "Profeta que usou o relacionamento com sua esposa para ilustrar o amor infiel de Israel por Deus.",
+                    },
+                    {
+                        question: "SEGNEIS",
+                        options: {
+                            a: "Gênesis",
+                        },
+                        correct: "a",
+                        hint: 'O livro do "início", que narra a criação, a queda e os primeiros patriarcas.',
+                    },
+                    {
+                        question: "SEIR",
+                        options: {
+                            a: "1 e 2 Reis",
+                        },
+                        correct: "a",
+                        hint: "Conta a ascensão de Salomão e a divisão do reino de Israel.",
+                    },
+                    {
+                        question: "ALOSMS",
+                        options: {
+                            a: "Salmos",
+                        },
+                        correct: "a",
+                        hint: "Uma coleção de cânticos, orações e poemas para louvar a Deus.",
+                    },
+                    {
+                        question: "UANM",
+                        options: {
+                            a: "Naum",
+                        },
+                        correct: "a",
+                        hint: "Anuncia a destruição da grande cidade de Nínive.",
+                    },
+                    {
+                        question: "QELUZIEE",
+                        options: {
+                            a: "Ezequiel",
+                        },
+                        correct: "a",
+                        hint: "O profeta que teve visões complexas, como o vale de ossos secos.",
+                    },
+                    {
+                        question: "UEIZJS",
+                        options: {
+                            a: "Juízes",
+                        },
+                        correct: "a",
+                        hint: "Relata o período em que Israel era governado por líderes carismáticos antes dos reis.",
+                    },
+                ],
+            },
+                {
+                    id: "new-testament",
+                    title: "Novo Testamento",
+                    questions: [{
+                        question: "OARMSC",
+                        options: {
+                            a: "Marcos",
+                        },
+                        correct: "a",
+                        hint: "O Evangelho mais curto e dinâmico, que mostra Jesus como o Servo sofredor.",
+                    },
+                        {
+                            question: "OOJA",
+                            options: {
+                                a: "1,2 e 3 João",
+                            },
+                            correct: "a",
+                            hint: "Fala sobre o amor de Deus, a comunhão e a certeza da salvação.",
+                        },
+                        {
+                            question: "TSAO",
+                            options: {
+                                a: "Atos",
+                            },
+                            correct: "a",
+                            hint: "Narra o início da Igreja após a ascensão de Jesus e a expansão do Evangelho.",
+                        },
+                        {
+                            question: "USRBEEH",
+                            options: {
+                                a: "Hebreus",
+                            },
+                            correct: "a",
+                            hint: "Exalta a superioridade de Jesus sobre anjos, Moisés e sacerdotes, e fala sobre a fé.",
+                        },
+                        {
+                            question: "SFISEOE",
+                            options: {
+                                a: "Efésios",
+                            },
+                            correct: "a",
+                            hint: "Fala sobre a unidade da igreja como o corpo de Cristo e a armadura de Deus.",
+                        },
+                        {
+                            question: "ESOSSLCONES",
+                            options: {
+                                a: "Colossenses",
+                            },
+                            correct: "a",
+                            hint: "Paulo combate falsas doutrinas e exalta a supremacia de Cristo.",
+                        },
+                        {
+                            question: "AUJDS",
+                            options: {
+                                a: "Judas",
+                            },
+                            correct: "a",
+                            hint: "Uma pequena carta que exorta os crentes a lutar pela fé contra falsos mestres.",
+                        },
+                        {
+                            question: "IÓTEMTO",
+                            options: {
+                                a: "Timóteo",
+                            },
+                            correct: "a",
+                            hint: "Paulo escreve a seu jovem discípulo dando instruções sobre como pastorear a igreja.",
+                        },
+                        {
+                            question: "IOAGT",
+                            options: {
+                                a: "Tiago",
+                            },
+                            correct: "a",
+                            hint: "Uma carta prática que enfatiza que a fé sem obras é morta.",
+                        },
+                        {
+                            question: "REPDO",
+                            options: {
+                                a: "Pedro",
+                            },
+                            correct: "a",
+                            hint: "Encoraja os cristãos a perseverarem em meio ao sofrimento e perseguição.",
+                        },
+                        {
+                            question: "LEISEISNPF",
+                            options: {
+                                a: "Filipenses",
+                            },
+                            correct: "a",
+                            hint: "Uma carta de alegria escrita da prisão, incentivando à unidade e à humildade de Cristo.",
+                        },
+                        {
+                            question: "OJAO",
+                            options: {
+                                a: "João",
+                            },
+                            correct: "a",
+                            hint: "O Evangelho que apresenta Jesus como o Verbo encarnado e enfatiza sua divindade.",
+                        },
+                        {
+                            question: "ORAMOSN",
+                            options: {
+                                a: "Romanos",
+                            },
+                            correct: "a",
+                            hint: "A carta mais completa de Paulo, que explica a doutrina da salvação pela fé.",
+                        },
+                        {
+                            question: "OTIT",
+                            options: {
+                                a: "Tito",
+                            },
+                            correct: "a",
+                            hint: "Paulo instrui seu jovem colaborador sobre a organização e conduta na igreja.",
+                        },
+                        {
+                            question: "IOSAPEPALC",
+                            options: {
+                                a: "Apocalipse",
+                            },
+                            correct: "a",
+                            hint: "O último livro da Bíblia, com visões proféticas sobre o fim dos tempos e a volta de Jesus.",
+                        },
+                        {
+                            question: "CEIOSTNSNSSAELE",
+                            options: {
+                                a: "1 e 2 Tessalonicenses",
+                            },
+                            correct: "a",
+                            hint: "Escrita por Paulo, fala sobre a segunda vinda de Cristo e a vida cristã.",
+                        },
+                        {
+                            question: "ISTROCNOI",
+                            options: {
+                                a: "1 e 2 Coríntios",
+                            },
+                            correct: "a",
+                            hint: "Paulo corrige problemas na igreja de Corinto, como divisões e imoralidade, e fala sobre o amor.",
+                        },
+                        {
+                            question: "AULSC",
+                            options: {
+                                a: "Lucas",
+                            },
+                            correct: "a",
+                            hint: "O Evangelho mais detalhado, escrito por um médico, que enfatiza a humanidade de Jesus e sua atenção aos marginalizados.",
+                        },
+                        {
+                            question: "SATLAAG",
+                            options: {
+                                a: "Gálatas",
+                            },
+                            correct: "a",
+                            hint: "Paulo defende a justificação pela fé, não pelas obras da lei.",
+                        },
+                        {
+                            question: "UEAMTS",
+                            options: {
+                                a: "Mateus",
+                            },
+                            correct: "a",
+                            hint: "O Evangelho que apresenta Jesus como o Messias prometido, com foco em seus ensinamentos (Sermão da Montanha).",
+                        },
+                        {
+                            question: "LMFMIEO",
+                            options: {
+                                a: "Filemom",
+                            },
+                            correct: "a",
+                            hint: "A menor carta de Paulo, pedindo perdão e aceitação para um escravo fugitivo.",
+                        },
+                    ],
+                },
+            ],
+        }
+    }, {
+        id: 'perguntas-gerais-id',
+        name: 'Peguntas Gerais Biblicas',
+        data: {
+            title: "Quiz Bíblico:<br> Perguntas Gerais da Biblia!",
+            subtitle: "Vamos testar seu conhecimento!",
+            actions: {
+                showToolbar: true,
+                showAwnserButtons: false,
+            },
+            data: [{
+                id: "easy",
+                title: "Nível Fácil",
+                questions: [{
+                    question: "Quem construiu a arca para se salvar do Grande Dilúvio?",
+                    options: {
+                        a: "Noé"
+                    },
+                    correct: "a",
+                    hint: "Gênesis 6:14",
+                },
+                    {
+                        question: "Qual gigante foi derrotado por Davi com uma pedra?",
+                        options: {
+                            a: "Golias"
+                        },
+                        correct: "a",
+                        hint: "1 Samuel 17:49-50",
+                    },
+                    {
+                        question: "Quem foi engolido por um grande peixe?",
+                        options: {
+                            a: "Jonas"
+                        },
+                        correct: "a",
+                        hint: "Jonas 1:17",
+                    },
+                    {
+                        question: "Qual foi o primeiro casal humano criado por Deus?",
+                        options: {
+                            a: "Adão e Eva"
+                        },
+                        correct: "a",
+                        hint: "Gênesis 2:7, 22",
+                    },
+                    {
+                        question: "Quem liderou os israelitas para fora do Egito?",
+                        options: {
+                            a: "Moisés"
+                        },
+                        correct: "a",
+                        hint: "Êxodo 3:10",
+                    },
+                    {
+                        question: "Em que cidade Jesus nasceu?",
+                        options: {
+                            a: "Belém"
+                        },
+                        correct: "a",
+                        hint: "Mateus 2:1",
+                    },
+                    {
+                        question: "Qual apóstolo negou Jesus três vezes?",
+                        options: {
+                            a: "Pedro"
+                        },
+                        correct: "a",
+                        hint: "Mateus 26:69-75",
+                    },
+                    {
+                        question: "Quem foi vendido como escravo pelos seus próprios irmãos?",
+                        options: {
+                            a: "José"
+                        },
+                        correct: "a",
+                        hint: "Gênesis 37:28",
+                    },
+                    {
+                        question: "Quantos discípulos Jesus escolheu para segui-lo de perto?",
+                        options: {
+                            a: "Doze"
+                        },
+                        correct: "a",
+                        hint: "Mateus 10:1-4",
+                    },
+                    {
+                        question: "De quem era a força que vinha dos longos cabelos?",
+                        options: {
+                            a: "Sansão"
+                        },
+                        correct: "a",
+                        hint: "Juízes 16:17",
+                    },
+                    {
+                        question: "Qual foi o primeiro milagre de Jesus registrado no Evangelho de João?",
+                        options: {
+                            a: "Transformar água em vinho."
+                        },
+                        correct: "a",
+                        hint: "João 2:1-11",
+                    },
+                    {
+                        question: "Que sinal Deus colocou no céu como promessa de nunca mais destruir a terra com um dilúvio?",
+                        options: {
+                            a: "O arco-íris"
+                        },
+                        correct: "a",
+                        hint: "Gênesis 9:13",
+                    },
+                    {
+                        question: "Quem recebeu os Dez Mandamentos no Monte Sinai?",
+                        options: {
+                            a: "Moisés"
+                        },
+                        correct: "a",
+                        hint: "Êxodo 20:1-17",
+                    },
+                    {
+                        question: "Quem foi o primeiro rei de Israel?",
+                        options: {
+                            a: "Saul"
+                        },
+                        correct: "a",
+                        hint: "1 Samuel 10:24",
+                    },
+                    {
+                        question: "Qual o nome do jardim onde Adão e Eva viviam?",
+                        options: {
+                            a: "Jardim do Éden"
+                        },
+                        correct: "a",
+                        hint: "Gênesis 2:8",
+                    },
+                    {
+                        question: 'Quem foi o "pai da fé"?',
+                        options: {
+                            a: "Abraão"
+                        },
+                        correct: "a",
+                        hint: "Romanos 4:16",
+                    },
+                    {
+                        question: "Que instrumento Davi tocava?",
+                        options: {
+                            a: "Harpa"
+                        },
+                        correct: "a",
+                        hint: "1 Samuel 16:23",
+                    },
+                    {
+                        question: "Quem subiu em uma árvore para ver Jesus?",
+                        options: {
+                            a: "Zaqueu"
+                        },
+                        correct: "a",
+                        hint: "Lucas 19:4",
+                    },
+                    {
+                        question: "Qual era o nome da mãe de Jesus?",
+                        options: {
+                            a: "Maria"
+                        },
+                        correct: "a",
+                        hint: "Lucas 1:30-31",
+                    },
+                    {
+                        question: "Qual foi o apóstolo que traiu Jesus?",
+                        options: {
+                            a: "Judas Iscariotes"
+                        },
+                        correct: "a",
+                        hint: "Mateus 26:14-16",
+                    },
+                ],
+            },
+                {
+                    id: "medium",
+                    title: "Nível Médio",
+                    questions: [{
+                        question: "Qual profeta foi alimentado por corvos?",
+                        options: {
+                            a: "Elias"
+                        },
+                        correct: "a",
+                        hint: "1 Reis 17:6",
+                    },
+                        {
+                            question: "Qual era a profissão de Pedro antes de se tornar apóstolo?",
+                            options: {
+                                a: "Pescador"
+                            },
+                            correct: "a",
+                            hint: "Mateus 4:18-19",
+                        },
+                        {
+                            question: "Qual livro da Bíblia é uma coleção de cânticos e poemas?",
+                            options: {
+                                a: "Salmos"
+                            },
+                            correct: "a",
+                            hint: "(Título do Livro)",
+                        },
+                        {
+                            question: "Quem foi a única mulher que serviu como juíza de Israel?",
+                            options: {
+                                a: "Débora"
+                            },
+                            correct: "a",
+                            hint: "Juízes 4:4",
+                        },
+                        {
+                            question: "Qual profeta foi jogado em uma cova de leões?",
+                            options: {
+                                a: "Daniel"
+                            },
+                            correct: "a",
+                            hint: "Daniel 6:16",
+                        },
+                        {
+                            question: "Que rei construiu o primeiro Templo em Jerusalém?",
+                            options: {
+                                a: "Salomão"
+                            },
+                            correct: "a",
+                            hint: "1 Reis 6:1",
+                        },
+                        {
+                            question: "Quem foi o primeiro mártir do cristianismo?",
+                            options: {
+                                a: "Estêvão"
+                            },
+                            correct: "a",
+                            hint: "Atos 7:59-60",
+                        },
+                        {
+                            question: "Qual era o nome da esposa de Isaque?",
+                            options: {
+                                a: "Rebeca"
+                            },
+                            correct: "a",
+                            hint: "Gênesis 24:67",
+                        },
+                        {
+                            question: "Quem era o irmão de Moisés que se tornou o primeiro sumo sacerdote?",
+                            options: {
+                                a: "Arão"
+                            },
+                            correct: "a",
+                            hint: "Êxodo 28:1",
+                        },
+                        {
+                            question: "Qual dos doze discípulos duvidou da ressurreição de Jesus até que pudesse ver e tocar em suas feridas?",
+                            options: {
+                                a: "Tomé"
+                            },
+                            correct: "a",
+                            hint: "João 20:24-25",
+                        },
+                        {
+                            question: "Qual o nome da cidade cujas muralhas caíram depois que os israelitas marcharam ao seu redor por sete dias?",
+                            options: {
+                                a: "Jericó"
+                            },
+                            correct: "a",
+                            hint: "Josué 6:20",
+                        },
+                        {
+                            question: "Qual era o nome do profeta que ungiu Davi como rei?",
+                            options: {
+                                a: "Samuel"
+                            },
+                            correct: "a",
+                            hint: "1 Samuel 16:13",
+                        },
+                        {
+                            question: "Quem escreveu o livro de Apocalipse?",
+                            options: {
+                                a: "João"
+                            },
+                            correct: "a",
+                            hint: "Apocalipse 1:1",
+                        },
+                        {
+                            question: "Que rainha judia salvou seu povo de um massacre planejado por Hamã?",
+                            options: {
+                                a: "Ester"
+                            },
+                            correct: "a",
+                            hint: "Ester 7:3-4",
+                        },
+                        {
+                            question: "Quem era a mulher de Ló que se transformou em uma estátua de sal?",
+                            options: {
+                                a: "(O nome dela não é mencionado)"
+                            },
+                            correct: "a",
+                            hint: "Gênesis 19:26",
+                        },
+                        {
+                            question: "De qual tribo de Israel Jesus era descendente?",
+                            options: {
+                                a: "Tribo de Judá"
+                            },
+                            correct: "a",
+                            hint: "Hebreus 7:14",
+                        },
+                        {
+                            question: 'Qual apóstolo era conhecido como "o médico amado"?',
+                            options: {
+                                a: "Lucas"
+                            },
+                            correct: "a",
+                            hint: "Colossenses 4:14",
+                        },
+                        {
+                            question: "Quem era o sogro de Moisés?",
+                            options: {
+                                a: "Jetro (ou Reuel)"
+                            },
+                            correct: "a",
+                            hint: "Êxodo 3:1",
+                        },
+                        {
+                            question: "Qual era o nome do profeta que Deus enviou para repreender o rei Davi após seu pecado com Bate-Seba?",
+                            options: {
+                                a: "Natã"
+                            },
+                            correct: "a",
+                            hint: "2 Samuel 12:1",
+                        },
+                        {
+                            question: "Para qual cidade Jonas foi enviado para pregar, contra a sua vontade inicial?",
+                            options: {
+                                a: "Nínive"
+                            },
+                            correct: "a",
+                            hint: "Jonas 1:2",
+                        },
+                    ],
+                },
+                {
+                    id: "difficult",
+                    title: "Nível Difícil",
+                    questions: [{
+                        question: "Qual profeta foi ordenado a se casar com uma prostituta como um sinal da infidelidade de Israel?",
+                        options: {
+                            a: "Oséias"
+                        },
+                        correct: "a",
+                        hint: "Oséias 1:2-3",
+                    },
+                        {
+                            question: "Em qual ilha o apóstolo João recebeu as visões que deram origem ao livro do Apocalipse?",
+                            options: {
+                                a: "Ilha de Patmos"
+                            },
+                            correct: "a",
+                            hint: "Apocalipse 1:9",
+                        },
+                        {
+                            question: "Qual era o nome do profeta que ungiu tanto Saul quanto Davi como reis?",
+                            options: {
+                                a: "Samuel"
+                            },
+                            correct: "a",
+                            hint: "1 Samuel 10:1; 16:13",
+                        },
+                        {
+                            question: "Quem foi o rei que prometeu sacrificar a primeira coisa que saísse de sua casa ao voltar vitorioso de uma batalha, e foi sua própria filha?",
+                            options: {
+                                a: "Jefté"
+                            },
+                            correct: "a",
+                            hint: "Juízes 11:30-39",
+                        },
+                        {
+                            question: "Qual é o nome do levita que, junto com sua esposa Safira, mentiu ao Espírito Santo sobre o valor de uma propriedade vendida e morreu?",
+                            options: {
+                                a: "Ananias"
+                            },
+                            correct: "a",
+                            hint: "Atos 5:1-10",
+                        },
+                        {
+                            question: "Qual profeta viu uma visão de Deus em um carro celestial com quatro seres viventes e rodas cheias de olhos?",
+                            options: {
+                                a: "Ezequiel"
+                            },
+                            correct: "a",
+                            hint: "Ezequiel 1:4-21",
+                        },
+                        {
+                            question: "Qual dos Evangelhos é conhecido por começar com 'No princípio era o Verbo, e o Verbo estava com Deus, e o Verbo era Deus'?",
+                            options: {
+                                a: "Evangelho de João"
+                            },
+                            correct: "a",
+                            hint: "João 1:1",
+                        },
+                        {
+                            question: "Quem foi o imperador romano durante o período em que Jesus Cristo nasceu?",
+                            options: {
+                                a: "César Augusto"
+                            },
+                            correct: "a",
+                            hint: "Lucas 2:1",
+                        },
+                        {
+                            question: "Qual livro do Antigo Testamento narra a história da rainha Ester?",
+                            options: {
+                                a: "Livro de Ester"
+                            },
+                            correct: "a",
+                            hint: "(Título do livro)",
+                        },
+                        {
+                            question: "Qual era o nome do sumo sacerdote que interrogou Pedro e João após a cura do paralítico na porta do templo?",
+                            options: {
+                                a: "Anás"
+                            },
+                            correct: "a",
+                            hint: "Atos 4:6",
+                        },
+                    ],
+                },
+            ],
+        }
+    }, {
+        id: 'emoji-quiz',
+        name: 'Descubra o Emoji!',
+        data: {
+            title: "Descubra o Emoji!",
+            subtitle: "O que os emojis querem dizer?",
+            font: "'Press Start 2P', cursive",
+            fontSize: "5.5em",
+            actions: { showToolbar: true, showAwnserButtons: false },
+            data: [
+                {
+                    "id": "old-testament-books",
+                    "title": "Livros do Antigo Testamento",
+                    "questions": [
+                        { "question": "🌍👨‍👩‍👧‍👦🐍🍎🌊", "options": { "a": "Gênesis" }, "correct": "a", "hint": "Criação, família, pecado, dilúvio" },
+                        { "question": "🌊🚶‍♂️🚶‍♀️🔥⛰️📜", "options": { "a": "Êxodo" }, "correct": "a", "hint": "Mar Vermelho, êxodo, sarça ardente, Monte Sinai, tábuas da lei" },
+                        { "question": "📖🩸🙏🕊️", "options": { "a": "Levítico" }, "correct": "a", "hint": "Lei, sacrifícios, pureza" },
+                        { "question": "🏕️🚶‍♂️🚶‍♀️🗺️🔢", "options": { "a": "Números" }, "correct": "a", "hint": "Caminhada no deserto, censo, jornada" },
+                        { "question": "🗣️📜✨", "options": { "a": "Deuteronômio" }, "correct": "a", "hint": "Discurso de Moisés, segunda lei, renovação da aliança" },
+                        { "question": "⚔️ Jericho 🎺🔥", "options": { "a": "Josué" }, "correct": "a", "hint": "Batalha de Jericó, trombetas, conquista" },
+                        { "question": "💪🦁🍯✂️", "options": { "a": "Juízes" }, "correct": "a", "hint": "Sansão, juízes, ciclo de desobediência" },
+                        { "question": "🌾❤️👩‍❤️‍👨", "options": { "a": "Rute" }, "correct": "a", "hint": "Campos de cevada, amor, casamento" },
+                        { "question": "👑🐑👂", "options": { "a": "1 Samuel" }, "correct": "a", "hint": "Rei, ovelhas, ouvir a Deus" },
+                        { "question": "👑⚔️🎵", "options": { "a": "2 Samuel" }, "correct": "a", "hint": "Rei Davi, batalhas, salmos" },
+                        { "question": "👑 Solomon 🏛️🔥", "options": { "a": "1 Reis" }, "correct": "a", "hint": "Rei Salomão, templo, divisão do reino" },
+                        { "question": "👑 Elijah 🔥 chariot 🌬️", "options": { "a": "2 Reis" }, "correct": "a", "hint": "Reis, Elias, Eliseu, carro de fogo" },
+                        { "question": "👑 genealogia 📜", "options": { "a": "1 Crônicas" }, "correct": "a", "hint": "Reis, genealogias, história" },
+                        { "question": "👑 temple 🙏", "options": { "a": "2 Crônicas" }, "correct": "a", "hint": "Reis, templo, adoração" },
+                        { "question": "📜 rebuild 🏛️", "options": { "a": "Esdras" }, "correct": "a", "hint": "Esdras, reconstrução do templo" },
+                        { "question": "🧱 rebuild 🛡️", "options": { "a": "Neemias" }, "correct": "a", "hint": "Neemias, reconstrução dos muros" },
+                        { "question": "👑👸📜", "options": { "a": "Ester" }, "correct": "a", "hint": "Rainha Ester, plano de salvação" },
+                        { "question": "😥🌪️🙏✨", "options": { "a": "Jó" }, "correct": "a", "hint": "Sofrimento, provação, fé" },
+                        { "question": "🎵🙏💖🙌", "options": { "a": "Salmos" }, "correct": "a", "hint": "Cânticos, louvor, oração" },
+                        { "question": "💡🦉🗣️", "options": { "a": "Provérbios" }, "correct": "a", "hint": "Sabedoria, conselhos, ensinamentos" },
+                        { "question": "🕰️💨🤔", "options": { "a": "Eclesiastes" }, "correct": "a", "hint": "Tempo, vaidade, reflexão" },
+                        { "question": "❤️🌹👰🤵", "options": { "a": "Cânticos" }, "correct": "a", "hint": "Amor, casamento, poema" },
+                        { "question": "🦁 Lamb 👑 prophecy 📜", "options": { "a": "Isaías" }, "correct": "a", "hint": "Profecia, Messias, leão e cordeiro" },
+                        { "question": "😭💔📜", "options": { "a": "Jeremias" }, "correct": "a", "hint": "Profeta chorão, destruição, lamento" },
+                        { "question": "😭💔🌃", "options": { "a": "Lamentações" }, "correct": "a", "hint": "Tristeza, destruição de Jerusalêm" },
+                        { "question": "👁️🔥🌪️👤", "options": { "a": "Ezequiel" }, "correct": "a", "hint": "Visões, profecias, restauração" },
+                        { "question": "🦁🔥👑", "options": { "a": "Daniel" }, "correct": "a", "hint": "Cova dos leões, fornalha ardente, reinos" },
+                        { "question": "❤️💔👰", "options": { "a": "Oséias" }, "correct": "a", "hint": "Amor de Deus, infidelidade" },
+                        { "question": "🦗🌍🔥", "options": { "a": "Joel" }, "correct": "a", "hint": "Pragas, dia do Senhor" },
+                        { "question": "🐑⚖️🗣️", "options": { "a": "Amós" }, "correct": "a", "hint": "Pastor, justiça social" },
+                        { "question": "⛰️⚔️", "options": { "a": "Obadias" }, "correct": "a", "hint": "Juízo sobre Edom" },
+                        { "question": "🐳🌊🙏", "options": { "a": "Jonas" }, "correct": "a", "hint": "Baleia, arrependimento" },
+                        { "question": "⚖️👣🙏", "options": { "a": "Miquéias" }, "correct": "a", "hint": "Justiça, andar com Deus" },
+                        { "question": "🌊🔥⚔️", "options": { "a": "Naum" }, "correct": "a", "hint": "Juízo sobre Nínive" },
+                        { "question": "🤔🙏❓", "options": { "a": "Habacuque" }, "correct": "a", "hint": "Perguntas a Deus, fé" },
+                        { "question": "🌍🔥🙏", "options": { "a": "Sofonias" }, "correct": "a", "hint": "Dia do Senhor, juízo" },
+                        { "question": "🏛️ rebuild 🙏", "options": { "a": "Ageu" }, "correct": "a", "hint": "Reconstrução do templo" },
+                        { "question": "🐎👑🙏", "options": { "a": "Zacarias" }, "correct": "a", "hint": "Visões, Messias" },
+                        { "question": "🙏🔥🎁", "options": { "a": "Malaquias" }, "correct": "a", "hint": "Sacrifícios, dízimos, dia do Senhor" }
+                    ]
+                },
+                {
+                    "id": "new-testament-books",
+                    "title": "Livros do Novo Testamento",
+                    "questions": [
+                        { "question": "👶👑🗣️📖", "options": { "a": "Mateus" }, "correct": "a", "hint": "Nascimento de Jesus, Rei, sermão da montanha" },
+                        { "question": "🦁👑🏃‍♂️", "options": { "a": "Marcos" }, "correct": "a", "hint": "Jesus servo, ação, milagres" },
+                        { "question": "👨‍⚕️🌍🙏📖", "options": { "a": "Lucas" }, "correct": "a", "hint": "Jesus homem, graça, parábolas" },
+                        { "question": "❤️🌟📖🔥", "options": { "a": "João" }, "correct": "a", "hint": "Jesus Deus, luz, amor" },
+                        { "question": "🔥🌬️ spreading the word 🌎", "options": { "a": "Atos" }, "correct": "a", "hint": "Espírito Santo, Igreja, missões" },
+                        { "question": "⚖️✝️🙏", "options": { "a": "Romanos" }, "correct": "a", "hint": "Justificação pela fé, salvação" },
+                        { "question": "❤️⛪🗣️", "options": { "a": "1 Coríntios" }, "correct": "a", "hint": "Amor, dons espirituais, divisões" },
+                        { "question": "💪💔🙏", "options": { "a": "2 Coríntios" }, "correct": "a", "hint": "Fraqueza, sofrimento, consolo" },
+                        { "question": "⛓️✝️ libertad", "options": { "a": "Gálatas" }, "correct": "a", "hint": "Liberdade em Cristo, lei e graça" },
+                        { "question": "💒👑🛡️", "options": { "a": "Efésios" }, "correct": "a", "hint": "Igreja, armadura de Deus, unidade" },
+                        { "question": "😁🙏💖", "options": { "a": "Filipenses" }, "correct": "a", "hint": "Alegria, contentamento, unidade" },
+                        { "question": "👑🌟✝️", "options": { "a": "Colossenses" }, "correct": "a", "hint": "Supremacia de Cristo, nova vida" },
+                        { "question": "✝️💨🙏", "options": { "a": "1 Tessalonicenses" }, "correct": "a", "hint": "Volta de Jesus, esperança" },
+                        { "question": "✝️💨🕰️", "options": { "a": "2 Tessalonicenses" }, "correct": "a", "hint": "Volta de Jesus, sinais, paciência" },
+                        { "question": "젊은 목사 📚👨‍🏫", "options": { "a": "1 Timóteo" }, "correct": "a", "hint": "Jovem pastor, liderança, doutrina" },
+                        { "question": "📜⚔️🏃‍♂️", "options": { "a": "2 Timóteo" }, "correct": "a", "hint": "Combate da fé, perseverança" },
+                        { "question": "👨‍🏫⛪✨", "options": { "a": "Tito" }, "correct": "a", "hint": "Liderança, boas obras" },
+                        { "question": "⛓️🤝❤️", "options": { "a": "Filemom" }, "correct": "a", "hint": "Escravo, perdão, reconciliação" },
+                        { "question": "👑✝️🙏", "options": { "a": "Hebreus" }, "correct": "a", "hint": "Jesus sumo sacerdote, superioridade de Cristo" },
+                        { "question": "🚶‍♂️🗣️🙏", "options": { "a": "Tiago" }, "correct": "a", "hint": "Fé e obras, sabedoria prática" },
+                        { "question": "✝️🔥🌍", "options": { "a": "1 Pedro" }, "correct": "a", "hint": "Sofrimento, esperança, fé" },
+                        { "question": "🚨📖🌟", "options": { "a": "2 Pedro" }, "correct": "a", "hint": "Falsos mestres, profecia, segunda vinda" },
+                        { "question": "❤️💡✝️", "options": { "a": "1 João" }, "correct": "a", "hint": "Amor, luz, verdade" },
+                        { "question": "🏡✝️", "options": { "a": "2 João" }, "correct": "a", "hint": "Caminhar na verdade e amor" },
+                        { "question": "🤝❤️", "options": { "a": "3 João" }, "correct": "a", "hint": "Hospitalidade, cooperadores" },
+                        { "question": "🛡️✝️", "options": { "a": "Judas" }, "correct": "a", "hint": "Defender a fé, alertar contra falsos mestres" },
+                        { "question": "🌍🔥😇👑", "options": { "a": "Apocalipse" }, "correct": "a", "hint": "Fim dos tempos, visões, vitória de Cristo" }
+                    ]
+                },
+                {
+                    "id": "bible-stories",
+                    "title": "Histórias da Bíblia",
+                    "questions": [
+                        { "question": "🌍☀️🌙⭐️🐠🦅🌳🐄👨‍👩‍👧‍👦", "options": { "a": "A Criação" }, "correct": "a", "hint": "Deus cria o mundo, o homem e a mulher em sete dias" },
+                        { "question": "🌳🐍🍎👨‍👩‍👧‍👦 expulsion 😭", "options": { "a": "Adão e Eva e a Queda" }, "correct": "a", "hint": "A primeira desobediência, expulsão do Jardim do Éden" },
+                        { "question": "👨‍🌾🐑🩸🔪", "options": { "a": "Caim e Abel" }, "correct": "a", "hint": "O primeiro assassinato, inveja e sacrifício" },
+                        { "question": "🌧️🌊🛶🐘🦒🐅🕊️🌈", "options": { "a": "A Arca de Noé" }, "correct": "a", "hint": "O dilúvio, salvação da família de Noé e dos animais" },
+                        { "question": "🏗️ Babel 🗣️🤔", "options": { "a": "A Torre de Babel" }, "correct": "a", "hint": "Tentativa de construir uma torre até o céu, confusão de línguas" },
+                        { "question": "👨‍👦🔪🐑🙏", "options": { "a": "Abraão e o Sacrifício de Isaque" }, "correct": "a", "hint": "Fé e obediência de Abraão, provisão de Deus" },
+                        { "question": "🌈🧥💭🌾👑🌽👨‍👩‍👦‍👦", "options": { "a": "José e os Sonhos do Egito" }, "correct": "a", "hint": "José tem sonhos, interpreta os sonhos do Faraó sobre as vacas e o trigo, administra o Egito durante a fome, e reencontra sua família" },
+                        { "question": "🔥🌳🗣️🙏", "options": { "a": "Moisés e a Sarça Ardente" }, "correct": "a", "hint": "Deus chama Moisés para libertar o povo" },
+                        { "question": "🐸🩸🦟蝇🐄🔥🧊🦗 darkness 💀", "options": { "a": "As Dez Pragas do Egito" }, "correct": "a", "hint": "Juízos de Deus sobre o Egito para libertar Israel" },
+                        { "question": "🌊🚶‍♂️🚶‍♀️🌊 Pharaoh 🐎🌊", "options": { "a": "Abertura do Mar Vermelho" }, "correct": "a", "hint": "Deus abre o mar para o povo passar e fecha sobre os egípcios" },
+                        { "question": "⛰️📜🙏", "options": { "a": "Os Dez Mandamentos" }, "correct": "a", "hint": "Deus entrega suas leis a Moisés no Monte Sinai" },
+                        { "question": "🐑🍶🎺⚔️💪", "options": { "a": "Gideão e o Exército Pequeno" }, "correct": "a", "hint": "Vitória de Israel com poucos homens, fé em Deus" },
+                        { "question": "💪🦁🍯✂️😩", "options": { "a": "Sansão e Dalila" }, "correct": "a", "hint": "Força de Sansão, fraqueza por Dalila, queda e redenção" },
+                        { "question": "👦🐑🪨 slingshot ⚔️巨人", "options": { "a": "Davi e Golias" }, "correct": "a", "hint": "O jovem Davi derrota o gigante Golias com uma funda" },
+                        { "question": "👑 Solomon 👶⚖️💡", "options": { "a": "A Sabedoria de Salomão" }, "correct": "a", "hint": "Salomão pede sabedoria a Deus, julgamento famoso" },
+                        { "question": "🔥 altar 🙏🌧️", "options": { "a": "Elias e os Profetas de Baal" }, "correct": "a", "hint": "Confronto no Monte Carmelo, Deus envia fogo do céu" },
+                        { "question": "⛵️🌊🐳🙏🗣️", "options": { "a": "Jonas e a Baleia" }, "correct": "a", "hint": "Jonas foge de Deus, é engolido por um grande peixe, se arrepende e prega" },
+                        { "question": "🦁 den 🙏😇", "options": { "a": "Daniel na Cova dos Leões" }, "correct": "a", "hint": "Daniel é salvo dos leões por sua fé" },
+                        { "question": "🌟👶🐑 stable", "options": { "a": "Jesus Nasce" }, "correct": "a", "hint": "O nascimento de Jesus em Belém" },
+                        { "question": "🌊🚶‍♂️⛵️🙏", "options": { "a": "Jesus Anda sobre as Águas" }, "correct": "a", "hint": "Jesus caminha sobre o mar e Pedro tenta imitá-lo" },
+                        { "question": "🍞🐟 Crowd 🖐️✨", "options": { "a": "A Multiplicação dos Pães e Peixes" }, "correct": "a", "hint": "Jesus alimenta milhares com poucos alimentos" },
+                        { "question": "🐖💰🏡😔➡️🎉🥳", "options": { "a": "A Parábola do Filho Pródigo" }, "correct": "a", "hint": "Filho que gasta tudo, se arrepende e é recebido com festa pelo pai" },
+                        { "question": "🤕 Samaritan ❤️🩹🙏", "options": { "a": "A Parábola do Bom Samaritano" }, "correct": "a", "hint": "Ajuda ao próximo, amor ao próximo sem preconceitos" },
+                        { "question": "👁️➡️✨🙏", "options": { "a": "Jesus Cura o Cego de Nascença" }, "correct": "a", "hint": "Jesus restaura a visão de um homem cego de nascença" },
+                        { "question": "🪦 Lazarus 🗣️✨🙏", "options": { "a": "A Ressurreição de Lázaro" }, "correct": "a", "hint": "Jesus ressuscita Lázaro dos mortos" },
+                        { "question": "🍷🍞 discípulos 🙏", "options": { "a": "A Última Ceia" }, "correct": "a", "hint": "Jesus partilha a última refeição com seus discípulos" },
+                        { "question": "✝️👑💔😭", "options": { "a": "A Crucificação de Jesus" }, "correct": "a", "hint": "Jesus morre na cruz por nossos pecados" },
+                        { "question": "🪦🌅😇✨🙌", "options": { "a": "A Ressurreição de Jesus" }, "correct": "a", "hint": "Jesus ressuscita dos mortos ao terceiro dia" },
+                        { "question": "🔥🌬️🗣️🌎🙏", "options": { "a": "Pentecostes" }, "correct": "a", "hint": "O Espírito Santo desce sobre os apóstolos, início da Igreja" }
+                    ]
+                }
+            ]
+        }
+    }
+];
