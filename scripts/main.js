@@ -1,6 +1,6 @@
 // Importa as funcionalidades dos outros módulos
-import {getProjectName, getQuizDataPath} from './utils.js';
-import { loadGameData, saveGameProgress } from './storage.js';
+import {getProjectName, getQuizDataPath, getTeamsDataPath} from './utils.js';
+import { loadGameData, saveGameProgress, loadTeamsData, saveTeamsData } from './storage.js';
 import { startObstacleSpawning, showDarkScreen, hideDarkScreen } from './mario-animations.js';
 
 // Variável que irá armazenar os dados do quiz (carregados do localStorage ou padrão)
@@ -24,6 +24,17 @@ let QUIZ_OPTIONS_DATA = [];
 
 // Caminho para o arquivo JSON do quiz
 const pathData = getQuizDataPath(); // Variável atualizada aqui
+const teamsDataPath = getTeamsDataPath(); // Caminho para o arquivo JSON de equipes
+
+// Variáveis para gerenciamento de equipes
+// Adicione 'color' com um valor padrão para novas equipes
+let teams = []; // Array de objetos de equipe: [{ id: 'uuid', name: 'Team A', score: 0, maxScore: 100, color: '#007bff' }]
+let currentTeamId = null; // ID da equipe atualmente selecionada
+let editingTeamId = null; // ID da equipe que está sendo editada no modal
+
+// Variável para rastrear a tela anterior
+let previousScreenId = "quiz-selection-screen"; // Define um padrão inicial
+
 
 // Referências aos elementos HTML (agora obtidas no DOMContentLoaded)
 let quizSelectionScreen;
@@ -34,6 +45,7 @@ let startScreen;
 let levelSelectionScreen;
 let questionSelectionScreen;
 let questionDisplayScreen;
+let scoreboardScreen;
 
 let startButton;
 let levelOptionsContainer;
@@ -44,7 +56,10 @@ let globalBackButton;
 let answerButtonToolbar;
 let answerCheckButtonToolbar;
 let hintButtonToolbar;
-let clearProgressButton; // Adicionada referência ao novo botão
+let clearProgressButton;
+let showScoreboardButton;
+let backToMainMenuButton;
+
 let themeToggleCheckbox;
 
 let fontSizeSlider;
@@ -69,6 +84,26 @@ let optionButtons;
 
 let selectedOption = null;
 
+// Elementos da tela de placar
+let newTeamNameInput;
+let addTeamButton;
+let teamsListContainer;
+// Removida a referência a teamSelectQuestion, pois não será mais usado na tela de perguntas
+// let teamSelectQuestion;
+
+// Elementos do novo diálogo de atualização manual
+let manualScoreDialog;
+let manualScoreDialogTitle;
+let manualScoreTeamName;
+let currentXpInput;
+let maxXpInput;
+let colorSelect; // Novo seletor de cor
+let hexColorInput; // Novo input para HEX
+let saveManualScoreButton;
+let cancelManualScoreButton;
+let toggleAnswerButtonsSwitch; // Referência ao novo switch
+
+
 /**
  * Obtém todas as referências DOM. Chamado no DOMContentLoaded.
  */
@@ -81,6 +116,7 @@ function getDOMElements() {
     levelSelectionScreen = document.getElementById("level-selection-screen");
     questionSelectionScreen = document.getElementById("question-selection-screen");
     questionDisplayScreen = document.getElementById("question-display-screen");
+    scoreboardScreen = document.getElementById("scoreboard-screen");
 
     startButton = document.getElementById("start-button");
     levelOptionsContainer = document.getElementById("level-options-container");
@@ -91,7 +127,10 @@ function getDOMElements() {
     answerButtonToolbar = document.getElementById("answer-button-toolbar");
     answerCheckButtonToolbar = document.getElementById("answer-check-button-toolbar");
     hintButtonToolbar = document.getElementById("hint-button-toolbar");
-    clearProgressButton = document.getElementById("clear-progress-button"); // Obtendo a referência do novo botão
+    clearProgressButton = document.getElementById("clear-progress-button");
+    showScoreboardButton = document.getElementById("show-scoreboard-button");
+    backToMainMenuButton = document.getElementById("back-to-main-menu-button");
+
     themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
 
     fontSizeSlider = document.getElementById("font-size-slider");
@@ -113,6 +152,25 @@ function getDOMElements() {
 
     currentQuestionElement = document.getElementById("current-question");
     optionButtons = document.querySelectorAll(".option-button");
+
+    // Novas referências para elementos de equipe
+    newTeamNameInput = document.getElementById("new-team-name");
+    addTeamButton = document.getElementById("add-team-button");
+    teamsListContainer = document.getElementById("teams-list-container");
+    // Removida a referência a teamSelectQuestion, pois não será mais usado na tela de perguntas
+    // teamSelectQuestion = document.getElementById("team-select-question");
+
+    // Referências para o novo diálogo de atualização manual
+    manualScoreDialog = document.getElementById("manual-score-dialog");
+    manualScoreDialogTitle = document.getElementById("manual-score-dialog-title");
+    manualScoreTeamName = document.getElementById("manual-score-team-name");
+    currentXpInput = document.getElementById("current-xp-input");
+    maxXpInput = document.getElementById("max-xp-input");
+    colorSelect = document.getElementById("color-select"); // Obtém a referência do select de cor
+    hexColorInput = document.getElementById("hex-color-input"); // Obtém a referência do input de HEX
+    saveManualScoreButton = document.getElementById("save-manual-score-button");
+    cancelManualScoreButton = document.getElementById("cancel-manual-score-button");
+    toggleAnswerButtonsSwitch = document.getElementById("toggle-answer-buttons"); // Obtém a referência do switch
 }
 
 
@@ -123,24 +181,35 @@ function getDOMElements() {
  * @param {string} screenId O ID da tela a ser exibida.
  */
 function showScreen(screenId) {
+    // Esconde todas as telas
     document.querySelectorAll(".screen").forEach((screen) => {
+        // Antes de esconder a tela atual, salva seu ID como a tela anterior
+        if (screen.classList.contains("active")) {
+            previousScreenId = screen.id;
+        }
         screen.classList.remove("active");
     });
+    // Ativa a nova tela
     document.getElementById(screenId).classList.add("active");
 
     // Esconde a toolbar por padrão em todas as telas
     gameToolbar.classList.add("hidden");
     hintDialog.close();
     feedbackDialog.close();
+    manualScoreDialog.close(); // Fecha o diálogo de score manual
     hideDarkScreen();
 
-    // Esconde o slider de fonte e o botão de limpar progresso por padrão em todas as telas
+    // Esconde o slider de fonte e os botões de gerenciamento de progresso/placar por padrão
     fontSizeSliderContainer.classList.add('hidden');
-    clearProgressButton.classList.add("hidden"); // Esconde o botão de limpar progresso por padrão
+    clearProgressButton.classList.add("hidden");
+    showScoreboardButton.classList.add("hidden");
+    toggleAnswerButtonsSwitch.parentElement.classList.add("hidden"); // Esconde o switch por padrão
 
     // Garante que as opções de resposta estejam visíveis por padrão,
     // e serão ocultadas ou não dependendo da lógica abaixo.
     currentQuestionOptions.classList.remove("hidden");
+    // Removida a linha que mostra/esconde teamSelectQuestion, pois ele não está mais na tela de perguntas
+    // teamSelectQuestion.classList.add("hidden"); // Esconde o seletor de equipe por padrão
 
     // Lógica de visibilidade da toolbar e botões específicos por tela
     if (screenId === "question-display-screen") {
@@ -149,6 +218,8 @@ function showScreen(screenId) {
         globalBackButton.classList.remove("hidden");
         hintButtonToolbar.classList.remove("hidden");
         fontSizeSliderContainer.classList.remove('hidden'); // Mostra o slider apenas na tela de pergunta
+        showScoreboardButton.classList.add("hidden"); // Oculta o botão do placar na tela de perguntas
+        toggleAnswerButtonsSwitch.parentElement.classList.remove("hidden"); // Mostra o switch na tela de perguntas
 
         // Lógica para showAwnserButtons e currentQuestionOptions
         if (quizData && quizData.actions) {
@@ -175,7 +246,7 @@ function showScreen(screenId) {
         answerCheckButtonToolbar.classList.add("hidden");
         hintButtonToolbar.classList.add("hidden");
         questionDisplayScreen.classList.remove('no-answer-options');
-        // clearProgressButton.classList.remove("hidden"); // Removido daqui
+        showScoreboardButton.classList.remove("hidden"); // Mostra o botão do placar
     } else if (screenId === "question-selection-screen") {
         gameToolbar.classList.remove("hidden");
         globalBackButton.dataset.targetScreen = "level-selection-screen";
@@ -184,7 +255,7 @@ function showScreen(screenId) {
         answerCheckButtonToolbar.classList.add("hidden");
         hintButtonToolbar.classList.add("hidden");
         questionDisplayScreen.classList.remove('no-answer-options');
-        // clearProgressButton.classList.remove("hidden"); // Removido daqui
+        showScoreboardButton.classList.remove("hidden"); // Mostra o botão do placar
     } else if (screenId === "quiz-selection-screen") {
         gameToolbar.classList.add("hidden");
         globalBackButton.classList.add("hidden");
@@ -192,7 +263,19 @@ function showScreen(screenId) {
         answerCheckButtonToolbar.classList.add("hidden");
         hintButtonToolbar.classList.add("hidden");
         questionDisplayScreen.classList.remove('no-answer-options');
-    } else { // start-screen
+        showScoreboardButton.classList.add("hidden"); // Esconde o botão do placar
+    } else if (screenId === "scoreboard-screen") { // Lógica para a tela de placar
+        gameToolbar.classList.add("hidden"); // Esconde a toolbar na tela de placar
+        globalBackButton.classList.add("hidden"); // Esconde o botão de voltar global
+        answerButtonToolbar.classList.add("hidden");
+        answerCheckButtonToolbar.classList.add("hidden");
+        hintButtonToolbar.classList.add("hidden");
+        clearProgressButton.classList.add("hidden");
+        showScoreboardButton.classList.add("hidden");
+        questionDisplayScreen.classList.remove('no-answer-options');
+        // O botão 'back-to-main-menu-button' é visível por padrão no HTML para esta tela
+    }
+    else { // start-screen
         gameToolbar.classList.remove('hidden');
         globalBackButton.dataset.targetScreen = "quiz-selection-screen";
         globalBackButton.classList.remove("hidden");
@@ -201,6 +284,7 @@ function showScreen(screenId) {
         hintButtonToolbar.classList.add('hidden');
         questionDisplayScreen.classList.remove('no-answer-options');
         clearProgressButton.classList.remove("hidden"); // Mostrar apenas na start-screen
+        showScoreboardButton.classList.remove("hidden"); // Mostra o botão do placar
     }
 
     if (quizData && quizData.actions && !quizData.actions.showToolbar) {
@@ -309,15 +393,10 @@ function loadQuestion(levelId, index) {
         }
     });
 
-    if (!quizData.actions.showAwnserButtons) {
-        answerButtonToolbar.disabled = true;
-        answerCheckButtonToolbar.disabled = false;
-        optionButtons.forEach(button => button.disabled = true);
-    } else {
-        answerButtonToolbar.disabled = true;
-        answerCheckButtonToolbar.disabled = true;
-        optionButtons.forEach(button => button.disabled = false);
-    }
+    // Atualiza o estado do switch e dos botões de resposta
+    toggleAnswerButtonsSwitch.checked = quizData.actions.showAwnserButtons;
+    updateAnswerButtonVisibility(quizData.actions.showAwnserButtons);
+
 
     hintButtonToolbar.classList.remove("hidden");
     hintButtonToolbar.disabled = false;
@@ -352,6 +431,11 @@ function selectOption(selectedButton) {
  */
 function checkAnswer() {
     if (!selectedOption) return;
+    // Removido o alerta e a verificação de currentTeamId aqui, pois a pontuação é manual
+    // if (!currentTeamId) {
+    //     alert("Por favor, selecione uma equipe antes de responder!");
+    //     return;
+    // }
 
     const selectedLevelObject = quizData.data.find(
         (level) => level.id === currentLevel
@@ -369,6 +453,8 @@ function checkAnswer() {
         }
         answeredQuestions[currentLevel][currentQuestionIndex] = true;
         saveGameProgress(answeredQuestions, quizData.id); // quizData.id garante que é salvo para o quiz específico
+        // Removida a chamada para updateTeamScore aqui, pois a pontuação é manual
+        // updateTeamScore(currentTeamId, 1); // Adiciona 1 ponto à equipe atual
     } else {
         feedbackDialogTitle.textContent = "Ops!";
         feedbackDialogMessage.textContent = "Tente novamente!";
@@ -391,6 +477,12 @@ function checkAnswer() {
  * Usado quando quizData.actions.showAwnserButtons é false.
  */
 function checkCorrectAnswer() {
+    // Removido o alerta e a verificação de currentTeamId aqui, pois a pontuação é manual
+    // if (!currentTeamId) {
+    //     alert("Por favor, selecione uma equipe antes de marcar a resposta!");
+    //     return;
+    // }
+
     const selectedLevelObject = quizData.data.find(
         (level) => level.id === currentLevel
     );
@@ -416,6 +508,8 @@ function checkCorrectAnswer() {
     }
     answeredQuestions[currentLevel][currentQuestionIndex] = true;
     saveGameProgress(answeredQuestions, quizData.id); // quizData.id garante que é salvo para o quiz específico
+    // Removida a chamada para updateTeamScore aqui, pois a pontuação é manual
+    // updateTeamScore(currentTeamId, 1); // Adiciona 1 ponto à equipe atual
 
     answerButtonToolbar.disabled = true;
     answerCheckButtonToolbar.disabled = true;
@@ -490,6 +584,218 @@ function renderLevelSelectionButtons() {
 }
 
 /**
+ * Renderiza a lista de equipes no placar.
+ */
+function renderTeamScoreboard() {
+    teamsListContainer.innerHTML = "";
+    if (teams.length === 0) {
+        teamsListContainer.innerHTML = "<p>Nenhuma equipe adicionada ainda.</p>";
+        return;
+    }
+
+    // Ordena as equipes pela pontuação em ordem decrescente
+    const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
+
+    sortedTeams.forEach(team => {
+        const teamItem = document.createElement("div");
+        teamItem.classList.add("team-item");
+        teamItem.dataset.teamId = team.id; // Adiciona o ID da equipe ao item
+        teamItem.innerHTML = `
+            <span class="team-name">${team.name}</span>
+            <div class="team-progress-bar-container">
+                <div class="team-progress-bar" style="width: ${Math.min(100, (team.score / team.maxScore) * 100)}%; background-color: ${team.color || 'var(--mario-green)'};"></div>
+                <div class="team-score-text">${team.score} / ${team.maxScore} XP</div>
+            </div>
+            <button class="delete-team-button" data-team-id="${team.id}">X</button>
+        `;
+        teamsListContainer.appendChild(teamItem);
+    });
+
+    // Adiciona event listeners para os botões de exclusão
+    document.querySelectorAll(".delete-team-button").forEach(button => {
+        button.addEventListener("click", (event) => {
+            event.stopPropagation(); // Impede que o clique na lixeira acione o clique na barra de progresso
+            const teamIdToDelete = event.target.dataset.teamId;
+            if (confirm(`Tem certeza que deseja remover a equipe "${teams.find(t => t.id === teamIdToDelete).name}"?`)) {
+                teams = teams.filter(team => team.id !== teamIdToDelete);
+                // currentTeamId não é mais relevante para seleção na tela de perguntas, mas pode ser para outras lógicas
+                // Se a equipe ativa for removida, limpa o currentTeamId
+                if (currentTeamId === teamIdToDelete) {
+                    currentTeamId = null;
+                }
+                saveTeamsData(teams, currentTeamId); // Salva as equipes atualizadas
+                renderTeamScoreboard(); // Re-renderiza o placar
+                // populateTeamSelector(); // Não é mais necessário aqui, pois o seletor não está na tela de perguntas
+                alert("Equipe removida com sucesso!");
+            }
+        });
+    });
+
+    // Adiciona event listeners para clicar na barra de progresso
+    document.querySelectorAll(".team-item").forEach(item => {
+        item.addEventListener("click", (event) => {
+            const teamIdToEdit = event.currentTarget.dataset.teamId;
+            const teamToEdit = teams.find(team => team.id === teamIdToEdit);
+            if (teamToEdit) {
+                editingTeamId = teamIdToEdit; // Define a equipe que está sendo editada
+                showManualScoreInputModal(teamToEdit);
+            }
+        });
+    });
+}
+
+/**
+ * Adiciona uma nova equipe.
+ */
+function addTeam() {
+    const teamName = newTeamNameInput.value.trim();
+    if (teamName) {
+        if (teams.some(team => team.name.toLowerCase() === teamName.toLowerCase())) {
+            alert("Já existe uma equipe com este nome!");
+            return;
+        }
+        const newTeam = {
+            id: crypto.randomUUID(), // Gera um ID único para a equipe
+            name: teamName,
+            score: 0,
+            maxScore: 100, // Valor inicial para a pontuação máxima
+            color: '#4CAF50' // Cor padrão para novas equipes (verde Mario)
+        };
+        teams.push(newTeam);
+        newTeamNameInput.value = ""; // Limpa o input
+        saveTeamsData(teams, currentTeamId); // Salva as equipes atualizadas
+        renderTeamScoreboard(); // Atualiza o placar
+        // populateTeamSelector(); // Não é mais necessário aqui, pois o seletor não está na tela de perguntas
+        alert(`Equipe "${teamName}" adicionada!`);
+    } else {
+        alert("Por favor, digite um nome para a equipe.");
+    }
+}
+
+/**
+ * Atualiza a pontuação de uma equipe.
+ * @param {string} teamId O ID da equipe a ser atualizada.
+ * @param {number} points Os pontos a serem adicionados.
+ */
+function updateTeamScore(teamId, points) {
+    const teamIndex = teams.findIndex(team => team.id === teamId);
+    if (teamIndex !== -1) {
+        teams[teamIndex].score = Math.max(0, teams[teamIndex].score + points); // Garante que a pontuação não seja negativa
+        saveTeamsData(teams, currentTeamId); // Salva as equipes atualizadas
+        renderTeamScoreboard(); // Atualiza o placar
+    } else {
+        console.error("Equipe não encontrada para atualizar pontuação:", teamId);
+    }
+}
+
+/**
+ * Exibe o diálogo para atualização manual de pontuação.
+ * @param {object} team O objeto da equipe a ser editada.
+ */
+function showManualScoreInputModal(team) {
+    manualScoreDialogTitle.textContent = `Atualizar Pontuação da Equipe:`;
+    manualScoreTeamName.textContent = team.name;
+    currentXpInput.value = team.score;
+    maxXpInput.value = team.maxScore;
+
+    // Define a cor no seletor ou no campo HEX
+    const commonColors = Array.from(colorSelect.options).map(opt => opt.value);
+    if (commonColors.includes(team.color)) {
+        colorSelect.value = team.color;
+        hexColorInput.value = ''; // Limpa o campo HEX se a cor for comum
+    } else {
+        colorSelect.value = ''; // Seleciona a opção vazia se a cor não for comum
+        hexColorInput.value = team.color; // Exibe o HEX
+    }
+
+    manualScoreDialog.showModal();
+}
+
+/**
+ * Atualiza a pontuação e a pontuação máxima de uma equipe manualmente.
+ */
+function updateTeamScoreAndMaxManually() {
+    const teamIndex = teams.findIndex(team => team.id === editingTeamId);
+    if (teamIndex === -1) {
+        alert("Erro: Equipe não encontrada para atualização manual.");
+        return;
+    }
+
+    const newScore = parseInt(currentXpInput.value, 10);
+    const newMaxScore = parseInt(maxXpInput.value, 10);
+    let newColor = colorSelect.value; // Pega a cor do select
+
+    // Se o select não foi usado (valor vazio), tenta pegar do campo HEX
+    if (!newColor && hexColorInput.value.trim()) {
+        const hex = hexColorInput.value.trim();
+        // Validação básica de HEX (opcional, pode ser mais robusta)
+        if (/^#([0-9A-F]{3}){1,2}$/i.test(hex)) {
+            newColor = hex;
+        } else {
+            alert("Por favor, insira um valor HEX válido (ex: #FF00FF).");
+            return;
+        }
+    } else if (!newColor) {
+        // Se nem o select nem o HEX foram preenchidos, usa a cor atual ou um padrão
+        newColor = teams[teamIndex].color || '#4CAF50';
+    }
+
+
+    if (isNaN(newScore) || newScore < 0) {
+        alert("Por favor, insira um valor de XP atual válido (número positivo).");
+        return;
+    }
+    if (isNaN(newMaxScore) || newMaxScore <= 0) {
+        alert("Por favor, insira um valor de XP máximo válido (número positivo maior que zero).");
+        return;
+    }
+    if (newScore > newMaxScore) {
+        alert("A pontuação atual não pode ser maior que a pontuação máxima.");
+        return;
+    }
+
+    teams[teamIndex].score = newScore;
+    teams[teamIndex].maxScore = newMaxScore;
+    teams[teamIndex].color = newColor; // Salva a nova cor
+    saveTeamsData(teams, currentTeamId);
+    renderTeamScoreboard();
+    manualScoreDialog.close();
+    // Removido o alert de sucesso
+}
+
+
+/**
+ * Popula o seletor de equipe na tela de pergunta.
+ * Esta função agora é responsável apenas por popular o seletor de equipe,
+ * que pode ser usado em outras telas se necessário.
+ * Não é mais chamada na loadQuestion, pois o seletor foi removido da tela de perguntas.
+ */
+function populateTeamSelector() {
+    // Verifica se o elemento existe antes de tentar manipulá-lo
+    // Esta função não é mais usada para popular o seletor de equipe na tela de perguntas,
+    // pois o seletor foi removido de lá.
+    // No entanto, é mantida caso seja necessário popular um seletor em outra parte da UI.
+    // Se teamSelectQuestion for null (porque o elemento foi removido do HTML), esta verificação evita erros.
+    if (document.getElementById("team-select-question")) { // Usar uma verificação mais robusta aqui
+        const teamSelectQuestionElement = document.getElementById("team-select-question");
+        teamSelectQuestionElement.innerHTML = '<option value="">Selecione uma Equipe</option>';
+        teams.forEach(team => {
+            const option = document.createElement('option');
+            option.value = team.id;
+            option.textContent = team.name;
+            teamSelectQuestionElement.appendChild(option);
+        });
+        // Define a equipe selecionada se houver uma
+        if (currentTeamId && teams.some(team => team.id === currentTeamId)) {
+            teamSelectQuestionElement.value = currentTeamId;
+        } else {
+            currentTeamId = null; // Garante que currentTeamId seja nulo se a equipe não existir
+        }
+    }
+}
+
+
+/**
  * Configura a tela de seleção de quiz.
  * Popula o combobox e gerencia o carregamento do quiz.
  */
@@ -513,6 +819,7 @@ function setupQuizSelectionScreen() {
     levelSelectionScreen.classList.remove('active');
     questionSelectionScreen.classList.remove('active');
     questionDisplayScreen.classList.remove('active');
+    scoreboardScreen.classList.remove('active'); // Garante que a tela de placar também está oculta
 
     loadQuizButton.addEventListener('click', () => {
         const selectedQuizId = quizSelect.value;
@@ -573,10 +880,38 @@ function initializeGame() {
 
     fontSizeSlider.value = currentFontSize;
     fontSizeValueSpan.textContent = `${parseFloat(currentFontSize).toFixed(1)}`;
+
+    // populateTeamSelector(); // Não é mais necessário aqui, pois o seletor não está na tela de perguntas
 }
+
+/**
+ * Atualiza a visibilidade dos botões de resposta e opções com base no estado do switch.
+ * @param {boolean} showButtons Se true, mostra os botões de resposta e opções. Se false, oculta.
+ */
+function updateAnswerButtonVisibility(showButtons) {
+    if (showButtons) {
+        answerButtonToolbar.classList.remove("hidden");
+        answerCheckButtonToolbar.classList.add("hidden");
+        currentQuestionOptions.classList.remove("hidden");
+        questionDisplayScreen.classList.remove('no-answer-options');
+        optionButtons.forEach(button => button.disabled = false); // Re-habilita as opções
+    } else {
+        answerButtonToolbar.classList.add("hidden");
+        answerCheckButtonToolbar.classList.remove("hidden");
+        currentQuestionOptions.classList.add("hidden");
+        questionDisplayScreen.classList.add('no-answer-options');
+        optionButtons.forEach(button => button.disabled = true); // Desabilita as opções
+    }
+    answerButtonToolbar.disabled = true; // Sempre desabilita o botão "Responder" até uma opção ser selecionada
+    answerCheckButtonToolbar.disabled = false; // "Marcar Correta" sempre habilitado se visível
+}
+
 
 document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async' aqui
     getDOMElements(); // Obtém as referências DOM quando o DOM estiver carregado
+    const { teams: loadedTeams, currentTeamId: loadedCurrentTeamId } = loadTeamsData();
+    teams = loadedTeams;
+    currentTeamId = loadedCurrentTeamId;
 
     // Carrega os dados do quiz do arquivo JSON
     try {
@@ -589,6 +924,30 @@ document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async
         console.error("Erro ao carregar quiz-data.json:", error);
         // Fallback ou tratamento de erro, talvez usar um quiz padrão embutido
         QUIZ_OPTIONS_DATA = []; // Ou um array vazio para evitar erros
+    }
+
+    // Carrega os dados das equipes do teams.json se não houver dados salvos no localStorage
+    const savedTeamsData = localStorage.getItem('teamsData');
+    if (!savedTeamsData || JSON.parse(savedTeamsData).length === 0) { // Se não há dados salvos ou o array está vazio
+        try {
+            const teamsResponse = await fetch(teamsDataPath);
+            if (!teamsResponse.ok) {
+                throw new Error(`HTTP error! status: ${teamsResponse.status}`);
+            }
+            const initialTeamsData = await teamsResponse.json();
+            teams = initialTeamsData.teams.map(team => ({
+                id: team.id || crypto.randomUUID(), // Garante um ID se o JSON não tiver
+                name: team.name,
+                score: team.score || 0,
+                maxScore: initialTeamsData.maxScore || 100, // Usa o maxScore do JSON ou um padrão
+                color: team.color || '#4CAF50' // Usa a cor do JSON ou um padrão
+            }));
+            // Salva os dados iniciais no localStorage para persistência
+            saveTeamsData(teams, null); // currentTeamId inicial é null
+        } catch (error) {
+            console.error("Erro ao carregar teams.json:", error);
+            // Se teams.json falhar, teams permanece como array vazio (default)
+        }
     }
 
 
@@ -618,15 +977,72 @@ document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async
     answerButtonToolbar.addEventListener("click", checkAnswer);
     answerCheckButtonToolbar.addEventListener("click", checkCorrectAnswer);
     hintButtonToolbar.addEventListener("click", showHint);
+    showScoreboardButton.addEventListener("click", () => { // Event listener para o botão "Placar"
+        renderTeamScoreboard(); // Renderiza o placar antes de mostrar a tela
+        // populateTeamSelector(); // Não é mais necessário aqui, pois o seletor não está na tela de perguntas
+        showScreen("scoreboard-screen");
+    });
+    backToMainMenuButton.addEventListener("click", () => { // Event listener para o botão "Voltar ao Menu Principal" na tela de placar
+        showScreen(previousScreenId); // Volta para a tela anterior
+    });
+
+    addTeamButton.addEventListener("click", addTeam); // Event listener para adicionar equipe
+    newTeamNameInput.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            addTeam();
+        }
+    });
+
+    // Removido o event listener para teamSelectQuestion, pois ele não está mais na tela de perguntas
+    // teamSelectQuestion.addEventListener("change", (event) => {
+    //     currentTeamId = event.target.value;
+    //     saveTeamsData(teams, currentTeamId); // Salva a equipe selecionada
+    // });
+
+    saveManualScoreButton.addEventListener("click", updateTeamScoreAndMaxManually);
+    cancelManualScoreButton.addEventListener("click", () => {
+        manualScoreDialog.close();
+    });
+    // Adiciona listener para mudança no select de cor para preencher o HEX
+    colorSelect.addEventListener('change', () => {
+        if (colorSelect.value) {
+            hexColorInput.value = colorSelect.value;
+        }
+    });
+    // Adiciona listener para input no campo HEX para limpar o select
+    hexColorInput.addEventListener('input', () => {
+        if (hexColorInput.value) {
+            colorSelect.value = ''; // Limpa a seleção do dropdown se o HEX for digitado
+        }
+    });
+
+    // Event listener para o novo switch de botões de resposta
+    toggleAnswerButtonsSwitch.addEventListener('change', () => {
+        // Atualiza a propriedade quizData.actions.showAwnserButtons
+        quizData.actions.showAwnserButtons = toggleAnswerButtonsSwitch.checked;
+        // Re-renderiza a visibilidade dos botões e opções imediatamente
+        updateAnswerButtonVisibility(quizData.actions.showAwnserButtons);
+    });
+
 
     clearProgressButton.addEventListener("click", () => { // Adicionado event listener para o botão de limpar progresso
-        if (confirm("Tem certeza que deseja limpar todo o progresso deste quiz?")) {
+        if (confirm("Tem certeza que deseja limpar todo o progresso deste quiz e as pontuações das equipes?")) {
             localStorage.removeItem(`answeredQuestions_${quizData.id}`); // Limpa o progresso no localStorage
             answeredQuestions = {}; // Reinicializa o objeto de progresso em memória
+
+            // Limpa as pontuações das equipes
+            teams.forEach(team => {
+                team.score = 0;
+                team.maxScore = 100; // Reinicia o maxScore também
+                team.color = '#4CAF50'; // Reinicia a cor para o padrão
+            });
+            saveTeamsData(teams, currentTeamId); // Salva as equipes com pontuações zeradas
+
             if (document.getElementById("question-selection-screen").classList.contains("active")) {
                 renderQuestionBlocks(currentLevel); // Recarrega a tela para refletir as mudanças
             }
-            alert("Progresso limpo com sucesso!");
+            renderTeamScoreboard(); // Atualiza o placar após limpar
+            alert("Progresso e pontuações limpos com sucesso!");
         }
     });
 
@@ -674,9 +1090,8 @@ document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async
 
     const lastSelectedQuizId = localStorage.getItem('currentSelectedQuizId');
     if (lastSelectedQuizId) {
-        const selectedQuizOption = QUIZ_OPTIONS_DATA.find(q => q.id === lastSelectedQuizId); // Usar QUIZ_OPTIONS_DATA
+        const selectedQuizOption = QUIZ_OPTIONS_DATA.find(q => q.id === lastSelectedQuizId);
         if (selectedQuizOption) {
-            // Ao carregar, passe o ID do quiz para loadGameData
             const loadedData = loadGameData(selectedQuizOption.data, selectedQuizOption.id);
             quizData = loadedData.quizData;
             answeredQuestions = loadedData.answeredQuestions;

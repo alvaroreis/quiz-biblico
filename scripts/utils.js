@@ -41,3 +41,18 @@ export function getQuizDataPath() {
         return 'https://raw.githubusercontent.com/alvaroreis/quiz-biblico/main/assets/data/quiz-data.json';
     }
 }
+
+/**
+ * Retorna o caminho para o arquivo teams.json baseado no ambiente de execução.
+ * @returns {string} O caminho (URL) para o arquivo teams.json.
+ */
+export function getTeamsDataPath() {
+    const host = window.location.hostname;
+    const isLocalhost = host === 'localhost' || host === '127.0.0.1';
+
+    if (isLocalhost) {
+        return '../assets/data/teams.json';
+    } else {
+        return 'https://raw.githubusercontent.com/alvaroreis/quiz-biblico/main/assets/data/teams.json';
+    }
+}

@@ -1,0 +1,22 @@
+{
+  "maxScore": 5000,
+  "teams": [
+    {
+      "id": "equipe-verde",
+      "name": "GERAÇÃO ESCOLHIDA",
+      "score": 100,
+      "color": "#4CAF50"
+      
+    },{
+      "id": "equipe-azul",
+      "name": "IDENTIDADE",
+      "score": 100,
+      "color": "#007BFF"
+    },{
+      "id": "equipe-amarela",
+      "name": "DONAS DO GAME",
+      "score": 100,
+      "color": "#FFD700"
+    }
+  ]
+}
