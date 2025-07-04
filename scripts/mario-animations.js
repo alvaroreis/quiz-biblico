@@ -49,7 +49,7 @@ export function spawnObstacle() {
     });
 
     const obstacleAnimationDuration = 8000;
-    const marioJumpTriggerTime = obstacleAnimationDuration * 0.74;
+    const marioJumpTriggerTime = obstacleAnimationDuration * 0.77;
 
     setTimeout(() => {
         marioJump();
