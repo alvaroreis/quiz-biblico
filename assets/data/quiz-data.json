@@ -432,11 +432,306 @@
     }
   },
   {
+    "id": "livro-efesios-id",
+    "name": "Livro De Efésios",
+    "data": {
+      "title": "Quiz Bíblico:<br>A Carta aos Efésios!",
+      "subtitle": "Uma aventura de conhecimento no mundo de Paulo!",
+      "actions": {
+        "showToolbar": true,
+        "showAwnserButtons": false
+      },
+      "data": [
+        {
+          "id": "livro-efesios",
+          "title": "Livro de Efésios",
+          "questions": [
+            {
+              "question": "Qual livro de Paulo é conhecido por enfatizar a união de judeus e gentios em um só corpo em Cristo, sendo Ele a cabeça?",
+              "options": {
+                "a": "Gálatas",
+                "b": "Efésios",
+                "c": "Colossenses",
+                "d": "Filipenses"
+              },
+              "correct": "b",
+              "hint": "Efésios 2:14-16"
+            },
+            {
+              "question": "Em Efésios 1, qual é o propósito de sermos selados com o Espírito Santo da promessa?",
+              "options": {
+                "a": "Para que preguem o evangelho.",
+                "b": "Para que se tornem perfeitos instantaneamente.",
+                "c": "Como penhor da nossa herança, para a redenção da sua possessão, para louvor da sua glória.",
+                "d": "Para nos dar sabedoria humana."
+              },
+              "correct": "c",
+              "hint": "Efésios 1:13-14"
+            },
+            {
+              "question": "De acordo com Efésios 2:8-9, como somos salvos?",
+              "options": {
+                "a": "Pela circuncisão.",
+                "b": "Pelas obras da lei.",
+                "c": "Pela fé, mediante a graça.",
+                "d": "Pelo batismo em águas."
+              },
+              "correct": "c",
+              "hint": "Efésios 2:8-9"
+            },
+            {
+              "question": "Em Efésios 3, o que Paulo ora para que os crentes compreendam a fim de serem cheios de toda a plenitude de Deus?",
+              "options": {
+                "a": "Ao dízimo.",
+                "b": "À santidade na vida diária.",
+                "c": "Ao conhecimento da largura, comprimento, altura e profundidade do amor de Cristo.",
+                "d": "À pregação do evangelho em todas as nações."
+              },
+              "correct": "c",
+              "hint": "Efésios 3:18-19"
+            },
+            {
+              "question": "Em Efésios 4, quais são os cinco dons ministeriais que Cristo deu à igreja para o aperfeiçoamento dos santos?",
+              "options": {
+                "a": "A pregação do evangelho.",
+                "b": "Apóstolos, profetas, evangelistas, pastores e mestres.",
+                "c": "Discípulos e anciãos.",
+                "d": "Bispos e diáconos."
+              },
+              "correct": "b",
+              "hint": "Efésios 4:11"
+            },
+            {
+              "question": "Efésios 4:31-32 e 5:1-2 nos exorta a remover toda a amargura, ira, cólera, gritaria e blasfêmia. Qual é a alternativa positiva para essas atitudes?",
+              "options": {
+                "a": "Ser agressivo e argumentativo.",
+                "b": "Andar em amor, perdoando-se mutuamente e imitando a Deus.",
+                "c": "Guardar rancor e não perdoar.",
+                "d": "Falar mal dos outros para se sentir melhor."
+              },
+              "correct": "b",
+              "hint": "Efésios 4:31-32; 5:1-2"
+            },
+            {
+              "question": "Em Efésios 6, o que os cristãos são exortados a vestir para poderem resistir às ciladas do diabo no dia mau?",
+              "options": {
+                "a": "A fé.",
+                "b": "A oração incessante.",
+                "c": "A armadura de Deus.",
+                "d": "O conhecimento da Bíblia."
+              },
+              "correct": "c",
+              "hint": "Efésios 6:11"
+            },
+            {
+              "question": "De acordo com Efésios 5, qual a principal instrução de Paulo para maridos e esposas no casamento?",
+              "options": {
+                "a": "A esposa deve dominar sobre o marido.",
+                "b": "O marido deve amar a esposa como a si mesmo, e a esposa deve respeitar o marido.",
+                "c": "O casamento é opcional para a maioria dos cristãos.",
+                "d": "Os filhos devem desobedecer aos pais após os 18 anos."
+              },
+              "correct": "b",
+              "hint": "Efésios 5:33"
+            },
+            {
+              "question": "Em Efésios 6, como Paulo instrui os servos a obedecerem aos seus senhores?",
+              "options": {
+                "a": "Pagar todos os seus impostos.",
+                "b": "Servir com má vontade, apenas por obrigação.",
+                "c": "Obedecer aos seus senhores terrenos com temor e tremor, em sinceridade de coração, como a Cristo.",
+                "d": "Discutir com seus senhores para obter mais direitos."
+              },
+              "correct": "c",
+              "hint": "Efésios 6:5-7"
+            },
+            {
+              "question": "Por que Efésios 6:12 nos diz que devemos vestir toda a armadura de Deus?",
+              "options": {
+                "a": "Porque não temos inimigos espirituais.",
+                "b": "Porque nossa luta é contra a carne e o sangue, ou seja, pessoas físicas.",
+                "c": "Porque nossa luta não é contra a carne e o sangue, mas contra os principados e potestades, contra os dominadores deste mundo tenebroso, contra as forças espirituais do mal nas regiões celestes.",
+                "d": "Porque não precisamos de nenhuma proteção especial para lutar as batalhas espirituais."
+              },
+              "correct": "c",
+              "hint": "Efésios 6:12"
+            },
+            {
+              "question": "Em Efésios 1:17-18, o que Paulo ora para que Deus dê aos crentes?",
+              "options": {
+                "a": "A sabedoria humana e a inteligência.",
+                "b": "Um espírito de sabedoria e de revelação no pleno conhecimento de Deus.",
+                "c": "Riqueza material e prosperidade.",
+                "d": "Poder político e influência social."
+              },
+              "correct": "b",
+              "hint": "Efésios 1:17-18"
+            },
+            {
+              "question": "Sou um edifício espiritual, construído sobre alicerces antigos, mas minha pedra angular é a mais importante. O que é a pedra angular segundo Efésios 2?",
+              "options": {
+                "a": "O templo de Salomão.",
+                "b": "Um ajuntamento de pedras preciosas.",
+                "c": "Jesus Cristo a principal pedra angular.",
+                "d": "Um grupo de pessoas que seguem regras rígidas."
+              },
+              "correct": "c",
+              "hint": "Efésios 2:20-22"
+            },
+            {
+              "question": "Segundo Efésios 2:10, qual é o propósito de Deus nos ter criado em Cristo Jesus?",
+              "options": {
+                "a": "Para que eles se orgulhassem de seus próprios feitos.",
+                "b": "Para que pregassem em todas as nações imediatamente.",
+                "c": "Para que andassem em boas obras, as quais Deus de antemão preparou para que andássemos nelas.",
+                "d": "Para que vivessem sem se importar com as obras."
+              },
+              "correct": "c",
+              "hint": "Efésios 2:10"
+            },
+            {
+              "question": "Em Efésios 3, qual é o 'mistério' que foi revelado a Paulo e aos santos apóstolos e profetas?",
+              "options": {
+                "a": "Que os gentios não teriam parte na promessa de Deus.",
+                "b": "Que os gentios seriam co-herdeiros, membros do mesmo corpo e coparticipantes da promessa em Cristo Jesus por meio do evangelho.",
+                "c": "Que apenas os judeus seriam salvos.",
+                "d": "Que o evangelho só seria pregado para Israel."
+              },
+              "correct": "b",
+              "hint": "Efésios 3:6"
+            },
+            {
+              "question": "Em Efésios 4, qual é o chamado principal para os crentes em relação à unidade e aos dons espirituais?",
+              "options": {
+                "a": "Unidade de propósito e diversidade de dons para a edificação do corpo de Cristo.",
+                "b": "Cada um deve seguir seu próprio caminho.",
+                "c": "A divisão da igreja em diferentes grupos.",
+                "d": "Competição entre os membros para ver quem é o melhor."
+              },
+              "correct": "a",
+              "hint": "Efésios 4:1-16"
+            },
+            {
+              "question": "Efésios 5:8 nos diz que 'outrora éreis trevas, mas agora sois luz no Senhor'. Como Paulo nos exorta a andar a partir de então?",
+              "options": {
+                "a": "A ira e a gritaria.",
+                "b": "A luz, pois o fruto do Espírito está em toda bondade, justiça e verdade.",
+                "c": "A escuridão, pois o mundo jaz no maligno.",
+                "d": "A sabedoria mundana e a filosofia humana."
+              },
+              "correct": "b",
+              "hint": "Efésios 5:8-9"
+            },
+            {
+              "question": "Qual peça da armadura de Deus em Efésios 6 protege a nossa cabeça?",
+              "options": {
+                "a": "A espada do Espírito.",
+                "b": "O capacete da salvação.",
+                "c": "O escudo da fé.",
+                "d": "A couraça da justiça."
+              },
+              "correct": "b",
+              "hint": "Efésios 6:17"
+            },
+            {
+              "question": "Qual a instrução de Paulo para os pais em Efésios 6:4?",
+              "options": {
+                "a": "Amar e nutrir seus filhos sem disciplina.",
+                "b": "Educar os filhos na disciplina e admoestação do Senhor, sem os provocar à ira.",
+                "c": "Deixar que os filhos façam o que quiserem.",
+                "d": "Exigir obediência cega sem explicação."
+              },
+              "correct": "b",
+              "hint": "Efésios 6:4"
+            },
+            {
+              "question": "Em Efésios 5:15-16, Paulo nos adverte a 'andar prudentemente, não como néscios, mas como sábios'. O que significa 'remir o tempo' nesse contexto?",
+              "options": {
+                "a": "Fazer tudo o que o mundo faz.",
+                "b": "Remir o tempo, porque os dias são maus.",
+                "c": "Viver descuidadamente, sem pensar no futuro.",
+                "d": "Passar o tempo em futilidades e festas."
+              },
+              "correct": "b",
+              "hint": "Efésios 5:15-16"
+            },
+            {
+              "question": "Por que Paulo enfatiza a importância da armadura de Deus em Efésios 6?",
+              "options": {
+                "a": "Porque temos que obedecer a todas as autoridades, sem questionar.",
+                "b": "Para resistir ao diabo e suas forças espirituais do mal.",
+                "c": "Para nos proteger de problemas financeiros.",
+                "d": "Para nos tornarmos mais fortes fisicamente."
+              },
+              "correct": "b",
+              "hint": "Efésios 6:11-12"
+            },
+            {
+              "question": "Em Efésios 5:18-19, qual é a exortação de Paulo aos crentes em contraste com a embriaguez?",
+              "options": {
+                "a": "Serem cheios de vinho.",
+                "b": "Serem cheios do Espírito, falando entre si com salmos, hinos e cânticos espirituais, cantando e salmodiando ao Senhor em seu coração.",
+                "c": "Serem barulhentos e desordenados.",
+                "d": "Terem grandes dons de oratória."
+              },
+              "correct": "b",
+              "hint": "Efésios 5:18-19"
+            },
+            {
+              "question": "Qual é o propósito final de vestir toda a armadura de Deus em Efésios 6:13?",
+              "options": {
+                "a": "Para que não precisemos mais da oração.",
+                "b": "Para que possamos lutar com nossas próprias forças.",
+                "c": "Para que, havendo feito tudo, permaneçamos firmes.",
+                "d": "Para que fiquemos invulneráveis a qualquer pecado."
+              },
+              "correct": "c",
+              "hint": "Efésios 6:13-14"
+            },
+            {
+              "question": "Efésios 4:25 nos instrui a 'deixar a mentira e falar a verdade cada um ao seu próximo'. Qual é a razão dada para essa exortação?",
+              "options": {
+                "a": "Com mentiras e falsidades para enganar os outros.",
+                "b": "Com palavras vazias e sem sentido.",
+                "c": "Falando a verdade cada um ao seu próximo, porque somos membros uns dos outros.",
+                "d": "Com fofocas e maledicência."
+              },
+              "correct": "c",
+              "hint": "Efésios 4:25"
+            },
+            {
+              "question": "Em Efésios 5:20, Paulo nos instrui a dar graças. Devemos dar graças por tudo?",
+              "options": {
+                "a": "Sim, mas apenas em momentos de grande alegria.",
+                "b": "Não, devemos dar graças apenas pelo que consideramos bom.",
+                "c": "Sim, dando sempre graças por tudo a Deus Pai, em nome de nosso Senhor Jesus Cristo.",
+                "d": "Apenas quando nos sentimos inspirados a fazê-lo."
+              },
+              "correct": "c",
+              "hint": "Efésios 5:20"
+            },
+            {
+              "question": "Sou a primeira peça da armadura de Deus e sou essencial para que todas as outras se encaixem e permaneçam no lugar. Quem sou eu?",
+              "options": {
+                "a": "O cinturão da verdade.",
+                "b": "A couraça da justiça.",
+                "c": "O escudo da fé.",
+                "d": "O capacete da salvação."
+              },
+              "correct": "a",
+              "hint": "Efésios 6:14"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": "livro-filipenses-id",
     "name": "Livro De Filipenses",
     "data": {
       "title": "Quiz Bíblico:<br>A Carta aos Filipenses!",
-      "subtitle": "Uma aventura de conhecimento no mundo do Paulo!",
+      "subtitle": "Uma aventura de conhecimento no mundo de Paulo!",
       "actions": {
         "showToolbar": true,
         "showAwnserButtons": false

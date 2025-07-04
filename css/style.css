@@ -81,6 +81,17 @@ body.dark-theme {
     .font-size-slider-container input[type="range"]::-moz-range-thumb {
         background: white; /* Cor do polegar (ligado) */
     }
+
+    /* Estilos da barra de rolagem no tema escuro */
+    /* Para navegadores baseados em Webkit (Chrome, Safari) */
+    ::-webkit-scrollbar-thumb {
+        background: #555; /* Cor do polegar da barra de rolagem no tema escuro */
+    }
+    ::-webkit-scrollbar-track {
+        background: #333; /* Cor do trilho da barra de rolagem no tema escuro */
+    }
+    /* Para navegadores Firefox */
+    scrollbar-color: #555 #333; /* polegar trilho */
 }
 
 
@@ -125,11 +136,11 @@ body {
 }
 
 .font-size-slider-container input[type="range"] {
-    -webkit-appearance: none; /* Remove estilos padrão do navegador */
+    -webkit-appearance: none;
     appearance: none;
-    width: 100%; /* Slider deve ter 100% da largura do container */
-    height: 8px; /* Altura do trilho */
-    background: var(--mario-brown); /* Cor do trilho (desligado) */
+    width: 100%;
+    height: 8px;
+    background: var(--mario-brown);
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -141,10 +152,10 @@ body {
 .font-size-slider-container input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px; /* Largura do polegar */
-    height: 20px; /* Altura do polegar */
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: var(--mario-yellow); /* Cor do polegar (desligado) */
+    background: var(--mario-yellow);
     cursor: pointer;
     box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
 }
@@ -153,27 +164,27 @@ body {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: var(--mario-yellow); /* Cor do polegar (desligado) */
+    background: var(--mario-yellow);
     cursor: pointer;
     box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
 }
 
 #font-size-value {
-    min-width: 50px; /* Garante que o valor tenha um espaço mínimo */
-    text-align: center; /* Centraliza o valor */
-    font-size: 0.7em; /* Ajusta o tamanho da fonte do valor exibido */
+    min-width: 50px;
+    text-align: center;
+    font-size: 0.7em;
 }
 
 
 /* Estilos para o switch de tema */
 .theme-switch {
-    position: fixed; /* Fixa na tela */
-    top: 20px; /* Retorna à posição original superior */
-    right: 20px; /* Distância da direita */
-    z-index: 100; /* Acima da maioria dos elementos, mas abaixo dos diálogos */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
     display: inline-block;
-    width: 60px; /* Largura do switch */
-    height: 34px; /* Altura do switch */
+    width: 60px;
+    height: 34px;
 }
 
 /* Oculta o input checkbox padrão */
@@ -191,7 +202,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--mario-brown); /* Cor do trilho (desligado) */
+    background-color: var(--mario-brown);
     -webkit-transition: .4s;
     transition: .4s;
     box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
@@ -204,7 +215,7 @@ body {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: var(--mario-yellow); /* Cor do "polegar" (desligado) */
+    background-color: var(--mario-yellow);
     -webkit-transition: .4s;
     transition: .4s;
     box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
@@ -212,7 +223,7 @@ body {
 
 /* Quando o checkbox está marcado (ligado) */
 input:checked + .slider {
-    background-color: var(--mario-dark-green); /* Cor do trilho (ligado) */
+    background-color: var(--mario-dark-green);
 }
 
 input:focus + .slider {
@@ -223,7 +234,7 @@ input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
-    background-color: white; /* Cor do "polegar" (ligado) */
+    background-color: white;
 }
 
 /* Cantos arredondados para o slider e o polegar */
@@ -236,36 +247,68 @@ input:checked + .slider:before {
 }
 
 
+/* Estilos para o novo switch na toolbar */
+.answer-buttons-switch {
+    display: inline-block;
+    width: 45px; /* Largura menor */
+    height: 26px; /* Altura menor */
+    position: relative;
+    margin: 0 10px; /* Ajusta a margem para espaçamento */
+}
+
+.answer-buttons-switch .slider {
+    background-color: var(--mario-brown); /* Cor do trilho */
+}
+
+.answer-buttons-switch .slider:before {
+    height: 20px; /* Tamanho do polegar */
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--mario-yellow); /* Cor do polegar */
+}
+
+.answer-buttons-switch input:checked + .slider {
+    background-color: var(--mario-dark-green);
+}
+
+.answer-buttons-switch input:checked + .slider:before {
+    -webkit-transform: translateX(19px); /* Ajuste para o novo tamanho */
+    -ms-transform: translateX(19px);
+    transform: translateX(19px);
+}
+
+
 /* Efeitos de fundo do Mario */
-body::before { /* Céu (para garantir a cor base) */
+body::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--mario-blue); /* Cor do céu */
-    z-index: 0; /* Fundo mais distante */
+    background-color: var(--mario-blue);
+    z-index: 0;
 }
 
-body::after { /* Montanhas distantes (feitas com SVG inline) */
+body::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 200px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"><path d="M0 150 L25 50 L50 150 L75 70 L100 150 L125 90 L150 150 Z" fill="#6B8E23"/></svg>'); /* Cor mais escura para montanhas */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"><path d="M0 150 L25 50 L50 150 L75 70 L100 150 L125 90 L150 150 Z" fill="#6B8E23"/></svg>');
     background-size: 150px 150px;
     background-repeat: repeat-x;
     opacity: 0.7;
     animation: moveMountains 30s linear infinite;
-    z-index: 1; /* Abaixo do game-container e nuvens */
+    z-index: 1;
 }
 
 @keyframes moveMountains {
     from { background-position: 0 0; }
-    to { background-position: -1500px 0; } /* Move as montanhas para a esquerda */
+    to { background-position: -1500px 0; }
 }
 
 /* Estilos para a nova tela escura */
@@ -275,54 +318,51 @@ body::after { /* Montanhas distantes (feitas com SVG inline) */
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fundo preto semi-transparente */
-    z-index: 999; /* Acima de tudo, mas abaixo dos diálogos */
-    opacity: 0; /* Começa invisível */
-    pointer-events: none; /* Permite cliques através dela quando invisível */
-    transition: opacity 0.3s ease; /* Transição suave */
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 #dark-screen.visible {
-    opacity: 1; /* Fica visível */
-    pointer-events: auto; /* Bloqueia cliques quando visível */
+    opacity: 1;
+    pointer-events: auto;
 }
 
 #game-container {
-    background-color: var(--game-container-bg); /* Usa variável de tema */
+    background-color: var(--game-container-bg);
     border: 5px solid var(--mario-brown);
     border-radius: 10px;
     box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.2);
     padding: 30px;
     text-align: center;
-    max-width: 1000px; /* Alterado de 800px para 1000px */
-    width: 100%; /* Ajuste para ser mais responsivo */
-    position: relative; /* Essencial para o posicionamento absoluto da toolbar */
-    z-index: 10; /* Acima dos elementos de fundo */
-    min-height: 300px; /* Altura mínima para o container */
-    max-height: 90vh; /* Limita a altura a 90% da altura da viewport */
-    /* REMOVIDO: overflow-y: auto; do game-container */
-    display: flex; /* Para centralizar o conteúdo verticalmente */
+    max-width: 1000px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    min-height: 300px;
+    max-height: 90vh;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom: 90px; /* Espaço para a toolbar no rodapé */
+    padding-bottom: 90px;
 }
 
 .screen {
     display: none;
-    flex-grow: 1; /* Permite que as telas preencham o espaço disponível */
+    flex-grow: 1;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    position: relative; /* Para que o botão "Voltar" seja posicionado em relação à tela */
+    position: relative;
 }
 
 .screen.active {
-    display: flex; /* Mostra a tela ativa */
-    /* Adicionado max-height e overflow-y para o question-display-screen */
-    max-height: calc(100% - 100px); /* Ajusta a altura máxima para caber dentro do game-container, considerando padding e toolbar */
-    overflow-y: auto; /* Adiciona scroll vertical se o conteúdo exceder a altura */
-    padding-right: 10px; /* Espaço para a barra de rolagem */
-    justify-content: flex-start; /* Alinha o conteúdo ao topo quando há rolagem */
+    display: flex;
+    /* Removido max-height e overflow-y daqui para serem controlados pelo question-display-screen */
+    /* Removido padding-right daqui */
+    justify-content: flex-start;
 }
 
 h1 {
@@ -342,14 +382,16 @@ h2 {
 
 h3 {
     color: var(--mario-text-color);
-    font-size: 1.6em; /* Aumentado o tamanho da fonte */
+    font-size: 1.6em;
     margin-bottom: 20px;
-    line-height: 1.4; /* Ajustado para melhor legibilidade com quebra de linha */
+    line-height: 1.4;
     word-wrap: break-word; /* Garante que palavras longas quebrem */
     overflow-wrap: break-word; /* Adicionado para compatibilidade moderna */
     white-space: normal; /* Permite quebra de linha */
-    max-height: 30vh; /* Altura máxima para o texto da pergunta */
-    width: 100%; /* Garante que o h3 ocupe a largura total do pai para quebrar o texto */
+    width: 100%;
+    max-height: 50vh; /* Altura máxima para o texto da pergunta */
+    overflow-y: auto; /* Adiciona scroll vertical se o conteúdo exceder a altura */
+    padding-right: 10px; /* Espaço para a barra de rolagem */
 }
 
 p {
@@ -371,7 +413,7 @@ p {
     transition: background-color 0.2s, transform 0.1s, box-shadow 0.1s;
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
     text-transform: uppercase;
-    white-space: nowrap; /* Evita quebra de linha em botões pequenos */
+    white-space: nowrap;
 }
 
 .mario-button:hover {
@@ -403,7 +445,6 @@ p {
 }
 
 #quiz-select {
-    /* Herda a maioria dos estilos de .mario-button */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -495,11 +536,10 @@ p {
     flex-direction: column;
     gap: 15px;
     margin-bottom: 20px;
-    width: 100%;
-    max-width: 900px;
-    max-height: 40vh;
-    overflow-y: auto;
-    padding-right: 10px;
+    width: 98%; /* Mantido em 98% */
+    /* Removido max-width: 700px; */
+    max-height: 680px; /* Alterado para 645px */
+    padding-right: 10px; /* Adicionado padding para a barra de rolagem */
 }
 
 .option-button {
@@ -699,7 +739,7 @@ p {
 
 /* Estilo específico para o input de texto de HEX */
 #hex-color-input {
-    text-transform: uppercase; /* Garante que o texto seja maiúsculo */
+    text-transform: uppercase;
 }
 
 /* Estilo para o select de cores */
@@ -714,7 +754,7 @@ p {
     cursor: pointer;
     text-align: center;
     text-align-last: center;
-    width: 80%; /* Ajusta a largura para combinar com outros inputs */
+    width: 80%;
     max-width: 200px;
 }
 
@@ -1041,12 +1081,6 @@ p {
         max-height: 50vh;
     }
 
-    .question-block {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5em;
-    }
-
     .options-container {
         font-size: 1em;
         padding: 10px 15px;
@@ -1173,11 +1207,18 @@ p {
         font-size: 1.2em;
     }
 
-    .option-button {
+    .options-container {
         font-size: 0.9em;
         padding: 8px 10px;
         max-width: 400px;
         max-height: 25vh;
+    }
+
+    #game-toolbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px;
+        gap: 5px;
     }
 
     #game-toolbar .toolbar-button {

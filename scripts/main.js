@@ -101,6 +101,7 @@ let colorSelect; // Novo seletor de cor
 let hexColorInput; // Novo input para HEX
 let saveManualScoreButton;
 let cancelManualScoreButton;
+let toggleAnswerButtonsSwitch; // Referência ao novo switch
 
 
 /**
@@ -169,6 +170,7 @@ function getDOMElements() {
     hexColorInput = document.getElementById("hex-color-input"); // Obtém a referência do input de HEX
     saveManualScoreButton = document.getElementById("save-manual-score-button");
     cancelManualScoreButton = document.getElementById("cancel-manual-score-button");
+    toggleAnswerButtonsSwitch = document.getElementById("toggle-answer-buttons"); // Obtém a referência do switch
 }
 
 
@@ -201,6 +203,7 @@ function showScreen(screenId) {
     fontSizeSliderContainer.classList.add('hidden');
     clearProgressButton.classList.add("hidden");
     showScoreboardButton.classList.add("hidden");
+    toggleAnswerButtonsSwitch.parentElement.classList.add("hidden"); // Esconde o switch por padrão
 
     // Garante que as opções de resposta estejam visíveis por padrão,
     // e serão ocultadas ou não dependendo da lógica abaixo.
@@ -216,8 +219,7 @@ function showScreen(screenId) {
         hintButtonToolbar.classList.remove("hidden");
         fontSizeSliderContainer.classList.remove('hidden'); // Mostra o slider apenas na tela de pergunta
         showScoreboardButton.classList.add("hidden"); // Oculta o botão do placar na tela de perguntas
-        // Removida a linha que mostra/esconde teamSelectQuestion, pois ele não está mais na tela de perguntas
-        // teamSelectQuestion.classList.remove("hidden"); // Mostra o seletor de equipe
+        toggleAnswerButtonsSwitch.parentElement.classList.remove("hidden"); // Mostra o switch na tela de perguntas
 
         // Lógica para showAwnserButtons e currentQuestionOptions
         if (quizData && quizData.actions) {
@@ -391,24 +393,13 @@ function loadQuestion(levelId, index) {
         }
     });
 
-    if (!quizData.actions.showAwnserButtons) {
-        answerButtonToolbar.disabled = true;
-        answerCheckButtonToolbar.disabled = false;
-        optionButtons.forEach(button => button.disabled = true);
-    } else {
-        answerButtonToolbar.disabled = true;
-        answerCheckButtonToolbar.disabled = true;
-        optionButtons.forEach(button => button.disabled = false);
-    }
+    // Atualiza o estado do switch e dos botões de resposta
+    toggleAnswerButtonsSwitch.checked = quizData.actions.showAwnserButtons;
+    updateAnswerButtonVisibility(quizData.actions.showAwnserButtons);
+
 
     hintButtonToolbar.classList.remove("hidden");
     hintButtonToolbar.disabled = false;
-
-    // O seletor de equipe não é mais populado ou exibido na tela de perguntas.
-    // A gestão da equipe ativa será feita apenas no placar.
-    // populateTeamSelector();
-    // teamSelectQuestion.value = currentTeamId;
-
 
     setTimeout(() => {
         showScreen("question-display-screen");
@@ -893,6 +884,29 @@ function initializeGame() {
     // populateTeamSelector(); // Não é mais necessário aqui, pois o seletor não está na tela de perguntas
 }
 
+/**
+ * Atualiza a visibilidade dos botões de resposta e opções com base no estado do switch.
+ * @param {boolean} showButtons Se true, mostra os botões de resposta e opções. Se false, oculta.
+ */
+function updateAnswerButtonVisibility(showButtons) {
+    if (showButtons) {
+        answerButtonToolbar.classList.remove("hidden");
+        answerCheckButtonToolbar.classList.add("hidden");
+        currentQuestionOptions.classList.remove("hidden");
+        questionDisplayScreen.classList.remove('no-answer-options');
+        optionButtons.forEach(button => button.disabled = false); // Re-habilita as opções
+    } else {
+        answerButtonToolbar.classList.add("hidden");
+        answerCheckButtonToolbar.classList.remove("hidden");
+        currentQuestionOptions.classList.add("hidden");
+        questionDisplayScreen.classList.add('no-answer-options');
+        optionButtons.forEach(button => button.disabled = true); // Desabilita as opções
+    }
+    answerButtonToolbar.disabled = true; // Sempre desabilita o botão "Responder" até uma opção ser selecionada
+    answerCheckButtonToolbar.disabled = false; // "Marcar Correta" sempre habilitado se visível
+}
+
+
 document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async' aqui
     getDOMElements(); // Obtém as referências DOM quando o DOM estiver carregado
     const { teams: loadedTeams, currentTeamId: loadedCurrentTeamId } = loadTeamsData();
@@ -1000,6 +1014,14 @@ document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async
         if (hexColorInput.value) {
             colorSelect.value = ''; // Limpa a seleção do dropdown se o HEX for digitado
         }
+    });
+
+    // Event listener para o novo switch de botões de resposta
+    toggleAnswerButtonsSwitch.addEventListener('change', () => {
+        // Atualiza a propriedade quizData.actions.showAwnserButtons
+        quizData.actions.showAwnserButtons = toggleAnswerButtonsSwitch.checked;
+        // Re-renderiza a visibilidade dos botões e opções imediatamente
+        updateAnswerButtonVisibility(quizData.actions.showAwnserButtons);
     });
 
 
