@@ -13,7 +13,7 @@
 <div id="cloud-layer-1" class="cloud-layer"></div>
 <div id="cloud-layer-2" class="cloud-layer"></div>
 
-<div class="font-size-slider-container">
+<div class="font-size-slider-container hidden">
     <label for="font-size-slider">Tamanho da Fonte:</label>
     <input type="range" id="font-size-slider" min="1.5" max="20.0" step="0.1">
     <span id="font-size-value"></span>
@@ -58,6 +58,21 @@
             <button class="option-button mario-button" data-option="c"></button>
             <button class="option-button mario-button" data-option="d"></button>
         </div>
+        <!-- O seletor de equipe foi removido desta tela -->
+    </div>
+
+    <!-- Tela de Placar de Equipes (antiga progress-screen) -->
+    <div id="scoreboard-screen" class="screen">
+        <h2>Placar das Equipes</h2>
+        <div class="team-management-section">
+            <input type="text" id="new-team-name" placeholder="Nome da Nova Equipe" class="mario-input">
+            <button id="add-team-button" class="mario-button">Adicionar Equipe</button>
+        </div>
+        <!-- A seção de atualização manual de score será movida para um modal/dialog -->
+        <div id="teams-list-container" class="teams-list-container">
+            <!-- As equipes serão renderizadas aqui -->
+        </div>
+        <button id="back-to-main-menu-button" class="mario-button">Voltar ao Menu Principal</button>
     </div>
 
     <div id="game-toolbar" class="hidden">
@@ -66,6 +81,7 @@
         <button id="answer-button-toolbar" class="mario-button toolbar-button">Responder</button>
         <button id="answer-check-button-toolbar" class="mario-button toolbar-button selected hidden">Marcar Correta</button>
         <button id="clear-progress-button" class="mario-button toolbar-button hidden">Limpar Progresso</button>
+        <button id="show-scoreboard-button" class="mario-button toolbar-button">Placar</button> <!-- Botão para mostrar o placar -->
     </div>
 </div>
 
@@ -79,6 +95,46 @@
     <h3 id="feedback-dialog-title"></h3>
     <p id="feedback-dialog-message"></p>
     <button id="close-feedback-dialog-button" class="mario-button">Ok!</button>
+</dialog>
+
+<!-- Novo Diálogo para Atualização Manual de Pontuação -->
+<dialog id="manual-score-dialog" class="mario-dialog">
+    <h3 id="manual-score-dialog-title">Atualizar Pontuação da Equipe</h3>
+    <p id="manual-score-team-name"></p>
+    <div class="dialog-input-group">
+        <label for="current-xp-input">XP Atual:</label>
+        <input type="number" id="current-xp-input" class="mario-input" min="0">
+    </div>
+    <div class="dialog-input-group">
+        <label for="max-xp-input">XP Máximo:</label>
+        <input type="number" id="max-xp-input" class="mario-input" min="1">
+    </div>
+    <div class="dialog-input-group">
+        <label for="color-select">Cor da Equipe:</label>
+        <select id="color-select" class="mario-button">
+            <option value="#4CAF50">Verde (Padrão)</option>
+            <option value="#FFD700">Amarelo</option>
+            <option value="#007bff">Azul</option>
+            <option value="#ADD8E6">Azul Claro</option>
+            <option value="#FF6347">Vermelho</option>
+            <option value="#8A2BE2">Azul Violeta</option>
+            <option value="#DDA0DD">Ameixa</option>
+            <option value="#FF4500">Laranja</option>
+            <option value="#800080">Roxo</option>
+            <option value="#FFC0CB">Rosa</option>
+            <option value="#00CED1">Turquesa</option>
+            <option value="#FFFFFF">Branco</option>
+            <option value="#000000">Preto</option>
+        </select>
+    </div>
+    <div class="dialog-input-group">
+        <label for="hex-color-input">Ou insira o HEX:</label>
+        <input type="text" id="hex-color-input" class="mario-input" placeholder="#RRGGBB">
+    </div>
+    <div class="dialog-buttons">
+        <button id="save-manual-score-button" class="mario-button">Salvar</button>
+        <button id="cancel-manual-score-button" class="mario-button">Cancelar</button>
+    </div>
 </dialog>
 
 <div id="mario-animation-area">

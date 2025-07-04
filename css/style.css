@@ -138,10 +138,6 @@ body {
     cursor: pointer;
 }
 
-.font-size-slider-container input[type="range"]:hover {
-    opacity: 1;
-}
-
 .font-size-slider-container input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -408,16 +404,16 @@ p {
 
 #quiz-select {
     /* Herda a maioria dos estilos de .mario-button */
-    -webkit-appearance: none; /* Remove estilos padrão do navegador */
+    -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M7 10l5 5 5-5z"/></svg>'); /* Seta para baixo */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M7 10l5 5 5-5z"/></svg>');
     background-repeat: no-repeat;
     background-position: right 15px center;
-    padding-right: 45px; /* Espaço para a seta */
+    padding-right: 45px;
     cursor: pointer;
     text-align: center;
-    text-align-last: center; /* Centraliza o texto no Firefox */
+    text-align-last: center;
 }
 
 #quiz-select option {
@@ -435,10 +431,10 @@ p {
     flex-wrap: wrap;
     gap: 20px;
     margin-bottom: 30px;
-    max-width: 900px; /* Ajustado para acompanhar o game-container */
-    max-height: 60vh; /* Adicionado para permitir rolagem */
-    overflow-y: auto; /* Adicionado para permitir rolagem */
-    padding-right: 10px; /* Espaço para a barra de rolagem */
+    max-width: 900px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 /* Blocos de Perguntas (simulando blocos de interrogação) */
@@ -448,49 +444,49 @@ p {
     justify-content: center;
     gap: 15px;
     margin-top: 30px;
-    max-width: 900px; /* Ajustado para acompanhar o game-container */
+    max-width: 900px;
     width: 100%;
-    max-height: 60vh; /* Adicionado para permitir rolagem */
-    overflow-y: auto; /* Adicionado para permitir rolagem */
-    padding-right: 10px; /* Espaço para a barra de rolagem */
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 .question-block {
     width: 80px;
     height: 80px;
     background-color: var(--mario-yellow);
-    border: 5px solid var(--mario-light-brown); /* Borda mais clara para o bloco */
+    border: 5px solid var(--mario-light-brown);
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em; /* Ajustado para o número */
+    font-size: 2em;
     color: var(--mario-brown);
-    cursor: default; /* NOVO: Cursor padrão */
-    user-select: none; /* NOVO: Impede a seleção de texto */
+    cursor: default;
+    user-select: none;
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
     transition: transform 0.1s, background-color 0.2s;
     position: relative;
-    overflow: hidden; /* Garante que o conteúdo não vaze */
+    overflow: hidden;
 }
 
 .question-block:hover {
-    transform: translateY(-5px); /* Efeito de "quicar" */
+    transform: translateY(-5px);
     background-color: #FFEA00;
 }
 
 .question-block.answered {
-    background-color: #ccc; /* Bloco respondido */
+    background-color: #ccc;
     border-color: #999;
     cursor: default;
     box-shadow: none;
-    pointer-events: none; /* Desabilita cliques em blocos respondidos */
+    pointer-events: none;
 }
 
 .question-block.answered::before {
-    content: '✓'; /* Ou 'X' se for o caso */
-    color: var(--mario-dark-green); /* Cor verde para o check */
-    font-size: 2.5em; /* Ajuste o tamanho do check */
+    content: '✓';
+    color: var(--mario-dark-green);
+    font-size: 2.5em;
 }
 
 /* Opções de Resposta */
@@ -500,19 +496,19 @@ p {
     gap: 15px;
     margin-bottom: 20px;
     width: 100%;
-    max-width: 900px; /* Ajustado para acompanhar o game-container */
-    max-height: 40vh; /* Adicionado para permitir rolagem */
-    overflow-y: auto; /* Adicionado para permitir rolagem */
-    padding-right: 10px; /* Espaço para a barra de rolagem */
+    max-width: 900px;
+    max-height: 40vh;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 .option-button {
     width: 100%;
     text-align: left;
     padding: 12px 20px;
-    font-size: 1.1em; /* Aumentado o tamanho da fonte */
-    white-space: normal; /* Permite quebra de linha no texto da opção */
-    word-wrap: break-word; /* Garante que palavras longas quebrem */
+    font-size: 1.1em;
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 .option-button.selected {
@@ -522,23 +518,23 @@ p {
 }
 
 .option-button.correct-answer {
-    background-color: #4CAF50; /* Verde para resposta correta */
+    background-color: #4CAF50;
     border-color: #3D8B40;
     color: white;
 }
 
 .option-button.incorrect-answer {
-    background-color: #F44336; /* Vermelho para resposta incorreta */
+    background-color: #F44336;
     border-color: #D32F2F;
     color: white;
 }
 
 .hidden {
-    display: none !important; /* Adicionado !important para forçar a ocultação */
+    display: none !important;
 }
 
 .hint-block {
-    background-color: #FFA500; /* Laranja para a dica */
+    background-color: #FFA500;
     border-color: #CD853F;
 }
 
@@ -553,14 +549,14 @@ p {
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between; /* Alinha itens à esquerda, centro e direita */
+    justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: var(--toolbar-bg); /* Usa variável de tema */
+    background-color: var(--toolbar-bg);
     border-top: 5px solid var(--mario-brown);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    box-sizing: border-box; /* Inclui padding na largura */
+    box-sizing: border-box;
 }
 
 #game-toolbar .toolbar-button {
@@ -570,12 +566,12 @@ p {
 }
 
 /* Estilo para o botão Limpar Progresso */
-#clear-progress-button { /* Adicionado estilo para o botão Limpar Progresso */
+#clear-progress-button {
     background-color: var(--mario-red);
     border-color: #A00000;
 }
 
-#clear-progress-button:hover { /* Adicionado estilo de hover para o botão Limpar Progresso */
+#clear-progress-button:hover {
     background-color: #CC0000;
     box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
 }
@@ -584,14 +580,14 @@ p {
 .mario-dialog {
     border: 5px solid var(--mario-brown);
     border-radius: 10px;
-    background-color: var(--dialog-bg); /* Usa variável de tema */
+    background-color: var(--dialog-bg);
     box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.3);
     padding: 30px;
     max-width: 500px;
     width: 90%;
     text-align: center;
     font-family: 'Press Start 2P', cursive;
-    color: var(--mario-text-color); /* Usa variável de tema */
+    color: var(--mario-text-color);
     position: fixed;
     top: 0;
     left: 0;
@@ -622,10 +618,226 @@ p {
 }
 
 .mario-dialog p {
-    color: var(--mario-text-color); /* Usa variável de tema */
+    color: var(--mario-text-color);
     font-size: 1em;
     margin-bottom: 30px;
     line-height: 1.5;
+}
+
+/* Estilos do Seletor de Equipe na Tela de Pergunta */
+.team-selector-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+    color: var(--mario-text-color);
+    font-size: 1em;
+}
+
+.team-selector-container label {
+    font-size: 0.9em;
+}
+
+#team-select-question {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 45px;
+    cursor: pointer;
+    text-align: center;
+    text-align-last: center;
+    max-width: 200px;
+}
+
+
+/* Estilos da Tela de Placar de Equipes (scoreboard-screen) */
+#scoreboard-screen {
+    justify-content: flex-start;
+    padding-top: 50px;
+}
+
+#scoreboard-screen h2 {
+    margin-bottom: 30px;
+    color: var(--mario-red);
+    text-shadow: 2px 2px 0px var(--mario-brown);
+}
+
+.team-management-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Estilos para o grupo de inputs dentro do diálogo */
+.dialog-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.dialog-input-group label {
+    font-size: 0.9em;
+    color: var(--mario-text-color);
+}
+
+.dialog-input-group .mario-input {
+    width: 80%;
+    max-width: 200px;
+    text-align: center;
+}
+
+/* Estilo específico para o input de texto de HEX */
+#hex-color-input {
+    text-transform: uppercase; /* Garante que o texto seja maiúsculo */
+}
+
+/* Estilo para o select de cores */
+#color-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 45px;
+    cursor: pointer;
+    text-align: center;
+    text-align-last: center;
+    width: 80%; /* Ajusta a largura para combinar com outros inputs */
+    max-width: 200px;
+}
+
+
+.dialog-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+
+.mario-input {
+    background-color: white;
+    border: 3px solid var(--mario-brown);
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1em;
+    color: var(--mario-text-color);
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    flex-grow: 1;
+    max-width: calc(100% - 100px);
+}
+
+.mario-input::placeholder {
+    color: #aaa;
+}
+
+.teams-list-container {
+    width: 90%;
+    max-width: 600px;
+    max-height: 50vh;
+    overflow-y: auto;
+    border: 3px solid var(--mario-brown);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+}
+
+.team-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    background-color: var(--mario-yellow);
+    border: 2px solid var(--mario-light-brown);
+    border-radius: 5px;
+    font-size: 1.1em;
+    color: var(--mario-brown);
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+    position: relative;
+    cursor: pointer;
+}
+
+.team-item:last-child {
+    margin-bottom: 0;
+}
+
+.team-name {
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+/* Contêiner da barra de progresso para cada equipe */
+.team-progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border: 2px solid var(--mario-brown);
+    border-radius: 8px;
+    overflow: hidden;
+    height: 25px;
+    position: relative;
+    margin-top: 5px;
+}
+
+/* A barra de progresso individual da equipe */
+.team-progress-bar {
+    height: 100%;
+    background-color: var(--mario-green);
+    width: 0%;
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Texto da pontuação dentro da barra de progresso */
+.team-score-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 25px;
+    color: var(--mario-text-color);
+    font-size: 0.9em;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+}
+
+
+.delete-team-button {
+    background-color: var(--mario-red);
+    color: white;
+    border: 2px solid #a00000;
+    border-radius: 5px;
+    padding: 5px 8px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7em;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.delete-team-button:hover {
+    background-color: #cc0000;
+    transform: translateY(-1px);
 }
 
 /* --- Animação do Mario e Cenário --- */
@@ -810,9 +1022,9 @@ p {
     }
 
     h3 {
-        font-size: 1.2em; /* Ajustado para telas menores */
+        font-size: 1.2em;
         line-height: 1.3;
-        max-height: 25vh; /* Altura máxima ajustada para telas menores */
+        max-height: 25vh;
     }
 
     .mario-button {
@@ -843,21 +1055,21 @@ p {
     }
 
     #game-toolbar {
-        flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha */
-        justify-content: center; /* Centraliza os botões quando quebram */
-        padding: 10px; /* Ajusta o padding da toolbar */
-        gap: 5px; /* Adiciona espaçamento entre os botões */
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px;
+        gap: 5px;
     }
 
     #game-toolbar .toolbar-button {
-        margin: 5px; /* Ajusta a margem para botões quebrando */
-        padding: 8px 10px; /* Ajusta o padding */
-        font-size: 0.75em; /* Reduz o tamanho da fonte */
-        white-space: normal; /* Permite que o texto quebre */
-        text-align: center; /* Centraliza o texto dentro do botão */
-        flex-shrink: 1; /* Permite que o botão encolha */
-        min-width: 0; /* Garante que o encolhimento funcione */
-        max-width: calc(50% - 10px); /* Para no máximo 2 botões por linha, considerando o gap */
+        margin: 5px;
+        padding: 8px 10px;
+        font-size: 0.75em;
+        white-space: normal;
+        text-align: center;
+        flex-shrink: 1;
+        min-width: 0;
+        max-width: calc(50% - 10px);
     }
 
     .mario-dialog {
@@ -889,7 +1101,7 @@ p {
         to { background-position-x: -160px; }
     }
     .obstacle {
-        bottom: 20px; /* Ajustado para o chão responsivo */
+        bottom: 20px;
         width: 40px;
         height: 40px;
     }
@@ -902,18 +1114,18 @@ p {
 
     /* NOVO: Ajuste do slider de fonte para telas menores */
     .font-size-slider-container {
-        left: 50%; /* Centraliza horizontalmente */
+        left: 50%;
         transform: translateX(-50%);
-        top: 10px; /* Posiciona no topo */
-        width: 90%; /* Ocupa a maior parte da largura */
+        top: 10px;
+        width: 90%;
     }
 
     /* Ajuste do switch de tema para telas menores */
     .theme-switch {
-        left: 50%; /* Centraliza horizontalmente */
+        left: 50%;
         transform: translateX(-50%);
-        top: 80px; /* Posiciona abaixo do slider de fonte */
-        right: auto; /* Remove alinhamento à direita */
+        top: 80px;
+        right: auto;
     }
 }
 
@@ -924,8 +1136,8 @@ p {
     #game-container {
         padding: 10px;
         padding-bottom: 70px;
-        max-width: 85%; /* Ajustado para 85% */
-        min-height: 250px; /* Definido min-height para mobile */
+        max-width: 85%;
+        min-height: 250px;
     }
     h1 {
         font-size: 1.5em;
@@ -936,9 +1148,9 @@ p {
     }
 
     h3 {
-        font-size: 1em; /* Ajustado para telas menores */
+        font-size: 1em;
         line-height: 1.2;
-        max-height: 20vh; /* Altura máxima ajustada para telas muito pequenas */
+        max-height: 20vh;
     }
 
     .mario-button {
@@ -969,14 +1181,14 @@ p {
     }
 
     #game-toolbar .toolbar-button {
-        margin: 3px; /* Ajustado para margem menor */
-        padding: 5px 8px; /* Ajustado para padding menor */
-        font-size: 0.6em; /* Ajustado para fonte menor */
-        white-space: normal; /* Permite que o texto quebre */
-        text-align: center; /* Centraliza o texto dentro do botão */
-        flex-shrink: 1; /* Permite que o botão encolha */
-        min-width: 0; /* Garante que o encolhimento funcione */
-        width: calc(50% - 6px); /* Para no máximo 2 botões por linha, considerando o gap */
+        margin: 3px;
+        padding: 5px 8px;
+        font-size: 0.6em;
+        white-space: normal;
+        text-align: center;
+        flex-shrink: 1;
+        min-width: 0;
+        width: calc(50% - 6px);
     }
 
     .mario-dialog {
@@ -1008,7 +1220,7 @@ p {
         to { background-position-x: -160px; }
     }
     .obstacle {
-        bottom: 15px; /* Ajustado para o chão responsivo */
+        bottom: 15px;
         width: 30px;
         height: 30px;
     }
@@ -1021,18 +1233,18 @@ p {
 
     /* NOVO: Ajuste do slider de fonte para telas muito pequenas */
     .font-size-slider-container {
-        left: 50%; /* Centraliza horizontalmente */
+        left: 50%;
         transform: translateX(-50%);
-        top: 10px; /* Posiciona no topo */
-        width: 95%; /* Ocupa a maior parte da largura */
+        top: 10px;
+        width: 95%;
     }
 
     /* Ajuste do switch de tema para telas muito pequenas */
     .theme-switch {
-        left: 50%; /* Centraliza horizontalmente */
+        left: 50%;
         transform: translateX(-50%);
-        top: 80px; /* Posiciona abaixo do slider de fonte */
-        right: auto; /* Remove alinhamento à direita */
+        top: 80px;
+        right: auto;
     }
 }
 

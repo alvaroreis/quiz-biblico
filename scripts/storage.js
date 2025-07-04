@@ -52,8 +52,45 @@ export function loadGameData(defaultQuizData, quizIdForLoading) { // Adicionado 
 /**
  * Salva o progresso das perguntas respondidas no localStorage.
  * @param {object} answeredQuestionsToSave O objeto que rastreia as perguntas respondidas.
- * @param {string} quizId O ID do quiz atual para salvar o proguraço.
+ * @param {string} quizId O ID do quiz atual para salvar o progresso.
  */
 export function saveGameProgress(answeredQuestionsToSave, quizId) {
     localStorage.setItem(`answeredQuestions_${quizId}`, JSON.stringify(answeredQuestionsToSave));
+}
+
+// Funções de salvamento e carregamento de equipes
+/**
+ * Salva os dados das equipes e a equipe atualmente selecionada no localStorage.
+ * @param {Array<Object>} teamsData Array de objetos de equipe.
+ * @param {string|null} currentTeamId ID da equipe atualmente selecionada.
+ */
+export function saveTeamsData(teamsData, currentTeamId) {
+    localStorage.setItem('teamsData', JSON.stringify(teamsData));
+    localStorage.setItem('currentSelectedTeamId', currentTeamId);
+}
+
+/**
+ * Carrega os dados das equipes e a equipe atualmente selecionada do localStorage.
+ * @returns {Object} Um objeto contendo o array de equipes e o ID da equipe atual.
+ */
+export function loadTeamsData() {
+    const savedTeams = localStorage.getItem('teamsData');
+    const savedCurrentTeamId = localStorage.getItem('currentSelectedTeamId');
+    let teams = [];
+    let currentTeamId = null;
+
+    if (savedTeams) {
+        try {
+            teams = JSON.parse(savedTeams);
+        } catch (e) {
+            console.error("Erro ao analisar dados de equipes do localStorage, inicializando vazio.", e);
+            teams = [];
+        }
+    }
+
+    if (savedCurrentTeamId) {
+        currentTeamId = savedCurrentTeamId;
+    }
+
+    return { teams, currentTeamId };
 }
