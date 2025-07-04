@@ -1,5 +1,5 @@
 // Importa as funcionalidades dos outros módulos
-import { getProjectName } from './utils.js';
+import {getProjectName, getQuizDataPath} from './utils.js';
 import { loadGameData, saveGameProgress } from './storage.js';
 import { startObstacleSpawning, showDarkScreen, hideDarkScreen } from './mario-animations.js';
 
@@ -23,7 +23,7 @@ let answeredQuestions; // Será preenchida por loadGameData
 let QUIZ_OPTIONS_DATA = [];
 
 // Caminho para o arquivo JSON do quiz
-const pathData = `${getProjectName()}/assets/data/quiz-data.json`; // Variável atualizada aqui
+const pathData = getQuizDataPath(); // Variável atualizada aqui
 
 // Referências aos elementos HTML (agora obtidas no DOMContentLoaded)
 let quizSelectionScreen;
