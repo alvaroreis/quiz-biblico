@@ -162,7 +162,7 @@ function getDOMElements() {
     addTeamButton = document.getElementById("add-team-button");
     teamsListContainer = document.getElementById("teams-list-container");
     // Removida a referência a teamSelectQuestion, pois não será mais usado na tela de perguntas
-    // teamSelectQuestion = document.getElementById("team-select-question");
+    // let teamSelectQuestion;
 
     // Referências para o novo diálogo de atualização manual
     manualScoreDialog = document.getElementById("manual-score-dialog");
@@ -238,15 +238,16 @@ function showScreen(screenId) {
         if (quizData && quizData.actions) {
             if (!quizData.actions.showAwnserButtons) {
                 answerButtonToolbar.classList.add("hidden");
-                answerCheckButtonToolbar.classList.remove("hidden");
+                answerCheckButtonToolbar.classList.remove("hidden"); // Oculta o botão "Responder" e mostra "Marcar Correta"
                 currentQuestionOptions.classList.add("hidden"); // Oculta as opções de resposta
                 questionDisplayScreen.classList.add('no-answer-options');
             } else {
-                answerButtonToolbar.classList.remove("hidden");
-                answerCheckButtonToolbar.classList.add("hidden");
+                answerButtonToolbar.classList.remove("hidden"); // Mostra o botão "Responder"
+                answerCheckButtonToolbar.classList.add("hidden"); // Oculta o botão "Marcar Correta"
                 questionDisplayScreen.classList.remove('no-answer-options');
             }
         } else {
+            // Comportamento padrão se quizData.actions não estiver definido
             answerButtonToolbar.classList.remove("hidden");
             answerCheckButtonToolbar.classList.add("hidden");
             questionDisplayScreen.classList.remove('no-answer-options');
@@ -861,7 +862,7 @@ function setupQuizSelectionScreen() {
             if (!localStorage.getItem('appThemeMode')) {
                 localStorage.setItem('appThemeMode', selectedQuizOption.data.theme || 'light');
             }
-            const initialFontSize = selectedQuizOption.data.fontSize ? parseFloat(selectedQuizOption.data.fontSize) : 1.5;
+            const initialFontSize = parseFloat(selectedQuizOption.data.fontSize || 1.5); // Garante um valor numérico padrão
             localStorage.setItem('appFontSize', initialFontSize);
             // Ao salvar currentQuizConfig, inclua o ID do quiz para que loadGameData possa usá-lo
             localStorage.setItem('currentQuizConfig', JSON.stringify({ ...selectedQuizOption.data, id: selectedQuizOption.id }));
@@ -914,19 +915,19 @@ function initializeGame() {
 function updateAnswerButtonVisibility(showButtons) {
     if (showButtons) {
         answerButtonToolbar.classList.remove("hidden");
-        answerCheckButtonToolbar.classList.add("hidden");
+        answerCheckButtonToolbar.classList.add("hidden"); // Esconde o botão "Marcar Correta"
         currentQuestionOptions.classList.remove("hidden");
         questionDisplayScreen.classList.remove('no-answer-options');
         optionButtons.forEach(button => button.disabled = false); // Re-habilita as opções
     } else {
         answerButtonToolbar.classList.add("hidden");
-        answerCheckButtonToolbar.classList.remove("hidden");
+        answerCheckButtonToolbar.classList.remove("hidden"); // Mostra o botão "Marcar Correta"
         currentQuestionOptions.classList.add("hidden");
         questionDisplayScreen.classList.add('no-answer-options');
         optionButtons.forEach(button => button.disabled = true); // Desabilita as opções
     }
     answerButtonToolbar.disabled = true; // Sempre desabilita o botão "Responder" até uma opção ser selecionada
-    answerCheckButtonToolbar.classList.remove("hidden"); // "Marcar Correta" sempre habilitado se visível
+    // Removida a linha que estava sempre removendo a classe hidden do answerCheckButtonToolbar
 }
 
 

@@ -545,10 +545,9 @@ p {
     flex-direction: column;
     gap: 15px;
     margin-bottom: 20px;
-    width: 98%; /* Mantido em 98% */
+    width: 95%; /* Mantido em 98% */
     /* Removido max-width: 700px; */
     max-height: 645px; /* Alterado para 645px */
-    overflow-y: auto; /* Adicionado scroll vertical */
     padding-right: 10px; /* Adicionado padding para a barra de rolagem */
 }
 
