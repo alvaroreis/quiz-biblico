@@ -25,40 +25,43 @@
 </label>
 
 <div id="game-container">
-    <div id="quiz-selection-screen" class="screen">
-        <h1>Escolha seu Quiz!</h1>
-        <div class="quiz-selection-container">
-            <select id="quiz-select" class="mario-button"></select>
-            <button id="load-quiz-button" class="mario-button">Carregar Quiz</button>
+    <!-- Nova div para agrupar as telas principais -->
+    <div id="main-screens-wrapper">
+        <div id="quiz-selection-screen" class="screen">
+            <h1>Escolha seu Quiz!</h1>
+            <div class="quiz-selection-container">
+                <select id="quiz-select" class="mario-button"></select>
+                <button id="load-quiz-button" class="mario-button">Carregar Quiz</button>
+            </div>
         </div>
-    </div>
 
-    <div id="start-screen" class="screen">
-        <h1></h1> <h2></h2> <button id="start-button" class="mario-button">Iniciar Aventura</button>
-    </div>
-
-    <div id="level-selection-screen" class="screen">
-        <h2>Escolha sua Fase!</h2>
-        <div id="level-options-container" class="level-options">
+        <div id="start-screen" class="screen">
+            <h1></h1> <h2></h2> <button id="start-button" class="mario-button">Iniciar Aventura</button>
         </div>
-    </div>
 
-    <div id="question-selection-screen" class="screen">
-        <h2 id="level-title"></h2>
-        <p id="question-count"></p>
-        <div id="question-blocks" class="question-blocks-container">
+        <div id="level-selection-screen" class="screen">
+            <h2>Escolha sua Fase!</h2>
+            <div id="level-options-container" class="level-options">
+            </div>
         </div>
-    </div>
 
-    <div id="question-display-screen" class="screen">
-        <h3 id="current-question" tabindex="-1"></h3>
-        <div id="current-question-options" class="options-container">
-            <button class="option-button mario-button" data-option="a"></button>
-            <button class="option-button mario-button" data-option="b"></button>
-            <button class="option-button mario-button" data-option="c"></button>
-            <button class="option-button mario-button" data-option="d"></button>
+        <div id="question-selection-screen" class="screen">
+            <h2 id="level-title"></h2>
+            <p id="question-count"></p>
+            <div id="question-blocks" class="question-blocks-container">
+            </div>
         </div>
-        <!-- O seletor de equipe foi removido desta tela -->
+
+        <div id="question-display-screen" class="screen">
+            <h3 id="current-question" tabindex="-1"></h3>
+            <div id="current-question-options" class="options-container">
+                <button class="option-button mario-button" data-option="a"></button>
+                <button class="option-button mario-button" data-option="b"></button>
+                <button class="option-button mario-button" data-option="c"></button>
+                <button class="option-button mario-button" data-option="d"></button>
+            </div>
+            <!-- O seletor de equipe foi removido desta tela -->
+        </div>
     </div>
 
     <!-- Tela de Placar de Equipes (antiga progress-screen) -->

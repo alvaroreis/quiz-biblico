@@ -103,6 +103,9 @@ let saveManualScoreButton;
 let cancelManualScoreButton;
 let toggleAnswerButtonsSwitch; // Referência ao novo switch
 
+// Referência ao wrapper principal das telas
+let mainScreensWrapper;
+
 
 /**
  * Obtém todas as referências DOM. Chamado no DOMContentLoaded.
@@ -171,6 +174,8 @@ function getDOMElements() {
     saveManualScoreButton = document.getElementById("save-manual-score-button");
     cancelManualScoreButton = document.getElementById("cancel-manual-score-button");
     toggleAnswerButtonsSwitch = document.getElementById("toggle-answer-buttons"); // Obtém a referência do switch
+
+    mainScreensWrapper = document.getElementById("main-screens-wrapper"); // Obtém a referência do wrapper
 }
 
 
@@ -204,6 +209,13 @@ function showScreen(screenId) {
     clearProgressButton.classList.add("hidden");
     showScoreboardButton.classList.add("hidden");
     toggleAnswerButtonsSwitch.parentElement.classList.add("hidden"); // Esconde o switch por padrão
+
+    // Gerencia a classe 'mbt-65' no mainScreensWrapper
+    if (screenId === "scoreboard-screen") {
+        mainScreensWrapper.classList.remove("mbt-65");
+    } else {
+        mainScreensWrapper.classList.add("mbt-65");
+    }
 
     // Garante que as opções de resposta estejam visíveis por padrão,
     // e serão ocultadas ou não dependendo da lógica abaixo.
@@ -903,7 +915,7 @@ function updateAnswerButtonVisibility(showButtons) {
         optionButtons.forEach(button => button.disabled = true); // Desabilita as opções
     }
     answerButtonToolbar.disabled = true; // Sempre desabilita o botão "Responder" até uma opção ser selecionada
-    answerCheckButtonToolbar.disabled = false; // "Marcar Correta" sempre habilitado se visível
+    answerCheckButtonToolbar.classList.remove("hidden"); // "Marcar Correta" sempre habilitado se visível
 }
 
 

@@ -128,7 +128,9 @@ body {
     color: var(--mario-text-color); /* Cor do texto padrão para o slider */
     width: 150px; /* Largura aumentada para o container */
 }
-
+.mbt-65{
+    margin-bottom: 65px;
+}
 .font-size-slider-container label {
     white-space: nowrap; /* Evita quebra de linha no texto da label */
     font-size: 0.6em; /* Tamanho da fonte diminuído */
@@ -272,7 +274,7 @@ input:checked + .slider:before {
     background-color: var(--mario-dark-green);
 }
 
-.answer-buttons-switch input:checked + .slider:before {
+input:checked + .slider:before {
     -webkit-transform: translateX(19px); /* Ajuste para o novo tamanho */
     -ms-transform: translateX(19px);
     transform: translateX(19px);
@@ -298,8 +300,8 @@ body::after {
     left: 0;
     width: 100%;
     height: 200px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"><path d="M0 150 L25 50 L50 150 L75 70 L100 150 L125 90 L150 150 Z" fill="#6B8E23"/></svg>');
-    background-size: 150px 150px;
+    background-image: url('../assets/images/nuvem.png');
+    background-size: 160px 80px;
     background-repeat: repeat-x;
     opacity: 0.7;
     animation: moveMountains 30s linear infinite;
@@ -346,8 +348,17 @@ body::after {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom: 90px;
 }
+
+/* Nova div para agrupar as telas principais */
+#main-screens-wrapper {
+    max-height: 70vh; /* Altura máxima de 70% da viewport */
+    overflow-y: auto; /* Adiciona scroll vertical se o conteúdo exceder a altura */
+    width: 100%; /* Garante que o wrapper ocupe a largura total */
+    padding-right: 10px; /* Adiciona um pequeno padding para a barra de rolagem */
+    box-sizing: border-box; /* Inclui padding na largura */
+}
+
 
 .screen {
     display: none;
@@ -366,7 +377,7 @@ body::after {
 }
 
 h1 {
-    color: var(--mario-red);
+    color: var(--mario-text-color); /* Alterado para usar a cor de texto padrão */
     text-shadow: 3px 3px 0px var(--mario-brown);
     font-size: 2.5em;
     margin-bottom: 20px;
@@ -389,9 +400,8 @@ h3 {
     overflow-wrap: break-word; /* Adicionado para compatibilidade moderna */
     white-space: normal; /* Permite quebra de linha */
     width: 100%;
-    max-height: 50vh; /* Altura máxima para o texto da pergunta */
-    overflow-y: auto; /* Adiciona scroll vertical se o conteúdo exceder a altura */
-    padding-right: 10px; /* Espaço para a barra de rolagem */
+    /* Removido max-height e overflow-y daqui para serem controlados pelo question-display-screen */
+    /* Removido padding-right daqui */
 }
 
 p {
@@ -488,8 +498,7 @@ p {
     max-width: 900px;
     width: 100%;
     max-height: 60vh;
-    overflow-y: auto;
-    padding-right: 10px;
+    padding-right: 0; /* Removido o padding para o scroll */
 }
 
 .question-block {
@@ -538,7 +547,8 @@ p {
     margin-bottom: 20px;
     width: 98%; /* Mantido em 98% */
     /* Removido max-width: 700px; */
-    max-height: 680px; /* Alterado para 645px */
+    max-height: 645px; /* Alterado para 645px */
+    overflow-y: auto; /* Adicionado scroll vertical */
     padding-right: 10px; /* Adicionado padding para a barra de rolagem */
 }
 
@@ -554,12 +564,6 @@ p {
 .option-button.selected {
     background-color: var(--mario-green);
     border-color: var(--mario-dark-green);
-    color: white;
-}
-
-.option-button.correct-answer {
-    background-color: #4CAF50;
-    border-color: #3D8B40;
     color: white;
 }
 
@@ -697,7 +701,6 @@ p {
 /* Estilos da Tela de Placar de Equipes (scoreboard-screen) */
 #scoreboard-screen {
     justify-content: flex-start;
-    padding-top: 50px;
 }
 
 #scoreboard-screen h2 {
@@ -971,7 +974,7 @@ p {
     left: 10%;
     width: 85px;
     height: 85px;
-    background-image: url('https://i.pinimg.com/originals/3c/f4/42/3cf442eb0574a06127a2db3a6bd6e633.gif');
+    background-image: url('../assets/images/mario/mario.gif');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -1079,6 +1082,7 @@ p {
     .question-blocks-container {
         max-width: 600px;
         max-height: 50vh;
+        padding-right: 0; /* Removido o padding para o scroll */
     }
 
     .options-container {
@@ -1130,16 +1134,6 @@ p {
         height: 60px;
         bottom: 25px;
     }
-    @keyframes moveBushes {
-        from { background-position-x: 0; }
-        to { background-position-x: -160px; }
-    }
-    .obstacle {
-        bottom: 20px;
-        width: 40px;
-        height: 40px;
-    }
-    /* Keyframes responsivos para o pulo do Mario */
     @keyframes marioJump {
         0% { transform: translateY(0); }
         50% { transform: translateY(-50px); }
@@ -1199,12 +1193,7 @@ p {
     .question-blocks-container {
         max-width: 400px;
         max-height: 40vh;
-    }
-
-    .question-block {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2em;
+        padding-right: 0; /* Removido o padding para o scroll */
     }
 
     .options-container {
@@ -1256,16 +1245,6 @@ p {
         height: 52.5px;
         bottom: 15px;
     }
-    @keyframes moveBushes {
-        from { background-position-x: 0; }
-        to { background-position-x: -160px; }
-    }
-    .obstacle {
-        bottom: 15px;
-        width: 30px;
-        height: 30px;
-    }
-    /* Keyframes responsivos para o pulo do Mario */
     @keyframes marioJump {
         0% { transform: translateY(0); }
         50% { transform: translateY(-45px); }
@@ -1288,6 +1267,7 @@ p {
         right: auto;
     }
 }
+
 
 /* NOVO: Estilos para a tela de exibição de pergunta quando as opções não são mostradas */
 #question-display-screen.no-answer-options {
