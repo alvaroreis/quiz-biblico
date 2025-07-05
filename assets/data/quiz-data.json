@@ -13,140 +13,7 @@
         {
           "id": "quiz-charadas-geral",
           "title": "Charadas",
-          "questions": [
-            {
-              "question": "Fui salvo das águas em um cesto e me tornei líder do meu povo. Quem sou eu?",
-              "options": {
-                "a": "Davi",
-                "b": "Moisés",
-                "c": "José",
-                "d": "Noé"
-              },
-              "correct": "b",
-              "hint": "Êxodo 2:3-10"
-            },
-            {
-              "question": "Construí uma arca grande e salvei minha família e os animais do dilúvio. Quem sou eu?",
-              "options": {
-                "a": "Abraão",
-                "b": "Jacó",
-                "c": "Noé",
-                "d": "Moisés"
-              },
-              "correct": "c",
-              "hint": "Gênesis 6:13-22"
-            },
-            {
-              "question": "Venci um gigante com uma pedra e uma funda e me tornei rei de Israel. Quem sou eu?",
-              "options": {
-                "a": "Davi",
-                "b": "Saul",
-                "c": "Salomão",
-                "d": "Sansão"
-              },
-              "correct": "a",
-              "hint": "1 Samuel 17"
-            },
-            {
-              "question": "Nasci em Belém e sou o Salvador do mundo. Quem sou eu?",
-              "options": {
-                "a": "João Batista",
-                "b": "Jesus",
-                "c": "Pedro",
-                "d": "Paulo"
-              },
-              "correct": "b",
-              "hint": "Lucas 2:1-20"
-            },
-            {
-              "question": "Minha esposa, Eva, foi a primeira mulher. Quem sou eu?",
-              "options": {
-                "a": "Abraão",
-                "b": "Adão",
-                "c": "Noé",
-                "d": "Caim"
-              },
-              "correct": "b",
-              "hint": "Gênesis 2:20-25"
-            },
-            {
-              "question": "Traí Jesus por trinta moedas de prata. Quem sou eu?",
-              "options": {
-                "a": "Pedro",
-                "b": "Judas Iscariotes",
-                "c": "Tomé",
-                "d": "Mateus"
-              },
-              "correct": "b",
-              "hint": "Mateus 26:14-16"
-            },
-            {
-              "question": "Fui jogado na cova dos leões, mas Deus me salvou. Quem sou eu?",
-              "options": {
-                "a": "Ezequiel",
-                "b": "Isaías",
-                "c": "Daniel",
-                "d": "Jeremias"
-              },
-              "correct": "c",
-              "hint": "Daniel 6"
-            },
-            {
-              "question": "Fui o homem mais forte, mas perdi minha força quando meu cabelo foi cortado. Quem sou eu?",
-              "options": {
-                "a": "Gideão",
-                "b": "Davi",
-                "c": "Sansão",
-                "d": "Saul"
-              },
-              "correct": "c",
-              "hint": "Juízes 16"
-            },
-            {
-              "question": "Fui um profeta que foi engolido por um grande peixe. Quem sou eu?",
-              "options": {
-                "a": "Elias",
-                "b": "Jonas",
-                "c": "Jeremias",
-                "d": "Ezequiel"
-              },
-              "correct": "b",
-              "hint": "Jonas 1:17"
-            },
-            {
-              "question": "Fui a mãe de Jesus. Quem sou eu?",
-              "options": {
-                "a": "Isabel",
-                "b": "Raquel",
-                "c": "Maria",
-                "d": "Marta"
-              },
-              "correct": "c",
-              "hint": "Lucas 1:26-38"
-            },
-            {
-              "question": "Sou um livro da Bíblia que começa com 'No princípio, criou Deus os céus e a terra.' Qual livro sou eu?",
-              "options": {
-                "a": "Gênesis",
-                "b": "Êxodo",
-                "c": "Jó",
-                "d": "Salmos"
-              },
-              "correct": "a",
-              "hint": "Gênesis 1:1"
-            },
-            {
-              "question": "Eu sou o décimo mandamento. Não cobiçarás a casa do teu próximo, não cobiçarás a mulher do teu próximo, nem o seu servo, nem a sua serva, nem o seu boi, nem o seu jumento, nem coisa alguma do teu próximo. O que sou eu?",
-              "options": {
-                "a": "Não matar",
-                "b": "Não cobiçar",
-                "c": "Não roubar",
-                "d": "Honrar pai e mãe"
-              },
-              "correct": "b",
-              "hint": "Êxodo 20:17"
-            },
-            {
+          "questions": [{
               "question": "O que a Bíblia diz que devemos fazer em tudo?",
               "options": {
                 "a": "Reclamar",
@@ -167,17 +34,6 @@
               },
               "correct": "b",
               "hint": "1 Reis 3:5-12"
-            },
-            {
-              "question": "Qual é o último livro da Bíblia?",
-              "options": {
-                "a": "Judas",
-                "b": "Apocalipse",
-                "c": "Filemom",
-                "d": "Hebreus"
-              },
-              "correct": "b",
-              "hint": "Apocalipse 1:1"
             },
             {
               "question": "Fui um homem justo, salvo de Sodoma e Gomorra, mas minha esposa se tornou uma estátua de sal. Quem sou eu?",
@@ -202,17 +58,6 @@
               "hint": "Gênesis 28:10-22"
             },
             {
-              "question": "Fui o primeiro rei de Israel, mas desobedeci a Deus. Quem sou eu?",
-              "options": {
-                "a": "Davi",
-                "b": "Salomão",
-                "c": "Saul",
-                "d": "Jeroboão"
-              },
-              "correct": "c",
-              "hint": "1 Samuel 10, 15"
-            },
-            {
               "question": "Fui uma rainha corajosa que salvou seu povo de um plano maligno, arriscando sua própria vida. Quem sou eu?",
               "options": {
                 "a": "Maria",
@@ -222,17 +67,6 @@
               },
               "correct": "b",
               "hint": "Ester 4:13-16"
-            },
-            {
-              "question": "Fui o irmão de Moisés e me tornei o primeiro sumo sacerdote. Quem sou eu?",
-              "options": {
-                "a": "Josué",
-                "b": "Arão",
-                "c": "Calebe",
-                "d": "Samuel"
-              },
-              "correct": "b",
-              "hint": "Êxodo 7:1-7"
             },
             {
               "question": "Fui um profeta que subiu ao céu em um carro de fogo. Quem sou eu?",
@@ -879,28 +713,6 @@
           "id": "quiz-filipenses-consolidado",
           "title": "Filipenses",
           "questions": [
-            {
-              "question": "Qual apóstolo escreveu a carta aos Filipenses?",
-              "options": {
-                "a": "Tiago",
-                "b": "João",
-                "c": "Paulo",
-                "d": "Pedro"
-              },
-              "correct": "c",
-              "hint": "Pense em quem escreveu a maioria das epístolas do Novo Testamento, muitas delas da prisão."
-            },
-            {
-              "question": "Em qual cidade ficava a igreja para quem Paulo escreveu esta carta?",
-              "options": {
-                "a": "Éfeso",
-                "b": "Filipos",
-                "c": "Corinto",
-                "d": "Roma"
-              },
-              "correct": "b",
-              "hint": "O nome da cidade está no título do livro."
-            },
             {
               "question": "Complete o versículo: 'Posso todas as coisas naquele que me _____________.' (Filipenses 4:13)",
               "options": {
@@ -1856,50 +1668,6 @@
           "title": "Quiz Bíblico Geral",
           "questions": [
             {
-              "question": "Quem construiu a arca para se salvar do Grande Dilúvio?",
-              "options": {
-                "a": "Amós",
-                "b": "Joel",
-                "c": "Apóstolo Paulo",
-                "d": "Noé"
-              },
-              "correct": "d",
-              "hint": "Gênesis 6:14"
-            },
-            {
-              "question": "Qual gigante foi derrotado por Davi com uma pedra?",
-              "options": {
-                "a": "3 João",
-                "b": "Neemias",
-                "c": "1 Crônicas",
-                "d": "Golias"
-              },
-              "correct": "d",
-              "hint": "1 Samuel 17:49-50"
-            },
-            {
-              "question": "Quem foi engolido por um grande peixe?",
-              "options": {
-                "a": "Jonas",
-                "b": "Gênesis",
-                "c": "Maria Madalena",
-                "d": "Ageu"
-              },
-              "correct": "a",
-              "hint": "Jonas 1:17"
-            },
-            {
-              "question": "Qual foi o primeiro casal humano criado por Deus?",
-              "options": {
-                "a": "Adão e Eva",
-                "b": "Sofonias",
-                "c": "Faraó",
-                "d": "Gálatas"
-              },
-              "correct": "a",
-              "hint": "Gênesis 2:7, 22"
-            },
-            {
               "question": "Quem liderou os israelitas para fora do Egito?",
               "options": {
                 "a": "Matusalém",
@@ -1909,61 +1677,6 @@
               },
               "correct": "c",
               "hint": "Êxodo 3:10"
-            },
-            {
-              "question": "Em que cidade Jesus nasceu?",
-              "options": {
-                "a": "Belém",
-                "b": "Rei Davi",
-                "c": "Joel",
-                "d": "Babilônia"
-              },
-              "correct": "a",
-              "hint": "Mateus 2:1"
-            },
-            {
-              "question": "Qual apóstolo negou Jesus três vezes?",
-              "options": {
-                "a": "3 João",
-                "b": "Éfeso",
-                "c": "Maria Madalena",
-                "d": "Pedro"
-              },
-              "correct": "d",
-              "hint": "Mateus 26:69-75"
-            },
-            {
-              "question": "Quem foi vendido como escravo pelos seus próprios irmãos?",
-              "options": {
-                "a": "José",
-                "b": "2 João",
-                "c": "Pilatos",
-                "d": "Maria Madalena"
-              },
-              "correct": "a",
-              "hint": "Gênesis 37:28"
-            },
-            {
-              "question": "Quantos discípulos Jesus escolheu para segui-lo de perto?",
-              "options": {
-                "a": "2 Timóteo",
-                "b": "Corinto",
-                "c": "Profeta Isaías",
-                "d": "Doze"
-              },
-              "correct": "d",
-              "hint": "Mateus 10:1-4"
-            },
-            {
-              "question": "De quem era a força que vinha dos longos cabelos?",
-              "options": {
-                "a": "1 Reis",
-                "b": "3 João",
-                "c": "Êxodo",
-                "d": "Sansão"
-              },
-              "correct": "d",
-              "hint": "Juízes 16:17"
             },
             {
               "question": "Qual foi o primeiro milagre de Jesus registrado no Evangelho de João?",
@@ -1988,39 +1701,6 @@
               "hint": "Gênesis 9:13"
             },
             {
-              "question": "Quem recebeu os Dez Mandamentos no Monte Sinai?",
-              "options": {
-                "a": "Moisés",
-                "b": "Templo de Salomão",
-                "c": "Filipenses",
-                "d": "Ester"
-              },
-              "correct": "a",
-              "hint": "Êxodo 20:1-17"
-            },
-            {
-              "question": "Quem foi o primeiro rei de Israel?",
-              "options": {
-                "a": "Abel",
-                "b": "Colossenses",
-                "c": "Saul",
-                "d": "Babilônia"
-              },
-              "correct": "c",
-              "hint": "1 Samuel 10:24"
-            },
-            {
-              "question": "Qual o nome do jardim onde Adão e Eva viviam?",
-              "options": {
-                "a": "Mateus",
-                "b": "Jardim do Éden",
-                "c": "Maná",
-                "d": "1 João"
-              },
-              "correct": "b",
-              "hint": "Gênesis 2:8"
-            },
-            {
               "question": "Quem foi o \"pai da fé\"?",
               "options": {
                 "a": "1 Crônicas",
@@ -2030,17 +1710,6 @@
               },
               "correct": "b",
               "hint": "Romanos 4:16"
-            },
-            {
-              "question": "Que instrumento Davi tocava?",
-              "options": {
-                "a": "Zacarias",
-                "b": "2 Crônicas",
-                "c": "Sofonias",
-                "d": "Harpa"
-              },
-              "correct": "d",
-              "hint": "1 Samuel 16:23"
             },
             {
               "question": "Quem subiu em uma árvore para ver Jesus?",
@@ -2054,28 +1723,6 @@
               "hint": "Lucas 19:4"
             },
             {
-              "question": "Qual era o nome da mãe de Jesus?",
-              "options": {
-                "a": "Ezequiel",
-                "b": "Joel",
-                "c": "Abel",
-                "d": "Maria"
-              },
-              "correct": "d",
-              "hint": "Lucas 1:30-31"
-            },
-            {
-              "question": "Qual foi o apóstolo que traiu Jesus?",
-              "options": {
-                "a": "Ageu",
-                "b": "Juízes",
-                "c": "Judas Iscariotes",
-                "d": "2 Tessalonicenses"
-              },
-              "correct": "c",
-              "hint": "Mateus 26:14-16"
-            },
-            {
               "question": "Qual profeta foi alimentado por corvos?",
               "options": {
                 "a": "Neemias",
@@ -2085,17 +1732,6 @@
               },
               "correct": "c",
               "hint": "1 Reis 17:6"
-            },
-            {
-              "question": "Qual era a profissão de Pedro antes de se tornar apóstolo?",
-              "options": {
-                "a": "Pescador",
-                "b": "2 Tessalonicenses",
-                "c": "Isaías",
-                "d": "Romanos"
-              },
-              "correct": "a",
-              "hint": "Mateus 4:18-19"
             },
             {
               "question": "Qual livro da Bíblia é uma coleção de cânticos e poemas?",
@@ -2118,17 +1754,6 @@
               },
               "correct": "a",
               "hint": "Juízes 4:4"
-            },
-            {
-              "question": "Qual profeta foi jogado em uma cova de leões?",
-              "options": {
-                "a": "Eclesiastes",
-                "b": "Êxodo",
-                "c": "1 Tessalonicenses",
-                "d": "Daniel"
-              },
-              "correct": "d",
-              "hint": "Daniel 6:16"
             },
             {
               "question": "Que rei construiu o primeiro Templo em Jerusalém?",
@@ -2162,17 +1787,6 @@
               },
               "correct": "d",
               "hint": "Gênesis 24:67"
-            },
-            {
-              "question": "Quem era o irmão de Moisés que se tornou o primeiro sumo sacerdote?",
-              "options": {
-                "a": "Matusalém",
-                "b": "Romanos",
-                "c": "Maria Madalena",
-                "d": "Arão"
-              },
-              "correct": "d",
-              "hint": "Êxodo 28:1"
             },
             {
               "question": "Qual dos doze discípulos duvidou da ressurreição de Jesus até que pudesse ver e tocar em suas feridas?",
