@@ -28,7 +28,8 @@ const teamsDataPath = getTeamsDataPath(); // Caminho para o arquivo JSON de equi
 
 // Variáveis para gerenciamento de equipes
 // Adicione 'color' com um valor padrão para novas equipes
-let teams = []; // Array de objetos de equipe: [{ id: 'uuid', name: 'Team A', score: 0, maxScore: 100, color: '#007bff' }]
+// A propriedade 'score' agora é um array de números
+let teams = []; // Array de objetos de equipe: [{ id: 'uuid', name: 'Team A', score: [10, 20], maxScore: 5000, color: '#007bff' }]
 let currentTeamId = null; // ID da equipe atualmente selecionada
 let editingTeamId = null; // ID da equipe que está sendo editada no modal
 
@@ -605,18 +606,26 @@ function renderTeamScoreboard() {
         return;
     }
 
-    // Ordena as equipes pela pontuação em ordem decrescente
-    const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
+    // Ordena as equipes pela pontuação total em ordem decrescente
+    const sortedTeams = [...teams].sort((a, b) => {
+        const scoreA = Array.isArray(a.score) ? a.score.reduce((sum, val) => sum + val, 0) : a.score;
+        const scoreB = Array.isArray(b.score) ? b.score.reduce((sum, val) => sum + val, 0) : b.score;
+        return scoreB - scoreA;
+    });
 
     sortedTeams.forEach(team => {
+        const currentTotalScore = Array.isArray(team.score) ? team.score.reduce((sum, val) => sum + val, 0) : team.score;
+        const teamMaxScore = team.maxScore || 100; // Garante um maxScore padrão
+        const progressBarWidth = Math.min(100, (currentTotalScore / teamMaxScore) * 100);
+
         const teamItem = document.createElement("div");
         teamItem.classList.add("team-item");
         teamItem.dataset.teamId = team.id; // Adiciona o ID da equipe ao item
         teamItem.innerHTML = `
             <span class="team-name">${team.name}</span>
             <div class="team-progress-bar-container">
-                <div class="team-progress-bar" style="width: ${Math.min(100, (team.score / team.maxScore) * 100)}%; background-color: ${team.color || 'var(--mario-green)'};"></div>
-                <div class="team-score-text">${team.score} / ${team.maxScore} XP</div>
+                <div class="team-progress-bar" style="width: ${progressBarWidth}%; background-color: ${team.color || 'var(--mario-green)'};"></div>
+                <div class="team-score-text">${currentTotalScore} / ${teamMaxScore} XP</div>
             </div>
             <button class="delete-team-button" data-team-id="${team.id}">X</button>
         `;
@@ -669,7 +678,7 @@ function addTeam() {
         const newTeam = {
             id: crypto.randomUUID(), // Gera um ID único para a equipe
             name: teamName,
-            score: 0,
+            score: [], // Inicializa score como um array vazio
             maxScore: 100, // Valor inicial para a pontuação máxima
             color: '#4CAF50' // Cor padrão para novas equipes (verde Mario)
         };
@@ -692,7 +701,8 @@ function addTeam() {
 function updateTeamScore(teamId, points) {
     const teamIndex = teams.findIndex(team => team.id === teamId);
     if (teamIndex !== -1) {
-        teams[teamIndex].score = Math.max(0, teams[teamIndex].score + points); // Garante que a pontuação não seja negativa
+        // Adiciona os novos pontos ao array de score
+        teams[teamIndex].score.push(points);
         saveTeamsData(teams, currentTeamId); // Salva as equipes atualizadas
         renderTeamScoreboard(); // Atualiza o placar
     } else {
@@ -707,7 +717,8 @@ function updateTeamScore(teamId, points) {
 function showManualScoreInputModal(team) {
     manualScoreDialogTitle.textContent = `Atualizar Pontuação da Equipe:`;
     manualScoreTeamName.textContent = team.name;
-    currentXpInput.value = team.score;
+    // Exibe a soma dos scores no input de XP Atual
+    currentXpInput.value = Array.isArray(team.score) ? team.score.reduce((sum, val) => sum + val, 0) : team.score;
     maxXpInput.value = team.maxScore;
 
     // Define a cor no seletor ou no campo HEX
@@ -766,7 +777,7 @@ function updateTeamScoreAndMaxManually() {
         return;
     }
 
-    teams[teamIndex].score = newScore;
+    teams[teamIndex].score = [newScore]; // Substitui o array de score pelo novo valor total
     teams[teamIndex].maxScore = newMaxScore;
     teams[teamIndex].color = newColor; // Salva a nova cor
     saveTeamsData(teams, currentTeamId);
@@ -950,7 +961,7 @@ document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async
             teams = initialTeamsData.teams.map(team => ({
                 id: team.id || crypto.randomUUID(), // Garante um ID se o JSON não tiver
                 name: team.name,
-                score: team.score || 0,
+                score: Array.isArray(team.score) ? team.score : [team.score || 0], // Garante que score é um array
                 maxScore: initialTeamsData.maxScore || 100, // Usa o maxScore do JSON ou um padrão
                 color: team.color || '#4CAF50' // Usa a cor do JSON ou um padrão
             }));
@@ -1044,7 +1055,7 @@ document.addEventListener("DOMContentLoaded", async () => { // Adicionado 'async
 
             // Limpa as pontuações das equipes
             teams.forEach(team => {
-                team.score = 0;
+                team.score = []; // Reinicia o score para um array vazio
                 team.maxScore = 100; // Reinicia o maxScore também
                 team.color = '#4CAF50'; // Reinicia a cor para o padrão
             });
